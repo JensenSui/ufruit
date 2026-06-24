@@ -1,1048 +1,216 @@
 <!DOCTYPE html>
-<html lang="zh-CN" class="scroll-smooth">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>果滋鲜切 | 现代健康鲜切水果首选平台</title>
-  <!-- 引入 Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <!-- 引入 Lucide 图标库用于优雅的图标展示 -->
-  <script src="https://unpkg.com/lucide@latest"></script>
-  <!-- 配置自定义橄榄绿(olive)与米色(beige)主题色 -->
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            olive: {
-              50: '#f5f7f2',
-              100: '#e6ebd9',
-              200: '#cedbb7',
-              300: '#abc18c',
-              400: '#87a564',
-              500: '#688948', // 主色调：自然橄榄绿
-              600: '#506c36',
-              700: '#3e532a',
-              800: '#324323',
-              900: '#2b391f',
-            },
-            beige: {
-              50: '#faf8f5',   // 主背景底色：柔和米白
-              100: '#f5efe6',   // 辅助底色：温暖米黄
-              200: '#e6dac3',
-              300: '#d2be99',
-              400: '#bd9e6f',
-              500: '#ab814e',
-              600: '#9b6e3f',
-              700: '#815732',
-              800: '#69462b',
-              900: '#563a25',
-            }
-          },
-          fontFamily: {
-            sans: ['Inter', 'Noto Sans SC', 'sans-serif'],
-          }
-        }
-      }
-    }
-  </script>
-  <style>
-    /* 微调滚动条和选择效果 */
-    ::selection {
-      background-color: #cedbb7;
-      color: #3e532a;
-    }
-    /* 平滑抽屉过渡 */
-    .drawer-transition {
-      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>U Fruit | High-End Fresh Fruit Experience</title>
+    <meta name="description" content="U Fruit offers the finest selection of whole fruits, fresh-cut platters, and freshly squeezed juices. Premium quality, delivered fresh.">
+    <link rel="stylesheet" href="style.css">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@0"></script>
 </head>
-<body class="bg-beige-50 text-stone-800 font-sans min-h-screen flex flex-col antialiased">
+<body>
 
-  <!-- ==================== 1. HEADER (导航栏) ==================== -->
-  <header class="sticky top-0 z-40 bg-beige-50/90 backdrop-blur-md border-b border-beige-200 transition-all duration-300">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-20">
-        <!-- 品牌 Logo -->
-        <a href="#" class="flex items-center space-x-2 group">
-          <div class="w-10 h-10 bg-olive-500 rounded-full flex items-center justify-center text-white shadow-md shadow-olive-500/20 group-hover:scale-105 transition-transform">
-            <i data-lucide="citrus" class="w-6 h-6 stroke-[2.5]"></i>
-          </div>
-          <span class="text-xl font-bold tracking-wider text-olive-800">
-            <span data-i18n="logo-p1">果滋</span><span data-i18n="logo-p2" class="text-olive-500 font-light">鲜切</span>
-          </span>
-        </a>
-
-        <!-- 桌面端导航链接 -->
-        <nav class="hidden md:flex items-center space-x-8 text-sm font-medium text-stone-600">
-          <a href="#" data-i18n="nav-home" class="text-olive-600 border-b-2 border-olive-500 px-1 py-1">首页</a>
-          <a href="#categories" data-i18n="nav-categories" class="hover:text-olive-600 transition-colors px-1 py-1">鲜切分类</a>
-          <a href="#featured" data-i18n="nav-featured" class="hover:text-olive-600 transition-colors px-1 py-1">爆款热销</a>
-          <a href="#brand" data-i18n="nav-brand" class="hover:text-olive-600 transition-colors px-1 py-1">新鲜承诺</a>
-        </nav>
-
-        <!-- 右侧交互区域 -->
-        <div class="flex items-center space-x-3 sm:space-x-4">
-          <!-- 核心：中英文语言切换按钮 -->
-          <button onclick="toggleLanguage()" class="flex items-center space-x-1 px-3 py-1.5 rounded-full border border-beige-300 hover:border-olive-500 hover:bg-olive-50 text-stone-600 hover:text-olive-700 text-xs font-semibold transition-all shadow-sm" aria-label="切换语言 Toggle Language">
-            <i data-lucide="languages" class="w-3.5 h-3.5 text-olive-600"></i>
-            <span id="lang-btn-text" class="tracking-wider">EN</span>
-          </button>
-
-          <!-- 搜索按钮 -->
-          <button class="p-2 text-stone-600 hover:text-olive-600 hover:bg-beige-100 rounded-full transition-colors" aria-label="搜索">
-            <i data-lucide="search" class="w-5 h-5"></i>
-          </button>
-          
-          <!-- 购物车按钮（含徽标计数） -->
-          <button onclick="toggleCart(true)" class="relative p-2.5 bg-olive-100 hover:bg-olive-200 text-olive-800 rounded-full transition-all focus:outline-none focus:ring-2 focus:ring-olive-500/50" aria-label="查看购物车">
-            <i data-lucide="shopping-bag" class="w-5 h-5"></i>
-            <span id="cart-badge" class="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center border-2 border-beige-50">
-              0
-            </span>
-          </button>
-
-          <!-- 移动端菜单按钮 -->
-          <button onclick="toggleMobileMenu()" class="p-2 md:hidden text-stone-600 hover:text-olive-600 hover:bg-beige-100 rounded-full transition-colors" aria-label="移动端菜单">
-            <i id="menu-icon" data-lucide="menu" class="w-6 h-6"></i>
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <!-- 移动端下拉导航 -->
-    <div id="mobile-menu" class="hidden md:hidden bg-beige-50 border-b border-beige-200 px-4 pt-2 pb-4 space-y-2">
-      <a href="#" data-i18n="nav-home" class="block px-3 py-2 rounded-lg bg-olive-50 text-olive-700 font-medium">首页</a>
-      <a href="#categories" onclick="toggleMobileMenu()" data-i18n="nav-categories" class="block px-3 py-2 rounded-lg hover:bg-beige-100 text-stone-600">鲜切分类</a>
-      <a href="#featured" onclick="toggleMobileMenu()" data-i18n="nav-featured" class="block px-3 py-2 rounded-lg hover:bg-beige-100 text-stone-600">爆款热销</a>
-      <a href="#brand" onclick="toggleMobileMenu()" data-i18n="nav-brand" class="block px-3 py-2 rounded-lg hover:bg-beige-100 text-stone-600">新鲜承诺</a>
-    </div>
-  </header>
-
-  <!-- ==================== 2. HERO SECTION (首屏大图) ==================== -->
-  <section class="relative overflow-hidden bg-gradient-to-b from-beige-100 to-beige-50 py-12 md:py-24">
-    <!-- 背景点缀图案 -->
-    <div class="absolute inset-0 opacity-40 pointer-events-none">
-      <div class="absolute -top-10 -left-10 w-48 h-48 bg-olive-200 rounded-full blur-3xl"></div>
-      <div class="absolute bottom-10 right-10 w-72 h-72 bg-beige-300 rounded-full blur-3xl"></div>
-    </div>
-
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-        <!-- 文本内容 -->
-        <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
-          <div class="inline-flex items-center space-x-2 bg-olive-100 text-olive-800 px-3 py-1.5 rounded-full text-xs font-semibold tracking-wide">
-            <i data-lucide="sparkles" class="w-3.5 h-3.5 animate-pulse"></i>
-            <span data-i18n="hero-tag">每日晨采 · 0℃冷链直达</span>
-          </div>
-          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-stone-900 tracking-tight leading-[1.15]" data-i18n-html="hero-title">
-            免洗免切，<br class="hidden sm:inline">
-            <span class="text-olive-600">一口爆汁</span>的鲜甜享受
-          </h1>
-          <p class="text-base sm:text-lg text-stone-600 max-w-xl mx-auto lg:mx-0 leading-relaxed" data-i18n="hero-desc">
-            严选当季黄金熟度鲜果，专业净化无菌车间即时现切。为你省去繁琐清洗去皮，只留下满满的维生素和最初的鲜甜滋味。
-          </p>
-
-          <!-- 亮点承诺 -->
-          <div class="grid grid-cols-3 gap-4 py-2 max-w-md mx-auto lg:mx-0">
-            <div class="flex flex-col items-center lg:items-start">
-              <span class="text-olive-600 font-bold text-xl sm:text-2xl" data-i18n="hero-stat-1-title">0添加</span>
-              <span class="text-xs text-stone-500 mt-1" data-i18n="hero-stat-1-desc">无防腐剂/色素</span>
-            </div>
-            <div class="flex flex-col items-center lg:items-start border-x border-beige-300">
-              <span class="text-olive-600 font-bold text-xl sm:text-2xl" data-i18n="hero-stat-2-title">100%</span>
-              <span class="text-xs text-stone-500 mt-1" data-i18n="hero-stat-2-desc">当季熟成鲜果</span>
-            </div>
-            <div class="flex flex-col items-center lg:items-start">
-              <span class="text-olive-600 font-bold text-xl sm:text-2xl" data-i18n="hero-stat-3-title">2小时</span>
-              <span class="text-xs text-stone-500 mt-1" data-i18n="hero-stat-3-desc">城市急速送达</span>
-            </div>
-          </div>
-
-          <!-- 呼吁行动按钮 -->
-          <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
-            <a href="#featured" class="w-full sm:w-auto px-8 py-4 bg-olive-600 hover:bg-olive-700 text-white font-medium rounded-xl shadow-lg shadow-olive-600/20 hover:shadow-xl hover:shadow-olive-600/30 transition-all text-center flex items-center justify-center space-x-2">
-              <span data-i18n="hero-cta-buy">立即选购</span>
-              <i data-lucide="arrow-right" class="w-4 h-4"></i>
+    <!-- Header -->
+    <header>
+        <div class="container nav-content">
+            <a href="#" class="logo">
+                <i data-lucide="citrus"></i>
+                U<span>Fruit</span>
             </a>
-            <a href="#brand" data-i18n="hero-cta-promise" class="w-full sm:w-auto px-8 py-4 bg-white hover:bg-beige-100 text-stone-700 font-medium rounded-xl border border-beige-300 transition-all text-center">
-              新鲜承诺
-            </a>
-          </div>
+            <nav class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#collections">Collections</a>
+                <a href="#process">Our Process</a>
+                <a href="#newsletter">Join the Club</a>
+            </nav>
+            <div class="header-right">
+                <a href="#collections" class="cta-button">Order Now</a>
+                <button class="menu-toggle" aria-label="Toggle Menu">
+                    <i data-lucide="menu"></i>
+                </button>
+            </div>
         </div>
+    </header>
 
-        <!-- 视觉展示区 -->
-        <div class="lg:col-span-5 relative">
-          <div class="relative w-full max-w-md mx-auto aspect-square">
-            <!-- 艺术背景圆环 -->
-            <div class="absolute inset-0 bg-gradient-to-tr from-olive-400 to-beige-300 rounded-3xl rotate-6 scale-95 opacity-20"></div>
-            <!-- 精美水果主图 -->
-            <div class="absolute inset-0 bg-cover bg-center rounded-3xl shadow-2xl overflow-hidden border-4 border-white" style="background-image: url('https://images.unsplash.com/photo-1519996521430-02b798c1d881?auto=format&fit=crop&w=800&q=80');">
-              <!-- 覆盖微阴影确保图层次 -->
-              <div class="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent"></div>
-              <!-- 实景果盘浮动卡片 -->
-              <div class="absolute bottom-4 left-4 right-4 bg-white/95 backdrop-blur-sm p-4 rounded-xl shadow-lg flex items-center justify-between">
-                <div>
-                  <p class="text-xs text-olive-600 font-bold" data-i18n="hero-floating-tag">今日限定热销</p>
-                  <p class="text-sm font-bold text-stone-800 animate-pulse" data-i18n="hero-floating-title">缤纷家庭分享桶 (1kg)</p>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container hero-content">
+            <div class="hero-text reveal">
+                <h1>Taste the <span>Purest</span> Energy of Nature</h1>
+                <p>Curated premium fruits, artistically cut platters, and raw cold-pressed juices. Experience the zesty side of luxury.</p>
+                <div class="hero-btns">
+                    <a href="#collections" class="cta-button">Explore Collections</a>
                 </div>
-                <span class="text-sm font-black text-olive-700 bg-olive-50 px-2 py-1 rounded">¥59.0</span>
-              </div>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== 3. CATEGORY GRID (品类魔方) ==================== -->
-  <section id="categories" class="py-16 md:py-24 bg-beige-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <!-- 区域头部标题 -->
-      <div class="text-center max-w-2xl mx-auto mb-12 md:mb-16">
-        <h2 class="text-3xl font-extrabold text-stone-900 tracking-tight" data-i18n="cat-title">鲜美划分，精准契合你的需求</h2>
-        <div class="w-16 h-1 bg-olive-500 mx-auto mt-4 rounded-full"></div>
-        <p class="text-stone-500 mt-4" data-i18n="cat-desc">无论是聚会分享、日常补充能量，还是轻盈低负担的一餐，我们都已为你分门别类。</p>
-      </div>
-
-      <!-- 三列网格布局 -->
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-        <!-- 卡片 1: 即食果切 -->
-        <div class="group relative overflow-hidden rounded-2xl bg-white border border-beige-200 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col h-[400px]">
-          <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105" style="background-image: url('https://images.unsplash.com/photo-1540420773420-3366772f4999?auto=format&fit=crop&w=800&q=80');"></div>
-          <!-- 渐变阴影覆盖，确保文字易读 -->
-          <div class="absolute inset-0 bg-gradient-to-t from-stone-900/80 via-stone-950/20 to-transparent"></div>
-          <div class="relative mt-auto p-8 text-white">
-            <span class="bg-olive-500 text-white text-xs px-2.5 py-1 rounded-full font-bold mb-3 inline-block" data-i18n="cat-1-tag">主打推荐</span>
-            <h3 class="text-2xl font-bold" data-i18n="cat-1-title">即食果切</h3>
-            <p class="text-sm text-stone-200 mt-2 line-clamp-2" data-i18n="cat-1-desc">精选无籽西瓜、金钻凤梨等爆汁水果，开盖即食，搭配果叉，办公室下午茶首选。</p>
-            <a href="#featured" class="mt-4 inline-flex items-center space-x-2 text-sm font-semibold text-olive-200 group-hover:text-white transition-colors">
-              <span data-i18n="cat-explore">立即去挑挑</span>
-              <i data-lucide="arrow-right" class="w-4 h-4"></i>
-            </a>
-          </div>
-        </div>
-
-        <!-- 卡片 2: 鲜榨果汁 -->
-        <div class="group relative overflow-hidden rounded-2xl bg-white border border-beige-200 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col h-[400px]">
-          <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105" style="background-image: url('https://images.unsplash.com/photo-1621506289937-a8e4df240d0b?auto=format&fit=crop&w=800&q=80');"></div>
-          <div class="absolute inset-0 bg-gradient-to-t from-stone-900/80 via-stone-950/20 to-transparent"></div>
-          <div class="relative mt-auto p-8 text-white">
-            <span class="bg-beige-600 text-white text-xs px-2.5 py-1 rounded-full font-bold mb-3 inline-block" data-i18n="cat-2-tag">冷压纯榨</span>
-            <h3 class="text-2xl font-bold" data-i18n="cat-2-title">鲜榨果汁</h3>
-            <p class="text-sm text-stone-200 mt-2 line-clamp-2" data-i18n="cat-2-desc">HPP高压冷杀菌技术，100%全果原汁，不额外添加一滴水和糖，留住最饱满的营养。</p>
-            <a href="#featured" class="mt-4 inline-flex items-center space-x-2 text-sm font-semibold text-olive-200 group-hover:text-white transition-colors">
-              <span data-i18n="cat-explore">立即去挑挑</span>
-              <i data-lucide="arrow-right" class="w-4 h-4"></i>
-            </a>
-          </div>
-        </div>
-
-        <!-- 卡片 3: 整箱水果 -->
-        <div class="group relative overflow-hidden rounded-2xl bg-white border border-beige-200 shadow-md hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col h-[400px]">
-          <div class="absolute inset-0 bg-cover bg-center transition-transform duration-500 group-hover:scale-105" style="background-image: url('https://images.unsplash.com/photo-1610832958506-ee56336191d1?auto=format&fit=crop&w=800&q=80');"></div>
-          <div class="absolute inset-0 bg-gradient-to-t from-stone-900/80 via-stone-950/20 to-transparent"></div>
-          <div class="relative mt-auto p-8 text-white">
-            <span class="bg-stone-700 text-white text-xs px-2.5 py-1 rounded-full font-bold mb-3 inline-block" data-i18n="cat-3-tag">原箱直发</span>
-            <h3 class="text-2xl font-bold" data-i18n="cat-3-title">原箱水果</h3>
-            <p class="text-sm text-stone-200 mt-2 line-clamp-2" data-i18n="cat-3-desc">满足全家囤货和送礼需求，精细气泡袋包裹，产地直采整箱无瑕疵严选好果。</p>
-            <a href="#featured" class="mt-4 inline-flex items-center space-x-2 text-sm font-semibold text-olive-200 group-hover:text-white transition-colors">
-              <span data-i18n="cat-explore">立即去挑挑</span>
-              <i data-lucide="arrow-right" class="w-4 h-4"></i>
-            </a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== 4. FEATURED PRODUCTS (爆款爆汁推荐) ==================== -->
-  <section id="featured" class="py-16 md:py-24 bg-beige-100">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <!-- 区域头部标题与切换Tab -->
-      <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
-        <div class="text-left">
-          <h2 class="text-3xl font-extrabold text-stone-900 tracking-tight" data-i18n="featured-title">热销鲜切，美味即刻呈现</h2>
-          <p class="text-stone-500 mt-2" data-i18n="featured-desc">高人气、高复购的招牌果切，今日已完成极速杀菌和锁鲜打包</p>
-        </div>
-        <!-- 切换分类小按钮组 -->
-        <div class="flex flex-wrap gap-2 mt-6 md:mt-0">
-          <button class="px-4 py-2 bg-olive-600 text-white text-sm font-medium rounded-lg shadow-sm" data-i18n="tab-all">全部推荐</button>
-          <button class="px-4 py-2 bg-white hover:bg-beige-50 text-stone-600 text-sm font-medium rounded-lg border border-beige-200" data-i18n="tab-peeled">免剥果切</button>
-          <button class="px-4 py-2 bg-white hover:bg-beige-50 text-stone-600 text-sm font-medium rounded-lg border border-beige-200" data-i18n="tab-trendy">网红多拼</button>
-        </div>
-      </div>
-
-      <!-- 4列具体商品卡片 -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        
-        <!-- 商品 1 -->
-        <div class="bg-white rounded-2xl border border-beige-200 p-4 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col">
-          <div class="relative aspect-square rounded-xl overflow-hidden bg-beige-50 mb-4 group">
-            <img src="https://images.unsplash.com/photo-1550258987-190a2d41a8ba?auto=format&fit=crop&w=500&q=80" alt="缤纷热带果切盒" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
-            <span class="absolute top-2 left-2 bg-red-500 text-white text-[11px] font-bold px-2.5 py-1 rounded-full animate-pulse" data-i18n="prod-1-badge">招牌爆款</span>
-          </div>
-          <div>
-            <div class="flex items-center justify-between">
-              <span class="text-xs text-olive-600 bg-olive-50 px-2 py-0.5 rounded font-medium" data-i18n="prod-1-tag">多拼果盒</span>
-              <div class="flex items-center text-amber-500">
-                <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
-                <span class="text-xs font-bold ml-1">4.9</span>
-              </div>
-            </div>
-            <h3 class="text-base font-bold text-stone-800 mt-2 line-clamp-1" data-i18n="prod-1-title">五彩斑斓热带果切分享盒</h3>
-            <p class="text-xs text-stone-500 mt-1" data-i18n="prod-1-desc">包含：芒果、凤梨、哈密瓜、无籽红提、猕猴桃 (500g)</p>
-          </div>
-          <div class="mt-auto pt-4 flex items-center justify-between border-t border-beige-100">
-            <div>
-              <span class="text-xs text-stone-400 line-through">¥39.0</span>
-              <p class="text-lg font-black text-olive-700">¥29.8 <span class="text-xs font-normal text-stone-500" data-i18n="prod-1-unit">/盒</span></p>
-            </div>
-            <button onclick="addToCart('prod-1', 29.8)" class="p-2.5 bg-olive-600 hover:bg-olive-700 text-white rounded-xl transition-all shadow-md shadow-olive-600/10 hover:shadow-olive-600/30" aria-label="加入购物车">
-              <i data-lucide="shopping-cart" class="w-4 h-4"></i>
-            </button>
-          </div>
-        </div>
-
-        <!-- 商品 2 -->
-        <div class="bg-white rounded-2xl border border-beige-200 p-4 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col">
-          <div class="relative aspect-square rounded-xl overflow-hidden bg-beige-50 mb-4 group">
-            <img src="https://images.unsplash.com/photo-1526318896980-cf78c088247c?auto=format&fit=crop&w=500&q=80" alt="泰国椰青果肉杯" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
-            <span class="absolute top-2 left-2 bg-olive-500 text-white text-[11px] font-bold px-2.5 py-1 rounded-full" data-i18n="prod-2-badge">原汁原味</span>
-          </div>
-          <div>
-            <div class="flex items-center justify-between">
-              <span class="text-xs text-olive-600 bg-olive-50 px-2 py-0.5 rounded font-medium" data-i18n="prod-2-tag">免剥懒人</span>
-              <div class="flex items-center text-amber-500">
-                <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
-                <span class="text-xs font-bold ml-1">4.8</span>
-              </div>
-            </div>
-            <h3 class="text-base font-bold text-stone-800 mt-2 line-clamp-1" data-i18n="prod-2-title">清甜泰国椰青果肉肉杯</h3>
-            <p class="text-xs text-stone-500 mt-1" data-i18n="prod-2-desc">精挑细选饱满椰子，100%全手工起肉，带淡淡奶香椰汁 (350g)</p>
-          </div>
-          <div class="mt-auto pt-4 flex items-center justify-between border-t border-beige-100">
-            <div>
-              <span class="text-xs text-stone-400 line-through">¥25.0</span>
-              <p class="text-lg font-black text-olive-700">¥19.9 <span class="text-xs font-normal text-stone-500" data-i18n="prod-2-unit">/杯</span></p>
-            </div>
-            <button onclick="addToCart('prod-2', 19.9)" class="p-2.5 bg-olive-600 hover:bg-olive-700 text-white rounded-xl transition-all shadow-md shadow-olive-600/10 hover:shadow-olive-600/30" aria-label="加入购物车">
-              <i data-lucide="shopping-cart" class="w-4 h-4"></i>
-            </button>
-          </div>
-        </div>
-
-        <!-- 商品 3 -->
-        <div class="bg-white rounded-2xl border border-beige-200 p-4 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col">
-          <div class="relative aspect-square rounded-xl overflow-hidden bg-beige-50 mb-4 group">
-            <img src="https://images.unsplash.com/photo-1585059895524-72359e061381?auto=format&fit=crop&w=500&q=80" alt="黄金奇异果切盘" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
-            <span class="absolute top-2 left-2 bg-beige-600 text-white text-[11px] font-bold px-2.5 py-1 rounded-full" data-i18n="prod-3-badge">高维C</span>
-          </div>
-          <div>
-            <div class="flex items-center justify-between">
-              <span class="text-xs text-olive-600 bg-olive-50 px-2 py-0.5 rounded font-medium" data-i18n="prod-3-tag">品质原切</span>
-              <div class="flex items-center text-amber-500">
-                <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
-                <span class="text-xs font-bold ml-1">5.0</span>
-              </div>
-            </div>
-            <h3 class="text-base font-bold text-stone-800 mt-2 line-clamp-1" data-i18n="prod-3-title">新西兰佳沛黄金奇异果杯</h3>
-            <p class="text-xs text-stone-500 mt-1" data-i18n="prod-3-desc">果肉细腻丰盈，清甜软糯，不酸牙，满满高倍活性VC (4粒量)</p>
-          </div>
-          <div class="mt-auto pt-4 flex items-center justify-between border-t border-beige-100">
-            <div>
-              <span class="text-xs text-stone-400 line-through">¥42.0</span>
-              <p class="text-lg font-black text-olive-700">¥35.0 <span class="text-xs font-normal text-stone-500" data-i18n="prod-3-unit">/杯</span></p>
-            </div>
-            <button onclick="addToCart('prod-3', 35.0)" class="p-2.5 bg-olive-600 hover:bg-olive-700 text-white rounded-xl transition-all shadow-md shadow-olive-600/10 hover:shadow-olive-600/30" aria-label="加入购物车">
-              <i data-lucide="shopping-cart" class="w-4 h-4"></i>
-            </button>
-          </div>
-        </div>
-
-        <!-- 商品 4 -->
-        <div class="bg-white rounded-2xl border border-beige-200 p-4 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col">
-          <div class="relative aspect-square rounded-xl overflow-hidden bg-beige-50 mb-4 group">
-            <img src="https://images.unsplash.com/photo-1553119187-b2507687d795?auto=format&fit=crop&w=500&q=80" alt="蜜瓜芒果双拼杯" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
-            <span class="absolute top-2 left-2 bg-olive-500 text-white text-[11px] font-bold px-2.5 py-1 rounded-full" data-i18n="prod-4-badge">超值双拼</span>
-          </div>
-          <div>
-            <div class="flex items-center justify-between">
-              <span class="text-xs text-olive-600 bg-olive-50 px-2 py-0.5 rounded font-medium" data-i18n="prod-4-tag">绝妙搭配</span>
-              <div class="flex items-center text-amber-500">
-                <i data-lucide="star" class="w-3.5 h-3.5 fill-current"></i>
-                <span class="text-xs font-bold ml-1">4.7</span>
-              </div>
-            </div>
-            <h3 class="text-base font-bold text-stone-800 mt-2 line-clamp-1" data-i18n="prod-4-title">新疆甜心蜜瓜与台农芒果双拼</h3>
-            <p class="text-xs text-stone-500 mt-1" data-i18n="prod-4-desc">蜜瓜清香爽脆搭配芒果浓郁软糯，口感层次鲜明 (450g)</p>
-          </div>
-          <div class="mt-auto pt-4 flex items-center justify-between border-t border-beige-100">
-            <div>
-              <span class="text-xs text-stone-400 line-through">¥28.0</span>
-              <p class="text-lg font-black text-olive-700">¥24.5 <span class="text-xs font-normal text-stone-500" data-i18n="prod-4-unit">/杯</span></p>
-            </div>
-            <button onclick="addToCart('prod-4', 24.5)" class="p-2.5 bg-olive-600 hover:bg-olive-700 text-white rounded-xl transition-all shadow-md shadow-olive-600/10 hover:shadow-olive-600/30" aria-label="加入购物车">
-              <i data-lucide="shopping-cart" class="w-4 h-4"></i>
-            </button>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ==================== 5. FRESHNESS ASSURANCE (新鲜保障区) ==================== -->
-  <section id="brand" class="py-16 md:py-24 bg-beige-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="bg-olive-900 text-white rounded-3xl overflow-hidden shadow-2xl relative">
-        <!-- 装饰图案 -->
-        <div class="absolute inset-0 bg-radial-gradient from-transparent to-black/40"></div>
-        
-        <div class="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 p-8 sm:p-12 lg:p-16 items-center">
-          <div>
-            <span class="text-olive-300 font-bold tracking-widest text-xs uppercase" data-i18n="brand-tag">果滋鲜切 · 品质立足</span>
-            <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-3" data-i18n="brand-title">坚持四大新鲜标准<br>给家人吃的新鲜</h2>
-            <p class="text-olive-100/80 mt-4 leading-relaxed text-sm sm:text-base" data-i18n="brand-desc">
-              我们相信好的果切不仅仅是“切水果”，更是一次对健康的精致守护。我们执行极为苛刻的新鲜规范，只为给您一口爆汁的纯粹美味。
-            </p>
-
-            <!-- 四项品质标准 -->
-            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-8">
-              <div class="flex items-start space-x-3">
-                <div class="p-2 bg-olive-800 rounded-lg text-olive-300">
-                  <i data-lucide="shield-check" class="w-5 h-5"></i>
+            <div class="hero-image reveal">
+                <img src="assets/hero.png" alt="Luxurious Fruit Platter">
+                <div class="floating-badge">
+                    <div class="badge-icon">
+                        <i data-lucide="sparkles"></i>
+                    </div>
+                    <div>
+                        <strong>Premium Choice</strong>
+                        <p>100% Organic Sourced</p>
+                    </div>
                 </div>
-                <div>
-                  <h4 class="font-bold text-white text-sm" data-i18n="brand-card-1-title">十万级无菌切分车间</h4>
-                  <p class="text-xs text-olive-200/70 mt-1" data-i18n="brand-card-1-desc">医用级空气净化，绝杜绝二次污染</p>
-                </div>
-              </div>
-
-              <div class="flex items-start space-x-3">
-                <div class="p-2 bg-olive-800 rounded-lg text-olive-300">
-                  <i data-lucide="clock" class="w-5 h-5"></i>
-                </div>
-                <div>
-                  <h4 class="font-bold text-white text-sm" data-i18n="brand-card-2-title">3小时销售黄金法则</h4>
-                  <p class="text-xs text-olive-200/70 mt-1" data-i18n="brand-card-2-desc">货架停留超3小时无条件废弃</p>
-                </div>
-              </div>
-
-              <div class="flex items-start space-x-3">
-                <div class="p-2 bg-olive-800 rounded-lg text-olive-300">
-                  <i data-lucide="thermometer-snowflake" class="w-5 h-5"></i>
-                </div>
-                <div>
-                  <h4 class="font-bold text-white text-sm" data-i18n="brand-card-3-title">0-4℃全程冷链配送</h4>
-                  <p class="text-xs text-olive-200/70 mt-1" data-i18n="brand-card-3-desc">温控保障，锁死原果鲜嫩营养</p>
-                </div>
-              </div>
-
-              <div class="flex items-start space-x-3">
-                <div class="p-2 bg-olive-800 rounded-lg text-olive-300">
-                  <i data-lucide="thumbs-up" class="w-5 h-5"></i>
-                </div>
-                <div>
-                  <h4 class="font-bold text-white text-sm" data-i18n="brand-card-4-title">不好吃，瞬间包退换</h4>
-                  <p class="text-xs text-olive-200/70 mt-1" data-i18n="brand-card-4-desc">专属售后客服，随时解决不满意</p>
-                </div>
-              </div>
             </div>
-          </div>
-
-          <!-- 视觉图示 -->
-          <div class="relative hidden lg:block aspect-square max-w-sm mx-auto">
-            <div class="absolute inset-0 border-2 border-dashed border-olive-500 rounded-full animate-[spin_60s_linear_infinite]"></div>
-            <img src="https://images.unsplash.com/photo-1615485290382-441e4d049cb5?auto=format&fit=crop&w=600&q=80" alt="新鲜水果质量" data-i18n-alt="brand-img-alt" class="w-full h-full object-cover rounded-full p-4 border border-olive-700/50">
-          </div>
         </div>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- ==================== 6. FOOTER (页脚) ==================== -->
-  <footer class="bg-stone-900 text-stone-400 py-16 mt-auto border-t border-stone-800">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
-        <!-- 品牌简介 -->
-        <div class="space-y-4">
-          <div class="flex items-center space-x-2">
-            <div class="w-8 h-8 bg-olive-600 rounded-full flex items-center justify-center text-white">
-              <i data-lucide="citrus" class="w-5 h-5"></i>
+    <!-- Collections Section -->
+    <section class="collections" id="collections">
+        <div class="container">
+            <div class="section-title reveal">
+                <h2>Our Curated Collections</h2>
+                <p>Exclusively hand-picked for the ultimate freshness.</p>
             </div>
-            <span class="text-lg font-bold text-white tracking-wider">
-              <span data-i18n="logo-p1">果滋</span><span data-i18n="logo-p2" class="text-olive-500 font-light">鲜切</span>
-            </span>
-          </div>
-          <p class="text-xs leading-relaxed text-stone-500" data-i18n="footer-desc">
-            精挑细选好鲜果，干净免切，省时更省心。果滋鲜切致力于通过标准化供应链，为您呈现大自然最纯粹的甜蜜滋味。
-          </p>
-          <!-- 社交链接 -->
-          <div class="flex space-x-4">
-            <a href="#" class="p-2 bg-stone-800 hover:bg-olive-600 hover:text-white rounded-full transition-colors"><i data-lucide="phone-call" class="w-4 h-4"></i></a>
-            <a href="#" class="p-2 bg-stone-800 hover:bg-olive-600 hover:text-white rounded-full transition-colors"><i data-lucide="map-pin" class="w-4 h-4"></i></a>
-            <a href="#" class="p-2 bg-stone-800 hover:bg-olive-600 hover:text-white rounded-full transition-colors"><i data-lucide="heart" class="w-4 h-4"></i></a>
-          </div>
-        </div>
+            <div class="grid">
+                <!-- Collection 1 -->
+                <div class="card reveal">
+                    <div class="card-image">
+                        <img src="assets/whole-fruit.png" alt="Whole Fruit Basket">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-tag">Exotic & Whole</span>
+                        <h3>Seasonal Treasures</h3>
+                        <p>Hand-picked exotic fruits sourced from sustainable organic orchards around the globe.</p>
+                        <a href="#" class="card-link">Shop Whole <i data-lucide="arrow-right"></i></a>
+                    </div>
+                </div>
 
-        <!-- 极速链接 -->
-        <div>
-          <h4 class="text-white text-sm font-bold tracking-wider mb-4 uppercase" data-i18n="footer-nav-title">网站导航</h4>
-          <ul class="space-y-2 text-xs">
-            <li><a href="#" class="hover:text-olive-400 transition-colors" data-i18n="footer-nav-1">品牌首屏</a></li>
-            <li><a href="#categories" class="hover:text-olive-400 transition-colors" data-i18n="footer-nav-2">鲜切品类</a></li>
-            <li><a href="#featured" class="hover:text-olive-400 transition-colors" data-i18n="footer-nav-3">当季爆款推荐</a></li>
-            <li><a href="#brand" class="hover:text-olive-400 transition-colors" data-i18n="footer-nav-4">品质保障机制</a></li>
-          </ul>
-        </div>
+                <!-- Collection 2 -->
+                <div class="card reveal">
+                    <div class="card-image">
+                        <img src="assets/hero.png" alt="Fresh-cut Platter">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-tag">Ready-to-Enjoy</span>
+                        <h3>Artisan Platters</h3>
+                        <p>Perfectly ripened fruits, masterfully cut and arranged for your parties or healthy snacking.</p>
+                        <a href="#" class="card-link">Order Platter <i data-lucide="arrow-right"></i></a>
+                    </div>
+                </div>
 
-        <!-- 服务指南 -->
-        <div>
-          <h4 class="text-white text-sm font-bold tracking-wider mb-4 uppercase" data-i18n="footer-services-title">服务与保障</h4>
-          <ul class="space-y-2 text-xs">
-            <li><a href="#" class="hover:text-olive-400 transition-colors" data-i18n="footer-service-1">配送时效承诺</a></li>
-            <li><a href="#" class="hover:text-olive-400 transition-colors" data-i18n="footer-service-2">退换货无忧政策</a></li>
-            <li><a href="#" class="hover:text-olive-400 transition-colors" data-i18n="footer-service-3">加盟合作意向</a></li>
-            <li><a href="#" class="hover:text-olive-400 transition-colors" data-i18n="footer-service-4">大企业采购定制</a></li>
-          </ul>
-        </div>
-
-        <!-- 订阅通讯 -->
-        <div class="space-y-4">
-          <h4 class="text-white text-sm font-bold tracking-wider mb-4 uppercase" data-i18n="footer-newsletter-title">新鲜好券一键领</h4>
-          <p class="text-xs text-stone-500" data-i18n="footer-newsletter-desc">输入您的电子邮箱，可获取首单 9 折优惠券代码及最新的应季水果上市提醒。</p>
-          <form class="flex flex-col sm:flex-row gap-2" onsubmit="event.preventDefault(); showToast('subscribe-success')">
-            <input type="email" required data-i18n-placeholder="footer-email-placeholder" placeholder="输入您的邮箱" class="w-full px-4 py-2 bg-stone-800 text-white rounded-xl border border-stone-700 text-xs focus:ring-1 focus:ring-olive-500 focus:outline-none">
-            <button type="submit" class="px-4 py-2 bg-olive-600 hover:bg-olive-700 text-white text-xs font-medium rounded-xl transition-colors shrink-0" data-i18n="footer-subscribe-btn">
-              立即订阅
-            </button>
-          </form>
-        </div>
-      </div>
-
-      <div class="border-t border-stone-800 mt-12 pt-8 flex flex-col sm:flex-row justify-between items-center text-xs text-stone-600">
-        <p data-i18n="footer-copyright">© 2026 果滋鲜切 FreshCut. 保留所有权利。</p>
-        <p class="mt-2 sm:mt-0" data-i18n="footer-tagline">绿色健康 · 环保包装 · 绿色生活</p>
-      </div>
-    </div>
-  </footer>
-
-  <!-- ==================== 7. SHOPPING CART DRAWER (侧边购物车抽屉) ==================== -->
-  <div id="cart-drawer-overlay" onclick="toggleCart(false)" class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 opacity-0 pointer-events-none transition-opacity duration-300"></div>
-  <aside id="cart-drawer" class="fixed top-0 right-0 h-full w-full sm:w-[400px] bg-beige-50 shadow-2xl z-50 translate-x-full drawer-transition flex flex-col border-l border-beige-200">
-    <!-- 抽屉头部 -->
-    <div class="p-6 border-b border-beige-200 flex items-center justify-between bg-beige-100">
-      <div class="flex items-center space-x-2">
-        <i data-lucide="shopping-bag" class="w-5 h-5 text-olive-700"></i>
-        <h3 class="font-bold text-lg text-stone-800" data-i18n="cart-title">您挑好的果实</h3>
-      </div>
-      <button onclick="toggleCart(false)" class="p-1 hover:bg-beige-200 rounded-lg text-stone-600 transition-colors" aria-label="关闭购物车">
-        <i data-lucide="x" class="w-6 h-6"></i>
-      </button>
-    </div>
-
-    <!-- 购物车商品列表（滚动层） -->
-    <div id="cart-items" class="flex-1 overflow-y-auto p-6 space-y-4">
-      <!-- 动态数据插入点 -->
-      <div id="cart-empty-state" class="flex flex-col items-center justify-center py-20 text-center space-y-3">
-        <div class="w-16 h-16 bg-beige-200 rounded-full flex items-center justify-center text-stone-400">
-          <i data-lucide="shopping-cart" class="w-8 h-8"></i>
-        </div>
-        <p class="text-sm text-stone-500 font-medium" data-i18n="cart-empty">您的果盘还是空的哦</p>
-        <button onclick="toggleCart(false)" class="text-xs bg-olive-600 hover:bg-olive-700 text-white px-4 py-2 rounded-lg transition-colors" data-i18n="cart-fill-btn">
-          立即去装满
-        </button>
-      </div>
-    </div>
-
-    <!-- 购物车总结与下单（底部层） -->
-    <div class="p-6 border-t border-beige-200 bg-beige-100 space-y-4">
-      <div class="flex items-center justify-between text-sm">
-        <span class="text-stone-500 font-medium" data-i18n="cart-subtotal-label">果切小计：</span>
-        <span id="cart-subtotal" class="font-bold text-lg text-stone-800">¥0.00</span>
-      </div>
-      <div class="flex items-center justify-between text-xs text-stone-500">
-        <span data-i18n="cart-shipping-note">满 39 包邮（已减免配送费）</span>
-        <span id="shipping-fee" class="text-olive-600" data-i18n="cart-shipping-free">已包邮</span>
-      </div>
-      <button onclick="checkout()" class="w-full py-4 bg-olive-600 hover:bg-olive-700 text-white font-bold rounded-xl shadow-lg shadow-olive-600/15 hover:shadow-xl transition-all text-center flex items-center justify-center space-x-2">
-        <span data-i18n="cart-checkout-btn">去结账，吃新鲜！</span>
-        <i data-lucide="chevron-right" class="w-4 h-4"></i>
-      </button>
-    </div>
-  </aside>
-
-  <!-- ==================== 8. TOAST NOTIFICATION (提示组件) ==================== -->
-  <div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-stone-900 text-white px-5 py-3 rounded-xl shadow-2xl flex items-center space-x-3 text-sm z-50 opacity-0 pointer-events-none transition-all duration-300 transform translate-y-2">
-    <i data-lucide="check-circle" class="w-4 h-4 text-olive-400 shrink-0"></i>
-    <span id="toast-message" class="font-medium"></span>
-  </div>
-
-  <!-- ==================== JavaScript 功能交互逻辑 ==================== -->
-  <script>
-    // 初始化 Lucide 图标库
-    lucide.createIcons();
-
-    // ----------------- i18n 语言词典配置 -----------------
-    const translations = {
-      zh: {
-        // Logo
-        "logo-p1": "果滋",
-        "logo-p2": "鲜切",
-
-        // Nav
-        "nav-home": "首页",
-        "nav-categories": "鲜切分类",
-        "nav-featured": "爆款热销",
-        "nav-brand": "新鲜承诺",
-        
-        // Hero Section
-        "hero-tag": "每日晨采 · 0℃冷链直达",
-        "hero-title": "免洗免切，<br class='hidden sm:inline'><span class='text-olive-600'>一口爆汁</span>的鲜甜享受",
-        "hero-desc": "严选当季黄金熟度鲜果，专业净化无菌车间即时现切。为你省去繁琐清洗去皮，只留下满满的维生素和最初的鲜甜滋味。",
-        "hero-stat-1-title": "0添加",
-        "hero-stat-1-desc": "无防腐剂/色素",
-        "hero-stat-2-title": "100%",
-        "hero-stat-2-desc": "当季熟成鲜果",
-        "hero-stat-3-title": "2小时",
-        "hero-stat-3-desc": "城市急速送达",
-        "hero-cta-buy": "立即选购",
-        "hero-cta-promise": "新鲜承诺",
-        "hero-floating-tag": "今日限定热销",
-        "hero-floating-title": "缤纷家庭分享桶 (1kg)",
-        
-        // Category section
-        "cat-title": "鲜美划分，精准契合你的需求",
-        "cat-desc": "无论是聚会分享、日常补充能量，还是轻盈低负担的一餐，我们都已为你分门别类。",
-        "cat-1-tag": "主打推荐",
-        "cat-1-title": "即食果切",
-        "cat-1-desc": "精选无籽西瓜、金钻凤梨等爆汁水果，开盖即食，搭配果叉，办公室下午茶首选。",
-        "cat-2-tag": "冷压纯榨",
-        "cat-2-title": "鲜榨果汁",
-        "cat-2-desc": "HPP高压冷杀菌技术，100%全果原汁，不额外添加一滴水和糖，留住最饱满的营养。",
-        "cat-3-tag": "原箱直发",
-        "cat-3-title": "原箱水果",
-        "cat-3-desc": "满足全家囤货和送礼需求，精细气泡袋包裹，产地直采整箱无瑕疵严选好果。",
-        "cat-explore": "立即去挑挑",
-
-        // Hot sellers section
-        "featured-title": "热销鲜切，美味即刻呈现",
-        "featured-desc": "高人气、高复购的招牌果切，今日已完成极速杀菌和锁鲜打包",
-        "tab-all": "全部推荐",
-        "tab-peeled": "免剥果切",
-        "tab-trendy": "网红多拼",
-
-        // Products
-        "prod-1-badge": "招牌爆款",
-        "prod-1-tag": "多拼果盒",
-        "prod-1-title": "五彩斑斓热带果切分享盒",
-        "prod-1-desc": "包含：芒果、凤梨、哈密瓜、无籽红提、猕猴桃 (500g)",
-        "prod-1-unit": "/盒",
-        
-        "prod-2-badge": "原汁原味",
-        "prod-2-tag": "免剥懒人",
-        "prod-2-title": "清甜泰国椰青果肉肉杯",
-        "prod-2-desc": "精挑细选饱满椰子，100%全手工起肉，带淡淡奶香椰汁 (350g)",
-        "prod-2-unit": "/杯",
-
-        "prod-3-badge": "高维C",
-        "prod-3-tag": "品质原切",
-        "prod-3-title": "新西兰佳沛黄金奇异果杯",
-        "prod-3-desc": "果肉细腻丰盈，清甜软糯，不酸牙，满满高倍活性VC (4粒量)",
-        "prod-3-unit": "/杯",
-
-        "prod-4-badge": "超值双拼",
-        "prod-4-tag": "绝妙搭配",
-        "prod-4-title": "新疆甜心蜜瓜与台农芒果双拼",
-        "prod-4-desc": "蜜瓜清香爽脆搭配芒果浓郁软糯，口感层次鲜明 (450g)",
-        "prod-4-unit": "/杯",
-
-        // Brand section
-        "brand-tag": "果滋鲜切 · 品质立足",
-        "brand-title": "坚持四大新鲜标准 给家人吃的新鲜",
-        "brand-desc": "我们相信好的果切不仅仅是“切水果”，更是一次对健康的精致守护。我们执行极为苛刻的新鲜规范，只为给您一口爆汁的纯粹美味。",
-        "brand-card-1-title": "十万级无菌切分车间",
-        "brand-card-1-desc": "医用级空气净化，绝杜绝二次污染",
-        "brand-card-2-title": "3小时销售黄金法则",
-        "brand-card-2-desc": "货架停留超3小时无条件废弃",
-        "brand-card-3-title": "0-4℃全程冷链配送",
-        "brand-card-3-desc": "温控保障，锁死原果鲜嫩营养",
-        "brand-card-4-title": "不好吃，瞬间包退换",
-        "brand-card-4-desc": "专属售后客服，随时解决不满意",
-        "brand-img-alt": "新鲜水果质量",
-
-        // Footer Section
-        "footer-desc": "精挑细选好鲜果，干净免切，省时更省心。果滋鲜切致力于通过标准化供应链，为您呈现大自然最纯粹的甜蜜滋味。",
-        "footer-nav-title": "网站导航",
-        "footer-nav-1": "品牌首屏",
-        "footer-nav-2": "鲜切品类",
-        "footer-nav-3": "当季爆款推荐",
-        "footer-nav-4": "品质保障机制",
-        "footer-services-title": "服务与保障",
-        "footer-service-1": "配送时效承诺",
-        "footer-service-2": "退换货无忧政策",
-        "footer-service-3": "加盟合作意向",
-        "footer-service-4": "大企业采购定制",
-        "footer-newsletter-title": "新鲜好券一键领",
-        "footer-newsletter-desc": "输入您的电子邮箱，可获取首单 9 折优惠券代码及最新的应季水果上市提醒。",
-        "footer-email-placeholder": "输入您的邮箱",
-        "footer-subscribe-btn": "立即订阅",
-        "footer-copyright": "© 2026 果滋鲜切 FreshCut. 保留所有权利。",
-        "footer-tagline": "绿色健康 · 环保包装 · 绿色生活",
-
-        // Cart Drawer
-        "cart-title": "您挑好的果实",
-        "cart-empty": "您的果盘还是空的哦",
-        "cart-fill-btn": "立即去装满",
-        "cart-subtotal-label": "果切小计：",
-        "cart-shipping-note": "满 39 包邮（已减免配送费）",
-        "cart-shipping-free": "已包邮",
-        "cart-shipping-cost": "配送费 ¥6.00",
-        "cart-checkout-btn": "去结账，吃新鲜！",
-        "cart-unit-price": "单价：¥",
-
-        // Dynamic System alerts
-        "add-success": "已成功添加 【{name}】 到果盘！",
-        "cart-empty-toast": "果盘空空如也，请先添加您心仪的水果！",
-        "checkout-processing": "正在为您建立绿色保鲜订单，请稍候...",
-        "checkout-success": "订单提交成功！冷链骑士正在整装待发。",
-        "subscribe-success": "订阅成功！感谢关注鲜切好物。"
-      },
-      en: {
-        // Logo
-        "logo-p1": "GuoZi",
-        "logo-p2": "Fresh",
-
-        // Nav
-        "nav-home": "Home",
-        "nav-categories": "Categories",
-        "nav-featured": "Trending",
-        "nav-brand": "Our Promise",
-        
-        // Hero Section
-        "hero-tag": "Fresh Sourced · 0°C Cold Chain Delivery",
-        "hero-title": "No Wash, No Cut.<br class='hidden sm:inline'><span class='text-olive-600'>Pure Sweet Juice</span> in Every Bite",
-        "hero-desc": "Strictly selected golden ripe seasonal fruits, hand-sliced in sterilized cleanrooms. Zero peeling, zero hassle—just pure delicious vitamins.",
-        "hero-stat-1-title": "Zero Additives",
-        "hero-stat-1-desc": "No Preservatives / Colors",
-        "hero-stat-2-title": "100%",
-        "hero-stat-2-desc": "Perfectly Ripe Fruits",
-        "hero-stat-3-title": "2 Hours",
-        "hero-stat-3-desc": "Instant Express Delivery",
-        "hero-cta-buy": "Shop Now",
-        "hero-cta-promise": "Our Promise",
-        "hero-floating-tag": "Today's Best Seller",
-        "hero-floating-title": "Family Medley Tub (1kg)",
-
-        // Category section
-        "cat-title": "Fresh Selections Tailored For You",
-        "cat-desc": "Whether for social parties, daily vitamin boosts, or a low-calorie diet snack, we have compiled it perfectly.",
-        "cat-1-tag": "Signature",
-        "cat-1-title": "Ready-to-eat Cups",
-        "cat-1-desc": "Premium seedless watermelon, gold pineapple, and other juicy fruits. Open and enjoy instantly with a fork.",
-        "cat-2-tag": "Cold-Pressed",
-        "cat-2-title": "Pure Cold Juice",
-        "cat-2-desc": "HPP ultra-high pressure cold sterilization. 100% whole fruits with zero added water or sugar.",
-        "cat-3-tag": "Direct Box",
-        "cat-3-title": "Direct Orchard Box",
-        "cat-3-desc": "Meet your family stocking and gifting needs. Premium quality whole fruits securely packed in bubble-wraps.",
-        "cat-explore": "Explore Now",
-
-        // Hot sellers section
-        "featured-title": "Best Sellers, Fresh Cut Live",
-        "featured-desc": "Our highly rated signature fruit cuts, freshly disinfected and sealed-fresh today.",
-        "tab-all": "All Selections",
-        "tab-peeled": "Peeled Cuts",
-        "tab-trendy": "Trendy Medleys",
-
-        // Products
-        "prod-1-badge": "Best Seller",
-        "prod-1-tag": "Mixed Fruit",
-        "prod-1-title": "Colorful Tropical Fruit Medley Box",
-        "prod-1-desc": "Includes: Mango, Pineapple, Cantaloupe, Red Grapes, Kiwi (500g)",
-        "prod-1-unit": "/Box",
-        
-        "prod-2-badge": "100% Pure",
-        "prod-2-tag": "Easy Prep",
-        "prod-2-title": "Sweet Thai Coconut Meat Bowl",
-        "prod-2-desc": "Exquisitely hand-scooped fresh coconut flesh served with fragrant sweet coconut juice (350g)",
-        "prod-2-unit": "/Cup",
-
-        "prod-3-badge": "High Vit-C",
-        "prod-3-tag": "Premium Cut",
-        "prod-3-title": "New Zealand Zespri Golden Kiwi Cup",
-        "prod-3-desc": "Fragrant and soft golden kiwi meat with high-strength active Vitamin C (4 kiwis equivalent)",
-        "prod-3-unit": "/Cup",
-
-        "prod-4-badge": "Super Value",
-        "prod-4-tag": "Perfect Duo",
-        "prod-4-title": "Sweet Melon & Ripe Mango Duo Cup",
-        "prod-4-desc": "Fragrant crispy Xinjiang sweet melon paired with rich soft mangoes for incredible layers (450g)",
-        "prod-4-unit": "/Cup",
-
-        // Brand section
-        "brand-tag": "GuoZi Standards",
-        "brand-title": "4 Golden Freshness Standards for Your Family",
-        "brand-desc": "We believe premium ready-to-eat fruits should go beyond the cutting board. We follow absolute safety-control practices for family trust.",
-        "brand-card-1-title": "Class 100K Sterile Facility",
-        "brand-card-1-desc": "Medical-grade air filters eliminate secondary risks",
-        "brand-card-2-title": "3-Hour Display Rule",
-        "brand-card-2-desc": "Any unsold cuts beyond 3 hours are discarded",
-        "brand-card-3-title": "0-4°C Cold Chain logistics",
-        "brand-card-3-desc": "Precision cooling locks in maximum original nutrition",
-        "brand-card-4-title": "Unsatisfactory refund policy",
-        "brand-card-4-desc": "Direct service line to resolve any taste issues",
-        "brand-img-alt": "Fresh Fruit Quality Standards",
-
-        // Footer Section
-        "footer-desc": "Handpicked high-quality fresh fruits, peeled, sliced, and packed with love. We strive to offer you the ultimate seasonal sweet experience.",
-        "footer-nav-title": "Navigation",
-        "footer-nav-1": "Home",
-        "footer-nav-2": "Fruit Categories",
-        "footer-nav-3": "Weekly Hot Sellers",
-        "footer-nav-4": "Quality Assurance",
-        "footer-services-title": "Customer Services",
-        "footer-service-1": "On-Time Express Promise",
-        "footer-service-2": "Hassle-Free Refunds",
-        "footer-service-3": "Franchise Partnerships",
-        "footer-service-4": "Corporate Catering Packages",
-        "footer-newsletter-title": "Get Fresh Coupons",
-        "footer-newsletter-desc": "Enter your email to receive a 10% off code and be updated on seasonal fruit launches.",
-        "footer-email-placeholder": "Enter your email address",
-        "footer-subscribe-btn": "Subscribe Now",
-        "footer-copyright": "© 2026 GuoZi FreshCut. All Rights Reserved.",
-        "footer-tagline": "Organic Living · Smart Eco Packaging · Healthy Life",
-
-        // Cart Drawer
-        "cart-title": "Your Selection",
-        "cart-empty": "Your fruit plate is empty",
-        "cart-fill-btn": "Let's Go Shopping",
-        "cart-subtotal-label": "Subtotal:",
-        "cart-shipping-note": "Free shipping on orders over ¥39",
-        "cart-shipping-free": "Free Delivery",
-        "cart-shipping-cost": "Delivery Fee ¥6.00",
-        "cart-checkout-btn": "Order Fresh Fruits!",
-        "cart-unit-price": "Unit: ¥",
-
-        // Dynamic System alerts
-        "add-success": "Successfully added 【{name}】 to your plate!",
-        "cart-empty-toast": "Your fruit plate is empty! Add some sweet fruits first.",
-        "checkout-processing": "Preparing your ultra-fresh express order, please wait...",
-        "checkout-success": "Order placed successfully! Cold-chain rider has departed.",
-        "subscribe-success": "Subscription successful! Thank you for staying fresh with us."
-      }
-    };
-
-    // 全局数据状态：当前语言及购物车
-    let currentLang = 'zh';
-    let cart = [];
-
-    // ----------------- i18n 核心切换函数 -----------------
-    function toggleLanguage() {
-      currentLang = currentLang === 'zh' ? 'en' : 'zh';
-      applyLanguage(currentLang);
-    }
-
-    function applyLanguage(lang) {
-      // 1. 查找并替换带有 data-i18n 的常规文本内容
-      document.querySelectorAll('[data-i18n]').forEach(el => {
-        const key = el.getAttribute('data-i18n');
-        if (translations[lang] && translations[lang][key]) {
-          el.textContent = translations[lang][key];
-        }
-      });
-
-      // 2. 查找并替换含有 HTML 格式的文本（主要用于换行样式）
-      document.querySelectorAll('[data-i18n-html]').forEach(el => {
-        const key = el.getAttribute('data-i18n-html');
-        if (translations[lang] && translations[lang][key]) {
-          el.innerHTML = translations[lang][key];
-        }
-      });
-
-      // 3. 替换 Input 框中的 placeholder
-      document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
-        const key = el.getAttribute('data-i18n-placeholder');
-        if (translations[lang] && translations[lang][key]) {
-          el.setAttribute('placeholder', translations[lang][key]);
-        }
-      });
-
-      // 4. 替换图片的 alt 辅助信息描述
-      document.querySelectorAll('[data-i18n-alt]').forEach(el => {
-        const key = el.getAttribute('data-i18n-alt');
-        if (translations[lang] && translations[lang][key]) {
-          el.setAttribute('alt', translations[lang][key]);
-        }
-      });
-
-      // 5. 更新语言切换按钮文本
-      document.getElementById('lang-btn-text').textContent = lang === 'zh' ? 'EN' : '中文';
-
-      // 6. 重绘购物车，实现购物车名称的实时双语翻译
-      updateCartUI();
-    }
-
-    // ----------------- 购物车业务逻辑 (双语重构) -----------------
-    
-    // 添加商品：保存唯一的 Product ID，而非硬编码的中文字符串
-    function addToCart(productId, price) {
-      const existingItem = cart.find(item => item.id === productId);
-      if (existingItem) {
-        existingItem.quantity += 1;
-      } else {
-        cart.push({ id: productId, price: price, quantity: 1 });
-      }
-      updateCartUI();
-
-      // 自适应语言的 Toast 提示
-      const productName = translations[currentLang][`${productId}-title` || productId];
-      const template = translations[currentLang]["add-success"];
-      const alertMsg = template.replace("{name}", productName);
-      showToastDirectly(alertMsg);
-    }
-
-    // 更新购物车界面
-    function updateCartUI() {
-      const cartItemsContainer = document.getElementById('cart-items');
-      const cartEmptyState = document.getElementById('cart-empty-state');
-      const cartBadge = document.getElementById('cart-badge');
-      const cartSubtotal = document.getElementById('cart-subtotal');
-      const shippingFee = document.getElementById('shipping-fee');
-
-      // 清除以往的动态行元素
-      const previousItems = cartItemsContainer.querySelectorAll('.cart-item-row');
-      previousItems.forEach(item => item.remove());
-
-      if (cart.length === 0) {
-        cartEmptyState.classList.remove('hidden');
-        cartBadge.textContent = '0';
-        cartSubtotal.textContent = '¥0.00';
-        shippingFee.textContent = currentLang === 'zh' ? '配送费 ¥6.00' : 'Delivery: ¥6.00';
-        shippingFee.className = 'text-stone-500';
-        return;
-      }
-
-      cartEmptyState.classList.add('hidden');
-
-      let totalCount = 0;
-      let totalPrice = 0;
-
-      cart.forEach((item, index) => {
-        totalCount += item.quantity;
-        totalPrice += item.price * item.quantity;
-
-        // 双语转换
-        const localizedName = translations[currentLang][`${item.id}-title`] || item.id;
-        const unitPriceLabel = translations[currentLang]["cart-unit-price"] || "Unit: ¥";
-
-        const itemRow = document.createElement('div');
-        itemRow.className = 'cart-item-row flex items-center justify-between p-3 bg-white rounded-xl border border-beige-200 shadow-sm transition-all';
-        itemRow.innerHTML = `
-          <div class="flex-1 min-w-0 pr-2">
-            <h4 class="text-sm font-bold text-stone-800 truncate">${localizedName}</h4>
-            <p class="text-xs text-stone-400 mt-0.5">${unitPriceLabel}${item.price.toFixed(2)}</p>
-          </div>
-          <div class="flex items-center space-x-3">
-            <div class="flex items-center bg-beige-50 border border-beige-200 rounded-lg">
-              <button onclick="changeQuantity(${index}, -1)" class="px-2 py-1 text-stone-500 hover:text-olive-700 hover:bg-beige-100 transition-colors rounded-l-lg">-</button>
-              <span class="px-2.5 text-xs font-bold text-stone-700">${item.quantity}</span>
-              <button onclick="changeQuantity(${index}, 1)" class="px-2 py-1 text-stone-500 hover:text-olive-700 hover:bg-beige-100 transition-colors rounded-r-lg">+</button>
+                <!-- Collection 3 -->
+                <div class="card reveal">
+                    <div class="card-image">
+                        <img src="assets/juice.png" alt="Cold-pressed Juice">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-tag">Raw & Pure</span>
+                        <h3>Cold-Pressed Elixirs</h3>
+                        <p>100% raw juice, cold-pressed to retain every nutrient and drop of natural sweetness.</p>
+                        <a href="#" class="card-link">Explore Juices <i data-lucide="arrow-right"></i></a>
+                    </div>
+                </div>
             </div>
-            <p class="text-sm font-bold text-olive-700 w-16 text-right">¥${(item.price * item.quantity).toFixed(2)}</p>
-          </div>
-        `;
-        cartItemsContainer.appendChild(itemRow);
-      });
+        </div>
+    </section>
 
-      // 更新徽标
-      cartBadge.textContent = totalCount;
-      // 更新价格总计
-      cartSubtotal.textContent = `¥${totalPrice.toFixed(2)}`;
-      
-      // 运费计算
-      if (totalPrice >= 39) {
-        shippingFee.textContent = translations[currentLang]["cart-shipping-free"];
-        shippingFee.className = 'text-olive-600 font-medium';
-      } else {
-        shippingFee.textContent = currentLang === 'zh' ? '配送费 ¥6.00' : 'Delivery: ¥6.00';
-        shippingFee.className = 'text-stone-500';
-      }
-    }
+    <!-- Process Section -->
+    <section class="process" id="process">
+        <div class="container process-grid">
+            <div class="process-image reveal">
+                <div style="background: var(--primary-lime); border-radius: 40px; padding: 2rem; position: relative;">
+                    <img src="assets/whole-fruit.png" alt="Fresh Harvest" style="width: 100%; border-radius: 20px; box-shadow: var(--shadow);">
+                </div>
+            </div>
+            <div class="process-steps reveal">
+                <div class="section-title" style="text-align: left; margin-bottom: 2rem;">
+                    <h2>The U Fruit Standard</h2>
+                    <p>How we ensure excellence from orchard to doorstep.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">01</div>
+                    <div class="step-content">
+                        <h4>Peak Ripeness Harvest</h4>
+                        <p>We only harvest when the fruit has reached its natural sugar peak, ensuring maximum flavor.</p>
+                    </div>
+                </div>
 
-    // 改变购物车商品数量
-    function changeQuantity(index, delta) {
-      cart[index].quantity += delta;
-      if (cart[index].quantity <= 0) {
-        cart.splice(index, 1);
-      }
-      updateCartUI();
-    }
+                <div class="step">
+                    <div class="step-number">02</div>
+                    <div class="step-content">
+                        <h4>Artisan Hand-Selection</h4>
+                        <p>Every single fruit is inspected by hand. Only 5% of the harvest meets the U Fruit standard.</p>
+                    </div>
+                </div>
 
-    // 控制购物车显示隐藏
-    function toggleCart(isOpen) {
-      const drawer = document.getElementById('cart-drawer');
-      const overlay = document.getElementById('cart-drawer-overlay');
+                <div class="step">
+                    <div class="step-number">03</div>
+                    <div class="step-content">
+                        <h4>Zero-Loss Cold Chain</h4>
+                        <p>Our specialized delivery keeps fruits at the perfect temperature to lock in freshness.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-      if (isOpen) {
-        drawer.classList.remove('translate-x-full');
-        overlay.classList.remove('opacity-0', 'pointer-events-none');
-        overlay.classList.add('opacity-100');
-      } else {
-        drawer.classList.add('translate-x-full');
-        overlay.classList.remove('opacity-100');
-        overlay.classList.add('opacity-0', 'pointer-events-none');
-      }
-    }
+    <!-- Newsletter Section -->
+    <section class="newsletter" id="newsletter">
+        <div class="container reveal">
+            <div class="newsletter-box">
+                <h2>Join the Fresh Circle</h2>
+                <p>Receive exclusive invitations to seasonal tastings and a 15% discount on your first boutique order.</p>
+                <form class="subscribe-form">
+                    <input type="email" placeholder="Your email address" required title="Please enter a valid email">
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </section>
 
-    // 移动端菜单
-    function toggleMobileMenu() {
-      const menu = document.getElementById('mobile-menu');
-      const isHidden = menu.classList.contains('hidden');
-      if (isHidden) {
-        menu.classList.remove('hidden');
-      } else {
-        menu.classList.add('hidden');
-      }
-    }
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <a href="#" class="footer-logo">
+                        <i data-lucide="citrus"></i>
+                        U<span>Fruit</span>
+                    </a>
+                    <p>Elevating the art of fresh fruit. From nature's best gardens to your sophisticated table.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Instagram"><i data-lucide="instagram"></i></a>
+                        <a href="#" aria-label="Facebook"><i data-lucide="facebook"></i></a>
+                        <a href="#" aria-label="Twitter"><i data-lucide="twitter"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Experience</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#collections">Collections</a></li>
+                        <li><a href="#process">Our Story</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Shipping</a></li>
+                        <li><a href="#">Returns</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Contact</h4>
+                    <p>hello@ufruit.com</p>
+                    <p>+1 (800) FRESH-U</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2026 U Fruit Boutique. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
 
-    // 触发系统通用 Toast，使用 i18n 词汇对应
-    function showToast(i18nKey) {
-      const message = translations[currentLang][i18nKey] || i18nKey;
-      showToastDirectly(message);
-    }
-
-    // 底层不带 i18n key 直接传字符串的弹窗显示
-    function showToastDirectly(message) {
-      const toast = document.getElementById('toast');
-      const toastMessage = document.getElementById('toast-message');
-
-      toastMessage.textContent = message;
-      toast.classList.remove('opacity-0', 'pointer-events-none', 'translate-y-2');
-      toast.classList.add('opacity-100', 'translate-y-0');
-
-      setTimeout(() => {
-        toast.classList.remove('opacity-100', 'translate-y-0');
-        toast.classList.add('opacity-0', 'pointer-events-none', 'translate-y-2');
-      }, 2500);
-    }
-
-    // 结账模拟
-    function checkout() {
-      if (cart.length === 0) {
-        showToast('cart-empty-toast');
-        return;
-      }
-      showToast('checkout-processing');
-      setTimeout(() => {
-        showToast('checkout-success');
-        cart = [];
-        updateCartUI();
-        toggleCart(false);
-      }, 1500);
-    }
-  </script>
+    <script src="app.js"></script>
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+    </script>
 </body>
 </html>

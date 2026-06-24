@@ -1,89 +1,216 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Welcome to Firebase Hosting</title>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>U Fruit | High-End Fresh Fruit Experience</title>
+    <meta name="description" content="U Fruit offers the finest selection of whole fruits, fresh-cut platters, and freshly squeezed juices. Premium quality, delivered fresh.">
+    <link rel="stylesheet" href="style.css">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@0"></script>
+</head>
+<body>
 
-    <!-- update the version number as needed -->
-    <script defer src="/__/firebase/12.15.0/firebase-app-compat.js"></script>
-    <!-- include only the Firebase features as you need -->
-    <script defer src="/__/firebase/12.15.0/firebase-auth-compat.js"></script>
-    <script defer src="/__/firebase/12.15.0/firebase-database-compat.js"></script>
-    <script defer src="/__/firebase/12.15.0/firebase-firestore-compat.js"></script>
-    <script defer src="/__/firebase/12.15.0/firebase-functions-compat.js"></script>
-    <script defer src="/__/firebase/12.15.0/firebase-messaging-compat.js"></script>
-    <script defer src="/__/firebase/12.15.0/firebase-storage-compat.js"></script>
-    <script defer src="/__/firebase/12.15.0/firebase-analytics-compat.js"></script>
-    <script defer src="/__/firebase/12.15.0/firebase-remote-config-compat.js"></script>
-    <script defer src="/__/firebase/12.15.0/firebase-performance-compat.js"></script>
-    <!-- 
-      initialize the SDK after all desired features are loaded, set useEmulator to false
-      to avoid connecting the SDK to running emulators.
-    -->
-    <script defer src="/__/firebase/init.js?useEmulator=true"></script>
+    <!-- Header -->
+    <header>
+        <div class="container nav-content">
+            <a href="#" class="logo">
+                <i data-lucide="citrus"></i>
+                U<span>Fruit</span>
+            </a>
+            <nav class="nav-links">
+                <a href="#home">Home</a>
+                <a href="#collections">Collections</a>
+                <a href="#process">Our Process</a>
+                <a href="#newsletter">Join the Club</a>
+            </nav>
+            <div class="header-right">
+                <a href="#collections" class="cta-button">Order Now</a>
+                <button class="menu-toggle" aria-label="Toggle Menu">
+                    <i data-lucide="menu"></i>
+                </button>
+            </div>
+        </div>
+    </header>
 
-    <style media="screen">
-      body { background: #ECEFF1; color: rgba(0,0,0,0.87); font-family: Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
-      #message { background: white; max-width: 360px; margin: 100px auto 16px; padding: 32px 24px; border-radius: 3px; }
-      #message h2 { color: #ffa100; font-weight: bold; font-size: 16px; margin: 0 0 8px; }
-      #message h1 { font-size: 22px; font-weight: 300; color: rgba(0,0,0,0.6); margin: 0 0 16px;}
-      #message p { line-height: 140%; margin: 16px 0 24px; font-size: 14px; }
-      #message a { display: block; text-align: center; background: #039be5; text-transform: uppercase; text-decoration: none; color: white; padding: 16px; border-radius: 4px; }
-      #message, #message a { box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); }
-      #load { color: rgba(0,0,0,0.4); text-align: center; font-size: 13px; }
-      @media (max-width: 600px) {
-        body, #message { margin-top: 0; background: white; box-shadow: none; }
-        body { border-top: 16px solid #ffa100; }
-      }
-    </style>
-  </head>
-  <body>
-    <div id="message">
-      <h2>Welcome</h2>
-      <h1>Firebase Hosting Setup Complete</h1>
-      <p>You're seeing this because you've successfully setup Firebase Hosting. Now it's time to go build something extraordinary!</p>
-      <a target="_blank" href="https://firebase.google.com/docs/hosting/">Open Hosting Documentation</a>
-    </div>
-    <p id="load">Firebase SDK Loading&hellip;</p>
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <div class="container hero-content">
+            <div class="hero-text reveal">
+                <h1>Taste the <span>Purest</span> Energy of Nature</h1>
+                <p>Curated premium fruits, artistically cut platters, and raw cold-pressed juices. Experience the zesty side of luxury.</p>
+                <div class="hero-btns">
+                    <a href="#collections" class="cta-button">Explore Collections</a>
+                </div>
+            </div>
+            <div class="hero-image reveal">
+                <img src="assets/hero.png" alt="Luxurious Fruit Platter">
+                <div class="floating-badge">
+                    <div class="badge-icon">
+                        <i data-lucide="sparkles"></i>
+                    </div>
+                    <div>
+                        <strong>Premium Choice</strong>
+                        <p>100% Organic Sourced</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
+    <!-- Collections Section -->
+    <section class="collections" id="collections">
+        <div class="container">
+            <div class="section-title reveal">
+                <h2>Our Curated Collections</h2>
+                <p>Exclusively hand-picked for the ultimate freshness.</p>
+            </div>
+            <div class="grid">
+                <!-- Collection 1 -->
+                <div class="card reveal">
+                    <div class="card-image">
+                        <img src="assets/whole-fruit.png" alt="Whole Fruit Basket">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-tag">Exotic & Whole</span>
+                        <h3>Seasonal Treasures</h3>
+                        <p>Hand-picked exotic fruits sourced from sustainable organic orchards around the globe.</p>
+                        <a href="#" class="card-link">Shop Whole <i data-lucide="arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Collection 2 -->
+                <div class="card reveal">
+                    <div class="card-image">
+                        <img src="assets/hero.png" alt="Fresh-cut Platter">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-tag">Ready-to-Enjoy</span>
+                        <h3>Artisan Platters</h3>
+                        <p>Perfectly ripened fruits, masterfully cut and arranged for your parties or healthy snacking.</p>
+                        <a href="#" class="card-link">Order Platter <i data-lucide="arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Collection 3 -->
+                <div class="card reveal">
+                    <div class="card-image">
+                        <img src="assets/juice.png" alt="Cold-pressed Juice">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-tag">Raw & Pure</span>
+                        <h3>Cold-Pressed Elixirs</h3>
+                        <p>100% raw juice, cold-pressed to retain every nutrient and drop of natural sweetness.</p>
+                        <a href="#" class="card-link">Explore Juices <i data-lucide="arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="process" id="process">
+        <div class="container process-grid">
+            <div class="process-image reveal">
+                <div style="background: var(--primary-lime); border-radius: 40px; padding: 2rem; position: relative;">
+                    <img src="assets/whole-fruit.png" alt="Fresh Harvest" style="width: 100%; border-radius: 20px; box-shadow: var(--shadow);">
+                </div>
+            </div>
+            <div class="process-steps reveal">
+                <div class="section-title" style="text-align: left; margin-bottom: 2rem;">
+                    <h2>The U Fruit Standard</h2>
+                    <p>How we ensure excellence from orchard to doorstep.</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">01</div>
+                    <div class="step-content">
+                        <h4>Peak Ripeness Harvest</h4>
+                        <p>We only harvest when the fruit has reached its natural sugar peak, ensuring maximum flavor.</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">02</div>
+                    <div class="step-content">
+                        <h4>Artisan Hand-Selection</h4>
+                        <p>Every single fruit is inspected by hand. Only 5% of the harvest meets the U Fruit standard.</p>
+                    </div>
+                </div>
+
+                <div class="step">
+                    <div class="step-number">03</div>
+                    <div class="step-content">
+                        <h4>Zero-Loss Cold Chain</h4>
+                        <p>Our specialized delivery keeps fruits at the perfect temperature to lock in freshness.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter" id="newsletter">
+        <div class="container reveal">
+            <div class="newsletter-box">
+                <h2>Join the Fresh Circle</h2>
+                <p>Receive exclusive invitations to seasonal tastings and a 15% discount on your first boutique order.</p>
+                <form class="subscribe-form">
+                    <input type="email" placeholder="Your email address" required title="Please enter a valid email">
+                    <button type="submit">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <a href="#" class="footer-logo">
+                        <i data-lucide="citrus"></i>
+                        U<span>Fruit</span>
+                    </a>
+                    <p>Elevating the art of fresh fruit. From nature's best gardens to your sophisticated table.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Instagram"><i data-lucide="instagram"></i></a>
+                        <a href="#" aria-label="Facebook"><i data-lucide="facebook"></i></a>
+                        <a href="#" aria-label="Twitter"><i data-lucide="twitter"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Experience</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#collections">Collections</a></li>
+                        <li><a href="#process">Our Story</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Shipping</a></li>
+                        <li><a href="#">Returns</a></li>
+                        <li><a href="#">FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-links">
+                    <h4>Contact</h4>
+                    <p>hello@ufruit.com</p>
+                    <p>+1 (800) FRESH-U</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2026 U Fruit Boutique. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
     <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        const loadEl = document.querySelector('#load');
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-        // // The Firebase SDK is initialized and available here!
-        //
-        // firebase.auth().onAuthStateChanged(user => { });
-        // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
-        // firebase.firestore().doc('/foo/bar').get().then(() => { });
-        // firebase.functions().httpsCallable('yourFunction')().then(() => { });
-        // firebase.messaging().requestPermission().then(() => { });
-        // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
-        // firebase.analytics(); // call to activate
-        // firebase.analytics().logEvent('tutorial_completed');
-        // firebase.performance(); // call to activate
-        //
-        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
-
-        try {
-          let app = firebase.app();
-          let features = [
-            'auth', 
-            'database', 
-            'firestore',
-            'functions',
-            'messaging', 
-            'storage', 
-            'analytics', 
-            'remoteConfig',
-            'performance',
-          ].filter(feature => typeof app[feature] === 'function');
-          loadEl.textContent = `Firebase SDK loaded with ${features.join(', ')}`;
-        } catch (e) {
-          console.error(e);
-          loadEl.textContent = 'Error loading the Firebase SDK, check the console.';
-        }
-      });
+        // Initialize Lucide icons
+        lucide.createIcons();
     </script>
-  </body>
+</body>
 </html>
