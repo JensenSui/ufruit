@@ -1,0 +1,23 @@
+[
+    {
+        "tag": "Exotic & Whole",
+        "title": "Berry Bliss Basket",
+        "desc": "A vibrant selection of the freshest, hand-picked berries. Perfect for antioxidants and natural sweetness.",
+        "price": "$45.00",
+        "image": "assets/IP1-Berry.png"
+    },
+    {
+        "tag": "Ready-to-Enjoy",
+        "title": "Citrus Zest Platter",
+        "desc": "A beautifully arranged platter of premium sliced lemons, oranges, and grapefruits.",
+        "price": "$65.00",
+        "image": "assets/IP3-Lemon.png"
+    },
+    {
+        "tag": "Raw & Pure",
+        "title": "Signature Green Juice",
+        "desc": "100% raw, cold-pressed green goodness to revitalize your body and mind.",
+        "price": "$18.00",
+        "image": "assets/IP2-Juice.png"
+    }
+]
