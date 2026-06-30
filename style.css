@@ -1,5 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Inter:wght@400;500&display=swap');
 
+@font-face {
+    font-family: 'GabrielSansCond-Bold';
+    src: url('assets/fonts/GabrielSansCond-Trial-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Armstrong';
+    src: url('assets/fonts/Armstrong-Extrabold.otf') format('opentype');
+    font-weight: 800;
+    font-style: normal;
+}
+
 :root {
     --primary-red: #E53935;
     --primary-orange: #FB8C00;
@@ -10,8 +24,15 @@
     --text-dark: #2D3436;
     --text-muted: #636E72;
     --white: #FFFFFF;
-    --glass: rgba(255, 255, 255, 0.7);
-    --shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    
+    /* Structural Tokens */
+    --radius-sm: 8px;
+    --radius-md: 14px;
+    --radius-pill: 9999px;
+    --shadow-float: rgba(0, 0, 0, 0.02) 0 0 0 1px, rgba(0, 0, 0, 0.04) 0 2px 6px, rgba(0, 0, 0, 0.1) 0 4px 8px;
+    
+    --glass: rgba(255, 255, 255, 0.95);
+    --shadow: var(--shadow-float);
     --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
@@ -30,7 +51,7 @@ body {
 }
 
 h1, h2, h3, h4 {
-    font-family: 'Outfit', sans-serif;
+    font-family: 'GabrielSansCond-Bold', sans-serif;
     font-weight: 700;
     line-height: 1.2;
 }
@@ -76,8 +97,8 @@ header.scrolled {
 }
 
 .logo {
-    font-family: 'Outfit', sans-serif;
-    font-size: 1.8rem;
+    font-family: 'GabrielSansCond-Bold', sans-serif;
+    font-size: 2.2rem;
     font-weight: 700;
     display: flex;
     align-items: center;
@@ -132,19 +153,20 @@ header.scrolled {
     background: var(--primary-orange);
     color: var(--white);
     padding: 0.8rem 1.8rem;
-    border-radius: 50px;
-    font-weight: 600;
-    box-shadow: 0 5px 15px rgba(251, 140, 0, 0.3);
+    border-radius: var(--radius-sm);
+    font-family: 'GabrielSansCond-Bold', sans-serif;
+    font-size: 1.1rem;
+    letter-spacing: 0.5px;
+    border: none;
 }
 
 .cta-button:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(251, 140, 0, 0.4);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-float);
 }
 
 .cta-button:active {
     transform: translateY(0) scale(0.95) !important;
-    box-shadow: 0 2px 10px rgba(251, 140, 0, 0.3) !important;
 }
 
 /* Hero Section */
@@ -204,8 +226,8 @@ header.scrolled {
     left: -20px;
     background: var(--white);
     padding: 1.5rem;
-    border-radius: 20px;
-    box-shadow: var(--shadow);
+    border-radius: var(--radius-pill);
+    box-shadow: var(--shadow-float);
     display: flex;
     align-items: center;
     gap: 1rem;
@@ -215,7 +237,7 @@ header.scrolled {
     width: 40px;
     height: 40px;
     background: var(--primary-yellow);
-    border-radius: 10px;
+    border-radius: var(--radius-pill);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -245,15 +267,17 @@ header.scrolled {
 
 .card {
     background: var(--white);
-    border-radius: 25px;
+    border-radius: var(--radius-md);
     overflow: hidden;
-    box-shadow: var(--shadow);
+    box-shadow: none;
+    border: 1px solid rgba(0,0,0,0.05);
     transition: var(--transition);
     position: relative;
 }
 
 .card:hover {
-    transform: translateY(-10px);
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-float);
 }
 
 .card-image {
@@ -277,12 +301,14 @@ header.scrolled {
 }
 
 .card-tag {
+    font-family: 'Armstrong', sans-serif;
     font-size: 0.8rem;
-    font-weight: 600;
+    font-weight: 800;
     text-transform: uppercase;
     color: var(--primary-lime);
     margin-bottom: 0.5rem;
     display: block;
+    letter-spacing: 0.5px;
 }
 
 .card h3 {
@@ -342,7 +368,7 @@ header.scrolled {
 .newsletter-box {
     background: var(--primary-green);
     padding: 5rem;
-    border-radius: 40px;
+    border-radius: var(--radius-md);
     color: var(--white);
     max-width: 900px;
     margin: 0 auto;
@@ -360,7 +386,7 @@ header.scrolled {
     margin: 2rem auto 0;
     background: white;
     padding: 0.5rem;
-    border-radius: 50px;
+    border-radius: var(--radius-pill);
 }
 
 .subscribe-form input {
@@ -369,7 +395,7 @@ header.scrolled {
     padding: 0 1.5rem;
     outline: none;
     font-family: inherit;
-    border-radius: 50px;
+    border-radius: var(--radius-pill);
 }
 
 .subscribe-form button {
@@ -377,8 +403,9 @@ header.scrolled {
     color: white;
     border: none;
     padding: 1rem 2rem;
-    border-radius: 50px;
-    font-weight: 600;
+    border-radius: var(--radius-pill);
+    font-family: 'GabrielSansCond-Bold', sans-serif;
+    font-size: 1.1rem;
     cursor: pointer;
 }
 
@@ -540,12 +567,12 @@ footer {
     background: var(--bg-cream);
     width: 90%;
     max-width: 900px;
-    border-radius: 30px;
+    border-radius: var(--radius-md);
     padding: 3rem;
     position: relative;
     transform: translateY(50px);
     transition: var(--transition);
-    box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+    box-shadow: var(--shadow-float);
 }
 
 .modal-overlay.active .modal-container {
