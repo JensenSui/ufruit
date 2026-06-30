@@ -15,8 +15,7 @@
     <header>
         <div class="container nav-content">
             <a href="#" class="logo">
-                <i data-lucide="citrus"></i>
-                U<span>Fruit</span>
+                <img src="assets/ufruit logo.png" alt="U Fruit Logo" style="height: 40px; width: auto;">
             </a>
             <nav class="nav-links">
                 <a href="#home">Home</a>
@@ -25,6 +24,9 @@
                 <a href="#newsletter">Join the Club</a>
             </nav>
             <div class="header-right">
+                <button class="cart-toggle" id="openCart" aria-label="Open Cart" style="background: none; border: none; cursor: pointer; color: var(--text-dark); display: flex; align-items: center; gap: 0.5rem; font-weight: 500;">
+                    <i data-lucide="shopping-bag"></i> <span class="cart-count" style="background: var(--primary-orange); color: white; width: 20px; height: 20px; border-radius: 50%; font-size: 0.7rem; display: flex; align-items: center; justify-content: center;">0</span>
+                </button>
                 <a href="#collections" class="cta-button">Order Now</a>
                 <button class="menu-toggle" aria-label="Toggle Menu">
                     <i data-lucide="menu"></i>
@@ -67,42 +69,115 @@
             </div>
             <div class="grid">
                 <!-- Collection 1 -->
-                <div class="card reveal">
+                <div class="card reveal" style="cursor: pointer;" onclick="openModal('Exotic & Whole', 'Berry Bliss Basket', 'A vibrant selection of the freshest, hand-picked berries. Perfect for antioxidants and natural sweetness.', '$45.00', 'assets/IP1-Berry.png')">
                     <div class="card-image">
-                        <img src="assets/whole-fruit.png" alt="Whole Fruit Basket">
+                        <img src="assets/IP1-Berry.png" alt="Berry Basket">
                     </div>
                     <div class="card-content">
                         <span class="card-tag">Exotic & Whole</span>
-                        <h3>Seasonal Treasures</h3>
-                        <p>Hand-picked exotic fruits sourced from sustainable organic orchards around the globe.</p>
-                        <a href="#" class="card-link">Shop Whole <i data-lucide="arrow-right"></i></a>
+                        <h3>Berry Bliss Basket</h3>
+                        <p>A vibrant selection of the freshest, hand-picked berries. Perfect for antioxidants and natural sweetness.</p>
+                        <span class="card-link" style="margin-top: 1rem;">View Details <i data-lucide="arrow-right"></i></span>
                     </div>
                 </div>
 
                 <!-- Collection 2 -->
-                <div class="card reveal">
+                <div class="card reveal" style="cursor: pointer;" onclick="openModal('Ready-to-Enjoy', 'Citrus Zest Platter', 'A beautifully arranged platter of premium sliced lemons, oranges, and grapefruits.', '$65.00', 'assets/IP3-Lemon.png')">
                     <div class="card-image">
-                        <img src="assets/hero.png" alt="Fresh-cut Platter">
+                        <img src="assets/IP3-Lemon.png" alt="Citrus Platter">
                     </div>
                     <div class="card-content">
                         <span class="card-tag">Ready-to-Enjoy</span>
-                        <h3>Artisan Platters</h3>
-                        <p>Perfectly ripened fruits, masterfully cut and arranged for your parties or healthy snacking.</p>
-                        <a href="#" class="card-link">Order Platter <i data-lucide="arrow-right"></i></a>
+                        <h3>Citrus Zest Platter</h3>
+                        <p>A beautifully arranged platter of premium sliced lemons, oranges, and grapefruits.</p>
+                        <span class="card-link" style="margin-top: 1rem;">View Details <i data-lucide="arrow-right"></i></span>
                     </div>
                 </div>
 
                 <!-- Collection 3 -->
-                <div class="card reveal">
+                <div class="card reveal" style="cursor: pointer;" onclick="openModal('Raw & Pure', 'Signature Green Juice', '100% raw, cold-pressed green goodness to revitalize your body and mind.', '$18.00', 'assets/IP2-Juice.png')">
                     <div class="card-image">
-                        <img src="assets/juice.png" alt="Cold-pressed Juice">
+                        <img src="assets/IP2-Juice.png" alt="Cold-pressed Juice">
                     </div>
                     <div class="card-content">
                         <span class="card-tag">Raw & Pure</span>
-                        <h3>Cold-Pressed Elixirs</h3>
-                        <p>100% raw juice, cold-pressed to retain every nutrient and drop of natural sweetness.</p>
-                        <a href="#" class="card-link">Explore Juices <i data-lucide="arrow-right"></i></a>
+                        <h3>Signature Green Juice</h3>
+                        <p>100% raw, cold-pressed green goodness to revitalize your body and mind.</p>
+                        <span class="card-link" style="margin-top: 1rem;">View Details <i data-lucide="arrow-right"></i></span>
                     </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials" id="reviews" style="padding: 8rem 0; background: var(--white);">
+        <div class="container">
+            <div class="section-title reveal">
+                <h2>Loved by Connoisseurs</h2>
+                <p>Don't just take our word for it. Hear from our community.</p>
+            </div>
+            <div class="grid">
+                <div class="card reveal" style="padding: 2.5rem; background: var(--bg-cream);">
+                    <div style="color: var(--primary-yellow); margin-bottom: 1.5rem; display: flex; gap: 0.2rem;">
+                        <i data-lucide="star" fill="currentColor"></i><i data-lucide="star" fill="currentColor"></i><i data-lucide="star" fill="currentColor"></i><i data-lucide="star" fill="currentColor"></i><i data-lucide="star" fill="currentColor"></i>
+                    </div>
+                    <p style="font-style: italic; margin-bottom: 2rem; color: var(--text-muted);">"The artisan platter was the centerpiece of our dinner party. Absolutely immaculate presentation and unmatched freshness."</p>
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <div style="width: 45px; height: 45px; border-radius: 50%; background: var(--primary-lime); color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; font-family: 'Outfit', sans-serif;">EK</div>
+                        <div>
+                            <strong style="display: block;">Elena K.</strong>
+                            <span style="font-size: 0.85rem; color: var(--text-muted);">Verified Buyer</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="card reveal" style="padding: 2.5rem; background: var(--bg-cream);">
+                    <div style="color: var(--primary-yellow); margin-bottom: 1.5rem; display: flex; gap: 0.2rem;">
+                        <i data-lucide="star" fill="currentColor"></i><i data-lucide="star" fill="currentColor"></i><i data-lucide="star" fill="currentColor"></i><i data-lucide="star" fill="currentColor"></i><i data-lucide="star" fill="currentColor"></i>
+                    </div>
+                    <p style="font-style: italic; margin-bottom: 2rem; color: var(--text-muted);">"The cold-pressed elixirs changed my morning routine. You can truly taste the purity. Highly recommended!"</p>
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <div style="width: 45px; height: 45px; border-radius: 50%; background: var(--primary-orange); color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; font-family: 'Outfit', sans-serif;">MJ</div>
+                        <div>
+                            <strong style="display: block;">Marcus J.</strong>
+                            <span style="font-size: 0.85rem; color: var(--text-muted);">Verified Buyer</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card reveal" style="padding: 2.5rem; background: var(--bg-cream);">
+                    <div style="color: var(--primary-yellow); margin-bottom: 1.5rem; display: flex; gap: 0.2rem;">
+                        <i data-lucide="star" fill="currentColor"></i><i data-lucide="star" fill="currentColor"></i><i data-lucide="star" fill="currentColor"></i><i data-lucide="star" fill="currentColor"></i><i data-lucide="star" fill="currentColor"></i>
+                    </div>
+                    <p style="font-style: italic; margin-bottom: 2rem; color: var(--text-muted);">"U Fruit sets the gold standard. Every delivery is perfectly ripe and beautifully packaged. Luxury in a box."</p>
+                    <div style="display: flex; align-items: center; gap: 1rem;">
+                        <div style="width: 45px; height: 45px; border-radius: 50%; background: var(--primary-red); color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; font-family: 'Outfit', sans-serif;">ST</div>
+                        <div>
+                            <strong style="display: block;">Sarah T.</strong>
+                            <span style="font-size: 0.85rem; color: var(--text-muted);">Verified Buyer</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Us / Sourcing Section -->
+    <section class="about-us" id="about" style="padding: 8rem 0; background: var(--bg-cream);">
+        <div class="container process-grid">
+            <div class="process-steps reveal">
+                <div class="section-title" style="text-align: left; margin-bottom: 2rem;">
+                    <span class="card-tag">Our Sourcing Story</span>
+                    <h2>Rooted in Purity</h2>
+                    <p style="font-size: 1.1rem; color: var(--text-muted); margin-top: 1.5rem;">At U Fruit, our mission begins long before the harvest. We travel the globe to partner exclusively with sustainable, generational organic farms.</p>
+                    <p style="font-size: 1.1rem; color: var(--text-muted); margin-top: 1rem;">Every fruit that bears the U Fruit badge has been cultivated with deep respect for the earth and hand-picked at the precise moment of peak vitality. Taste the unparalleled energy of true nature.</p>
+                    <a href="#collections" class="cta-button" style="display: inline-block; margin-top: 2rem;">Taste the Difference</a>
+                </div>
+            </div>
+            <div class="process-image reveal">
+                <div style="background: var(--primary-orange); border-radius: 40px; padding: 2rem; position: relative;">
+                    <img src="assets/IP5-Cado.png" alt="Sourcing Premium Avocado" style="width: 100%; border-radius: 20px; box-shadow: var(--shadow);">
                 </div>
             </div>
         </div>
@@ -207,10 +282,120 @@
         </div>
     </footer>
 
+    <!-- Product Modal Overlay -->
+    <div class="modal-overlay" id="productModal">
+        <div class="modal-container">
+            <button class="modal-close" id="closeModal"><i data-lucide="x"></i></button>
+            <div class="modal-grid">
+                <div class="modal-image">
+                    <img id="modalImage" src="" alt="Product">
+                </div>
+                <div class="modal-details">
+                    <span class="card-tag" id="modalTag"></span>
+                    <h2 id="modalTitle"></h2>
+                    <p id="modalDesc"></p>
+                    <div class="modal-price" id="modalPrice"></div>
+                    <button class="cta-button" style="width: 100%; margin-top: 1.5rem; justify-content: center; display: flex; gap: 0.5rem;" onclick="addToCart()"><i data-lucide="shopping-bag"></i> Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Shopping Cart Drawer -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <div class="cart-drawer" id="cartDrawer">
+        <div class="cart-header">
+            <h2>Your Cart</h2>
+            <button class="cart-close" id="closeCart"><i data-lucide="x"></i></button>
+        </div>
+        <div class="cart-body" id="cartItems">
+            <div class="cart-empty" style="text-align: center; padding: 3rem 0; color: var(--text-muted);">
+                <i data-lucide="shopping-bag" style="width: 48px; height: 48px; margin-bottom: 1rem; opacity: 0.5;"></i>
+                <p>Your cart is beautifully empty.</p>
+            </div>
+        </div>
+        <div class="cart-footer">
+            <div class="cart-total" style="display: flex; justify-content: space-between; font-size: 1.5rem; font-weight: bold; margin-bottom: 1.5rem;">
+                <span>Subtotal</span>
+                <span>$0.00</span>
+            </div>
+            <button class="cta-button" style="width: 100%; display: flex; justify-content: center;">Checkout securely</button>
+        </div>
+    </div>
+
     <script src="app.js"></script>
     <script>
         // Initialize Lucide icons
         lucide.createIcons();
+
+        // Product Modal Logic
+        const modal = document.getElementById('productModal');
+        const closeModal = document.getElementById('closeModal');
+        
+        function openModal(tag, title, desc, price, imageSrc) {
+            document.getElementById('modalTag').innerText = tag;
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalDesc').innerText = desc;
+            document.getElementById('modalPrice').innerText = price;
+            document.getElementById('modalImage').src = imageSrc;
+            
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        closeModal.addEventListener('click', () => {
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Cart Drawer Logic
+        const cartDrawer = document.getElementById('cartDrawer');
+        const cartOverlay = document.getElementById('cartOverlay');
+        const openCartBtn = document.getElementById('openCart');
+        const closeCartBtn = document.getElementById('closeCart');
+
+        function toggleCart() {
+            cartDrawer.classList.toggle('active');
+            cartOverlay.classList.toggle('active');
+            if (cartDrawer.classList.contains('active')) {
+                document.body.style.overflow = 'hidden';
+            } else {
+                document.body.style.overflow = 'auto';
+            }
+        }
+
+        openCartBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            toggleCart();
+        });
+        
+        closeCartBtn.addEventListener('click', toggleCart);
+        cartOverlay.addEventListener('click', toggleCart);
+
+        function addToCart() {
+            // Very simple UI update just to show interaction
+            document.querySelector('.cart-count').innerText = "1";
+            document.querySelector('.cart-empty').innerHTML = `
+                <div style="display: flex; gap: 1rem; align-items: center; border-bottom: 1px solid rgba(0,0,0,0.05); padding-bottom: 1rem;">
+                    <img src="${document.getElementById('modalImage').src}" style="width: 60px; height: 60px; border-radius: 10px; object-fit: cover;">
+                    <div style="flex: 1;">
+                        <div style="font-weight: 600;">${document.getElementById('modalTitle').innerText}</div>
+                        <div style="color: var(--text-muted); font-size: 0.9rem;">Qty: 1</div>
+                    </div>
+                    <div style="font-weight: 700; color: var(--primary-green);">${document.getElementById('modalPrice').innerText}</div>
+                </div>
+            `;
+            document.querySelector('.cart-total span:last-child').innerText = document.getElementById('modalPrice').innerText;
+            modal.classList.remove('active');
+            toggleCart();
+        }
     </script>
 </body>
 </html>
