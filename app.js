@@ -1,11 +1,22 @@
-// Header Scroll Effect
+// Header Scroll Effect (Smart Sticky)
+let lastScroll = 0;
 window.addEventListener('scroll', () => {
     const header = document.querySelector('header');
-    if (window.scrollY > 50) {
+    const currentScroll = window.scrollY;
+    
+    if (currentScroll > 50) {
         header.classList.add('scrolled');
     } else {
         header.classList.remove('scrolled');
     }
+    
+    // Hide header on scroll down, show on scroll up
+    if (currentScroll > lastScroll && currentScroll > 200) {
+        header.style.transform = 'translateY(-100%)';
+    } else {
+        header.style.transform = 'translateY(0)';
+    }
+    lastScroll = currentScroll;
 });
 
 // Reveal Animations on Scroll
