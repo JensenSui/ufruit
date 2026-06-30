@@ -67,44 +67,11 @@
                 <h2>Our Curated Collections</h2>
                 <p>Exclusively hand-picked for the ultimate freshness.</p>
             </div>
-            <div class="grid">
-                <!-- Collection 1 -->
-                <div class="card reveal" style="cursor: pointer;" onclick="openModal('Exotic & Whole', 'Berry Bliss Basket', 'A vibrant selection of the freshest, hand-picked berries. Perfect for antioxidants and natural sweetness.', '$45.00', 'assets/IP1-Berry.png')">
-                    <div class="card-image">
-                        <img src="assets/IP1-Berry.png" alt="Berry Basket">
-                    </div>
-                    <div class="card-content">
-                        <span class="card-tag">Exotic & Whole</span>
-                        <h3>Berry Bliss Basket</h3>
-                        <p>A vibrant selection of the freshest, hand-picked berries. Perfect for antioxidants and natural sweetness.</p>
-                        <span class="card-link" style="margin-top: 1rem;">View Details <i data-lucide="arrow-right"></i></span>
-                    </div>
-                </div>
-
-                <!-- Collection 2 -->
-                <div class="card reveal" style="cursor: pointer;" onclick="openModal('Ready-to-Enjoy', 'Citrus Zest Platter', 'A beautifully arranged platter of premium sliced lemons, oranges, and grapefruits.', '$65.00', 'assets/IP3-Lemon.png')">
-                    <div class="card-image">
-                        <img src="assets/IP3-Lemon.png" alt="Citrus Platter">
-                    </div>
-                    <div class="card-content">
-                        <span class="card-tag">Ready-to-Enjoy</span>
-                        <h3>Citrus Zest Platter</h3>
-                        <p>A beautifully arranged platter of premium sliced lemons, oranges, and grapefruits.</p>
-                        <span class="card-link" style="margin-top: 1rem;">View Details <i data-lucide="arrow-right"></i></span>
-                    </div>
-                </div>
-
-                <!-- Collection 3 -->
-                <div class="card reveal" style="cursor: pointer;" onclick="openModal('Raw & Pure', 'Signature Green Juice', '100% raw, cold-pressed green goodness to revitalize your body and mind.', '$18.00', 'assets/IP2-Juice.png')">
-                    <div class="card-image">
-                        <img src="assets/IP2-Juice.png" alt="Cold-pressed Juice">
-                    </div>
-                    <div class="card-content">
-                        <span class="card-tag">Raw & Pure</span>
-                        <h3>Signature Green Juice</h3>
-                        <p>100% raw, cold-pressed green goodness to revitalize your body and mind.</p>
-                        <span class="card-link" style="margin-top: 1rem;">View Details <i data-lucide="arrow-right"></i></span>
-                    </div>
+            <div class="grid" id="productsGrid">
+                <!-- Products will be injected here by Javascript from Firestore -->
+                <div style="grid-column: 1 / -1; text-align: center; padding: 4rem 0; color: var(--text-muted);">
+                    <i data-lucide="loader-2" class="spin" style="width: 48px; height: 48px; margin-bottom: 1rem;"></i>
+                    <p>Loading the freshest harvest from our database...</p>
                 </div>
             </div>
         </div>
@@ -325,7 +292,12 @@
         </div>
     </div>
 
-    <script src="app.js"></script>
+    <!-- Firebase SDKs -->
+    <script defer src="/__/firebase/10.12.2/firebase-app-compat.js"></script>
+    <script defer src="/__/firebase/10.12.2/firebase-firestore-compat.js"></script>
+    <script defer src="/__/firebase/init.js"></script>
+
+    <script defer src="app.js"></script>
     <script>
         // Initialize Lucide icons
         lucide.createIcons();

@@ -91,3 +91,53 @@ addToCartButtons.forEach(button => {
         }, 800);
     });
 });
+
+// Dynamic Data Connection (Firestore)
+document.addEventListener('DOMContentLoaded', async () => {
+    const productsGrid = document.getElementById('productsGrid');
+    if (!productsGrid) return;
+
+    if (typeof firebase !== 'undefined') {
+        try {
+            const db = firebase.firestore();
+            const snapshot = await db.collection('products').get();
+            
+            if (snapshot.empty) {
+                productsGrid.innerHTML = `
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 4rem 0; color: var(--text-muted);">
+                        <i data-lucide="package-open" style="width: 48px; height: 48px; margin-bottom: 1rem; opacity: 0.5;"></i>
+                        <p>No products found in the database. Please add them in the Firebase Console.</p>
+                    </div>
+                `;
+                lucide.createIcons();
+                return;
+            }
+            
+            let html = '';
+            snapshot.forEach(doc => {
+                const data = doc.data();
+                html += `
+                <div class="card reveal active" style="cursor: pointer;" onclick="openModal('${data.tag || 'Fresh'}', '${data.title || 'Product'}', '${data.desc || ''}', '${data.price || '$0.00'}', '${data.image || 'assets/hero.png'}')">
+                    <div class="card-image">
+                        <img src="${data.image || 'assets/hero.png'}" alt="${data.title || 'Product'}">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-tag">${data.tag || 'Fresh'}</span>
+                        <h3>${data.title || 'Product'}</h3>
+                        <p>${data.desc || ''}</p>
+                        <span class="card-link" style="margin-top: 1rem;">View Details <i data-lucide="arrow-right"></i></span>
+                    </div>
+                </div>
+                `;
+            });
+            productsGrid.innerHTML = html;
+            lucide.createIcons();
+            
+        } catch (error) {
+            console.error("Error fetching products: ", error);
+            productsGrid.innerHTML = `<div style="grid-column: 1 / -1; text-align: center; color: var(--primary-red);">Failed to load products. Check console for details.</div>`;
+        }
+    } else {
+        productsGrid.innerHTML = `<div style="grid-column: 1 / -1; text-align: center; color: var(--text-muted);">Firebase SDK not loaded. This is expected when running outside of Firebase Hosting or Emulators.</div>`;
+    }
+});
