@@ -13,6 +13,79 @@
 </head>
 <body>
 
+    <!-- ================================================
+         MAINTENANCE OVERLAY — Remove this block when done
+         ================================================ -->
+    <div id="maintenance-overlay" style="
+        position: fixed;
+        inset: 0;
+        z-index: 99999;
+        background: #FDFBF0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        padding: 2rem;
+        font-family: 'Inter', sans-serif;
+    ">
+        <!-- Logo -->
+        <img src="assets/ufruit logo.png" alt="FRÜIT Logo" style="height: 70px; width: auto; margin-bottom: 2.5rem;">
+
+        <!-- Animated fruit icon -->
+        <div style="
+            font-size: 3.5rem;
+            animation: fruit-bounce 2s ease-in-out infinite;
+            margin-bottom: 2rem;
+        ">🍊</div>
+
+        <!-- Headline -->
+        <h1 style="
+            font-family: 'GabrielSansCond-Bold', 'Outfit', sans-serif;
+            font-size: clamp(2rem, 6vw, 3.5rem);
+            color: #2D3436;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+        ">We'll Be Back Shortly</h1>
+
+        <!-- Sub-text -->
+        <p style="
+            font-size: 1.1rem;
+            color: #636E72;
+            max-width: 420px;
+            line-height: 1.7;
+            margin-bottom: 2.5rem;
+        ">We're currently giving <strong style="color: #2D3436;">FRÜIT</strong> a fresh upgrade. 
+        Something delicious is coming your way — check back soon!</p>
+
+        <!-- Divider dot -->
+        <div style="display:flex; gap: 0.5rem; margin-bottom: 2.5rem;">
+            <span style="width:8px;height:8px;border-radius:9999px;background:#FB8C00;animation:dot-pulse 1.4s ease-in-out infinite 0s;display:inline-block;"></span>
+            <span style="width:8px;height:8px;border-radius:9999px;background:#FB8C00;animation:dot-pulse 1.4s ease-in-out infinite 0.2s;display:inline-block;"></span>
+            <span style="width:8px;height:8px;border-radius:9999px;background:#FB8C00;animation:dot-pulse 1.4s ease-in-out infinite 0.4s;display:inline-block;"></span>
+        </div>
+
+        <!-- Contact line -->
+        <p style="font-size: 0.9rem; color: #636E72;">
+            Need something urgent? 
+            <a href="mailto:hello@ufruit.com.my" style="color: #FB8C00; font-weight: 600; text-decoration: none;">hello@ufruit.com.my</a>
+        </p>
+
+        <style>
+            @keyframes fruit-bounce {
+                0%, 100% { transform: translateY(0px); }
+                50% { transform: translateY(-14px); }
+            }
+            @keyframes dot-pulse {
+                0%, 80%, 100% { opacity: 0.2; transform: scale(0.8); }
+                40% { opacity: 1; transform: scale(1); }
+            }
+        </style>
+    </div>
+    <!-- ================================================
+         END MAINTENANCE OVERLAY
+         ================================================ -->
+
     <!-- Header -->
     <header>
         <div class="container nav-content">
