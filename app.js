@@ -92,16 +92,37 @@ addToCartButtons.forEach(button => {
     });
 });
 
-// Dynamic Data Connection (Local JSON)
+// Dynamic Data Connection (Google Sheets CSV with Local JSON Fallback)
+// To connect your Google Sheet: Publish your sheet to web as CSV and set window.GOOGLE_SHEET_CSV_URL
+window.GOOGLE_SHEET_CSV_URL = ""; // Drop your published Google Sheet CSV link here anytime!
+
 document.addEventListener('DOMContentLoaded', async () => {
     const productsGrid = document.getElementById('productsGrid');
     if (!productsGrid) return;
 
     try {
-        const response = await fetch('data/products.json');
-        if (!response.ok) throw new Error('Failed to fetch data');
-        const products = await response.json();
-        
+        let products = [];
+
+        // Try fetching from Google Sheet CSV first if configured
+        if (window.GOOGLE_SHEET_CSV_URL) {
+            try {
+                const sheetRes = await fetch(window.GOOGLE_SHEET_CSV_URL);
+                if (sheetRes.ok) {
+                    const csvText = await sheetRes.text();
+                    products = parseCSV(csvText);
+                }
+            } catch (sheetErr) {
+                console.warn('Google Sheet fetch failed, falling back to local JSON', sheetErr);
+            }
+        }
+
+        // Fallback to local JSON database if Sheet is empty or not configured
+        if (!products || products.length === 0) {
+            const response = await fetch('data/products.json');
+            if (!response.ok) throw new Error('Failed to fetch data');
+            products = await response.json();
+        }
+
         if (products.length === 0) {
             productsGrid.innerHTML = `
                 <div style="grid-column: 1 / -1; text-align: center; padding: 4rem 0; color: var(--text-muted);">
@@ -112,11 +133,13 @@ document.addEventListener('DOMContentLoaded', async () => {
             lucide.createIcons();
             return;
         }
-        
+
         let html = '';
         products.forEach(data => {
+            if (data.available === 'NO' || data.Available === 'NO') return; // Skip unavailable items
+
             html += `
-            <div class="card reveal active" style="cursor: pointer;" onclick="openModal('${data.tag || 'Fresh'}', '${data.title || 'Product'}', '${data.desc || ''}', '${data.price || '$0.00'}', '${data.image || 'assets/hero.png'}')">
+            <div class="card reveal active" style="cursor: pointer;" onclick="openModal('${escapeQuotes(data.tag || 'Fresh')}', '${escapeQuotes(data.title || 'Product')}', '${escapeQuotes(data.desc || '')}', '${escapeQuotes(data.price || 'RM 0.00')}', '${escapeQuotes(data.image || 'assets/hero.png')}')">
                 <div class="card-image">
                     <img src="${data.image || 'assets/hero.png'}" alt="${data.title || 'Product'}">
                 </div>
@@ -124,16 +147,53 @@ document.addEventListener('DOMContentLoaded', async () => {
                     <span class="card-tag">${data.tag || 'Fresh'}</span>
                     <h3>${data.title || 'Product'}</h3>
                     <p>${data.desc || ''}</p>
-                    <span class="card-link" style="margin-top: 1rem;">View Details <i data-lucide="arrow-right"></i></span>
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1rem;">
+                        <span style="font-weight: 700; color: var(--primary-green); font-size: 1.2rem;">${data.price || 'RM 0.00'}</span>
+                        <span class="card-link" style="margin-top: 0;">Order <i data-lucide="arrow-right"></i></span>
+                    </div>
                 </div>
             </div>
             `;
         });
         productsGrid.innerHTML = html;
         lucide.createIcons();
-        
+
     } catch (error) {
         console.error("Error fetching products: ", error);
         productsGrid.innerHTML = `<div style="grid-column: 1 / -1; text-align: center; color: var(--primary-red);">Failed to load products.</div>`;
     }
 });
+
+// CSV Parser Helper
+function parseCSV(text) {
+    const lines = text.trim().split('\n');
+    if (lines.length < 2) return [];
+    const headers = lines[0].split(',').map(h => h.trim().replace(/^"|"$/g, '').toLowerCase());
+    const result = [];
+    
+    for (let i = 1; i < lines.length; i++) {
+        const currentline = lines[i].split(',');
+        if (currentline.length < headers.length) continue;
+        const obj = {};
+        for (let j = 0; j < headers.length; j++) {
+            let val = currentline[j] ? currentline[j].trim().replace(/^"|"$/g, '') : '';
+            obj[headers[j]] = val;
+        }
+        result.push(obj);
+    }
+    return result;
+}
+
+function escapeQuotes(str) {
+    return (str || '').replace(/'/g, "\\'").replace(/"/g, '&quot;');
+}
+
+// WhatsApp Cart Checkout Helper
+function checkoutViaWhatsApp() {
+    const title = document.getElementById('modalTitle') ? document.getElementById('modalTitle').innerText : 'Fruit Package';
+    const price = document.getElementById('modalPrice') ? document.getElementById('modalPrice').innerText : '';
+    
+    const message = `Hi FRÜIT! 🍊 I'd like to order:\n- *${title}* (${price})\n\nPlease advise on delivery to my address!`;
+    const whatsappUrl = `https://wa.me/60122135938?text=${encodeURIComponent(message)}`;
+    window.open(whatsappUrl, '_blank');
+}
