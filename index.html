@@ -29,8 +29,8 @@
         padding: 2rem;
         font-family: 'Inter', sans-serif;
     ">
-        <!-- Logo -->
-        <img src="assets/ufruit logo.png" alt="FRÜIT Logo" style="height: 70px; width: auto; margin-bottom: 2.5rem;">
+        <!-- Logo (Click 3 times to unlock preview) -->
+        <img id="maintenance-logo" src="assets/ufruit logo.png" alt="FRÜIT Logo" style="height: 70px; width: auto; margin-bottom: 2.5rem; cursor: pointer; user-select: none;" title="Admin: Click 3 times to preview site">
 
         <!-- Animated fruit icon -->
         <div style="
@@ -82,6 +82,60 @@
             }
         </style>
     </div>
+
+    <!-- Admin Preview Badge & Logic -->
+    <div id="admin-preview-bar" style="display: none; position: fixed; bottom: 15px; right: 15px; z-index: 100000; background: #2D3436; color: #fff; padding: 10px 16px; border-radius: 9999px; font-family: sans-serif; font-size: 13px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); align-items: center; gap: 10px;">
+        <span>🔓 Admin Preview Mode Active</span>
+        <button id="lock-maint-btn" style="background: #FB8C00; border: none; color: #fff; padding: 4px 10px; border-radius: 9999px; cursor: pointer; font-weight: bold; font-size: 12px;">Lock Maintenance</button>
+    </div>
+
+    <script>
+        (function() {
+            const overlay = document.getElementById('maintenance-overlay');
+            const adminBar = document.getElementById('admin-preview-bar');
+            const lockBtn = document.getElementById('lock-maint-btn');
+            const logo = document.getElementById('maintenance-logo');
+
+            const params = new URLSearchParams(window.location.search);
+            const isPreviewParam = params.get('preview') === 'admin' || params.get('preview') === 'true';
+
+            function enablePreview() {
+                localStorage.setItem('fruit_admin_preview', 'true');
+                if (overlay) overlay.style.display = 'none';
+                if (adminBar) adminBar.style.display = 'flex';
+            }
+
+            function disablePreview() {
+                localStorage.removeItem('fruit_admin_preview');
+                if (overlay) overlay.style.display = 'flex';
+                if (adminBar) adminBar.style.display = 'none';
+            }
+
+            if (isPreviewParam || localStorage.getItem('fruit_admin_preview') === 'true') {
+                enablePreview();
+            }
+
+            if (lockBtn) {
+                lockBtn.addEventListener('click', disablePreview);
+            }
+
+            // Click logo 3 times to unlock
+            let logoClicks = 0;
+            let clickTimer;
+            if (logo) {
+                logo.addEventListener('click', function() {
+                    logoClicks++;
+                    clearTimeout(clickTimer);
+                    if (logoClicks >= 3) {
+                        enablePreview();
+                        logoClicks = 0;
+                    } else {
+                        clickTimer = setTimeout(() => { logoClicks = 0; }, 1000);
+                    }
+                });
+            }
+        })();
+    </script>
     <!-- ================================================
          END MAINTENANCE OVERLAY
          ================================================ -->
