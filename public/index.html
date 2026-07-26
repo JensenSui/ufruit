@@ -38,12 +38,12 @@
     </header>
 
     <!-- Hero Section (Kinetic Staggered Typography & Glowing Badges) -->
-    <section class="hero" id="home">
+    <section class="hero" id="home" style="padding-top: 3rem;">
         <div class="container hero-content">
             <div class="hero-text reveal">
-                <div class="hero-badge-pill border-gradient" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.4rem 1rem; border-radius: 9999px; background: rgba(255,255,255,0.85); margin-bottom: 1.5rem; font-size: 0.85rem; font-weight: 700; color: var(--text-dark); box-shadow: var(--shadow-card);">
+                <div class="hero-badge-pill border-gradient" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.45rem 1.1rem; border-radius: 9999px; background: rgba(255,255,255,0.9); margin-bottom: 1.8rem; font-family: 'Space Grotesk', monospace; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.15em; color: var(--text-dark); box-shadow: var(--shadow-card);">
                     <span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:#11720C; box-shadow: 0 0 8px #11720C;"></span>
-                    <span>100% ORGANIC SOURCED • PREMIUM CHOICE</span>
+                    <span>00 / KUALA LUMPUR • EST. 2026 • ARTISANAL HARVEST</span>
                 </div>
                 <h1 class="stagger-heading" aria-label="Taste the Purest Energy of Nature">
                     <span class="word-wrap"><span class="word">Taste</span></span>
@@ -53,14 +53,20 @@
                     <span class="word-wrap"><span class="word">of</span></span>
                     <span class="word-wrap"><span class="word">Nature</span></span>
                 </h1>
-                <p class="hero-subtext">Curated premium fruits, artistically cut platters, and raw cold-pressed juices. Experience the zesty side of luxury with U FRÜIT.</p>
-                <div class="hero-btns" style="display: flex; gap: 1.2rem; flex-wrap: wrap; margin-top: 1.5rem;">
-                    <a href="#collections" class="cta-button primary-cta">Explore Collections</a>
-                    <a href="https://order.epos.com/page/my-fruit-selection-enterprise" target="_blank" class="cta-button epos-hero-btn" style="background: #11720C; color: white;">🛒 Order Pick-Up (EPOS)</a>
+                <p class="hero-subtext" style="font-size: 1.15rem; line-height: 1.7; color: var(--text-muted); max-width: 520px;">Curated premium fruits, artistically cut platters, and raw cold-pressed juices. Experience the zesty side of luxury with U FRÜIT.</p>
+                <div class="hero-btns" style="display: flex; gap: 1.2rem; flex-wrap: wrap; margin-top: 2rem;">
+                    <a href="#collections" class="cta-button primary-cta" style="padding: 1rem 2rem; font-size: 1rem;">Explore Collections</a>
+                    <a href="https://order.epos.com/page/my-fruit-selection-enterprise" target="_blank" class="cta-button epos-hero-btn" style="background: #11720C; color: white; padding: 1rem 2rem; font-size: 1rem;">🛒 Order Pick-Up (EPOS)</a>
                 </div>
             </div>
-            <div class="hero-image reveal">
-                <img src="assets/hero.png" alt="Luxurious Fruit Platter" class="hero-main-img">
+            <div class="hero-image reveal" style="position: relative;">
+                <div class="hairline-frame" style="padding: 1.5rem; background: var(--white); border-radius: 24px; position: relative;">
+                    <div class="corner-bracket corner-tl"></div>
+                    <div class="corner-bracket corner-tr"></div>
+                    <div class="corner-bracket corner-bl"></div>
+                    <div class="corner-bracket corner-br"></div>
+                    <img src="assets/hero.png" alt="Luxurious Fruit Platter" class="hero-main-img" style="border-radius: 16px; width: 100%; display: block;">
+                </div>
                 <div class="floating-badge border-gradient">
                     <div class="badge-icon">
                         <i data-lucide="sparkles"></i>
@@ -116,15 +122,11 @@
 
     <!-- FRÜIT Squad Mascot Banner Section -->
     <section class="squad-banner-section" id="squad-banner" style="padding: 5rem 0; background: var(--bg-cream); overflow: hidden;">
-        <div class="container" style="text-align: center;">
-            <div class="section-title reveal">
-                <span class="card-tag">Meet Our Mascots</span>
-                <div style="display: flex; align-items: center; justify-content: center; gap: 0.8rem; flex-wrap: wrap; margin: 0.5rem 0 1rem 0;">
-                    <span style="font-size: clamp(1.8rem, 4vw, 2.8rem); font-family: 'Armstrong', sans-serif; font-weight: 800; color: var(--text-dark);">The</span>
-                    <img src="assets/fruit-logo-english-master-v1.jpg" alt="FRÜIT Master Logo" style="height: clamp(40px, 6vw, 60px); width: auto; display: inline-block; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.08);">
-                    <span style="font-size: clamp(1.8rem, 4vw, 2.8rem); font-family: 'Armstrong', sans-serif; font-weight: 800; color: var(--text-dark);">Squad 🍓🍊🍏🍋🥑</span>
-                </div>
-                <p>We're packing your box with love! 🧡</p>
+        <div class="container">
+            <div class="chapter-header reveal">
+                <span class="chapter-num">02 / The FRÜIT Squad</span>
+                <h2 class="chapter-title">Meet Your Daily Fruit Energy</h2>
+                <p class="chapter-subtitle">Art-directed vitamins and joy, packed with love in every box.</p>
             </div>
             
             <div class="squad-banner-wrapper auto-anim" id="squadBannerCanvas" style="
@@ -189,6 +191,35 @@
                     <div style="flex: 1; background: #4A6B2A;"></div>
                 </div>
             </div>
+
+            <!-- Squad Individual Podium Cards -->
+            <div class="squad-podium-grid">
+                <div class="squad-podium-card reveal">
+                    <img src="assets/IP1-Berry.png" alt="Berry" title="Berry 🍓">
+                    <h4>Berry 🍓</h4>
+                    <span>Antioxidant Queen</span>
+                </div>
+                <div class="squad-podium-card reveal">
+                    <img src="assets/IP2-Juice.png" alt="Juice" title="Juice 🍊">
+                    <h4>Juice 🍊</h4>
+                    <span>Citrus Dynamo</span>
+                </div>
+                <div class="squad-podium-card reveal">
+                    <img src="assets/IP3-Lemon.png" alt="Lemon" title="Lemon 🍋">
+                    <h4>Lemon 🍋</h4>
+                    <span>Zesty Cleanser</span>
+                </div>
+                <div class="squad-podium-card reveal">
+                    <img src="assets/IP4-Crisp.png" alt="Crisp" title="Crisp 🍏">
+                    <h4>Crisp 🍏</h4>
+                    <span>Crunch Specialist</span>
+                </div>
+                <div class="squad-podium-card reveal">
+                    <img src="assets/IP5-Cado.png" alt="Cado" title="Cado 🥑">
+                    <h4>Cado 🥑</h4>
+                    <span>Creamy Master</span>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -234,11 +265,12 @@
     <!-- Collections Section -->
     <section class="collections" id="collections">
         <div class="container">
-            <div class="section-title reveal">
-                <h2>Our Curated Collections</h2>
-                <p>Exclusively hand-picked for the ultimate freshness.</p>
+            <div class="chapter-header reveal">
+                <span class="chapter-num">01 / Curated Harvest</span>
+                <h2 class="chapter-title">Luxury Lookbook</h2>
+                <p class="chapter-subtitle">Exclusively hand-picked for the ultimate freshness and natural energy.</p>
             </div>
-            <div class="grid" id="productsGrid">
+            <div class="editorial-grid" id="productsGrid">
                 <!-- Products will be injected here by Javascript from Firestore -->
                 <div style="grid-column: 1 / -1; text-align: center; padding: 4rem 0; color: var(--text-muted);">
                     <i data-lucide="loader-2" class="spin" style="width: 48px; height: 48px; margin-bottom: 1rem;"></i>
@@ -251,10 +283,10 @@
     <!-- Services & B2B Section -->
     <section class="services" id="services" style="padding: 6rem 0; background: var(--bg-cream);">
         <div class="container">
-            <div class="section-title reveal">
-                <span class="card-tag">B2B & Special Projects</span>
-                <h2>Bespoke Services</h2>
-                <p>Elevate your workspace, events, and pantry with custom FRÜIT solutions.</p>
+            <div class="chapter-header reveal">
+                <span class="chapter-num">03 / Bespoke & B2B</span>
+                <h2 class="chapter-title">Corporate & VIP Gifting</h2>
+                <p class="chapter-subtitle">Elevate your workspace, events, and luxury pantry with custom U FRÜIT solutions.</p>
             </div>
             <div class="grid">
                 <!-- Service 1: Corporate Pantry -->

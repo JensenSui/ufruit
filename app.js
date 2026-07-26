@@ -186,25 +186,34 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
 
         let html = '';
+        let index = 0;
         products.forEach(data => {
             if (data.available === 'NO' || data.Available === 'NO') return; // Skip unavailable items
 
+            const numTag = String(index + 1).padStart(2, '0');
+            const spanClass = index === 0 ? 'span-12' : 'span-6';
+            const aspectStyle = index === 0 ? 'aspect-ratio: 16/7;' : 'aspect-ratio: 4/3;';
+            const imgStyle = index === 0 ? 'max-height: 400px;' : 'max-height: 300px;';
+
             html += `
-            <div class="card border-gradient reveal active" style="cursor: pointer;" onclick="openModal('${escapeQuotes(data.tag || 'Fresh')}', '${escapeQuotes(data.title || 'Product')}', '${escapeQuotes(data.desc || '')}', '${escapeQuotes(data.price || 'RM 0.00')}', '${escapeQuotes(data.image || 'assets/hero.png')}')">
-                <div class="card-image">
-                    <img src="${data.image || 'assets/hero.png'}" alt="${data.title || 'Product'}">
+            <div class="lookbook-card card ${spanClass} reveal active" style="cursor: pointer;" onclick="openModal('${escapeQuotes(data.tag || 'Fresh')}', '${escapeQuotes(data.title || 'Product')}', '${escapeQuotes(data.desc || '')}', '${escapeQuotes(data.price || 'RM 0.00')}', '${escapeQuotes(data.image || 'assets/hero.png')}')">
+                <span class="lookbook-index-tag">${numTag} / ${escapeQuotes(data.tag || 'LUXURY HARVEST')}</span>
+                <div class="lookbook-card-image" style="${aspectStyle}">
+                    <img src="${data.image || 'assets/hero.png'}" alt="${data.title || 'Product'}" style="${imgStyle}">
                 </div>
-                <div class="card-content">
-                    <span class="card-tag">${data.tag || 'Fresh'}</span>
-                    <h3>${data.title || 'Product'}</h3>
-                    <p>${data.desc || ''}</p>
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 1rem;">
-                        <span style="font-weight: 700; color: var(--primary-green); font-size: 1.2rem;">${data.price || 'RM 0.00'}</span>
-                        <span class="card-link" style="margin-top: 0;">Order <i data-lucide="arrow-right"></i></span>
+                <div class="lookbook-card-meta">
+                    <div>
+                        <h3>${data.title || 'Product'}</h3>
+                        <p>${data.desc || ''}</p>
+                    </div>
+                    <div class="lookbook-price-row">
+                        <span class="lookbook-price">${data.price || 'RM 0.00'}</span>
+                        <span class="card-link" style="margin-top: 0; font-family: 'Space Grotesk', monospace; font-weight: 700;">ACQUIRE <i data-lucide="arrow-right"></i></span>
                     </div>
                 </div>
             </div>
             `;
+            index++;
         });
         productsGrid.innerHTML = html;
         lucide.createIcons();
