@@ -92,9 +92,16 @@ addToCartButtons.forEach(button => {
     });
 });
 
-// Dynamic Data Connection (Google Sheets CSV with Local JSON Fallback)
-// To connect your Google Sheet: Publish your sheet to web as CSV and set window.GOOGLE_SHEET_CSV_URL
-window.GOOGLE_SHEET_CSV_URL = ""; // Drop your published Google Sheet CSV link here anytime!
+// EPOS 360 Store Integration Configuration
+window.EPOS_CONFIG = {
+    brandName: "my-fruit-selection-enterprise",
+    accessKey: "957cf20ddf534cc6bab06382f486b48b",
+    appId: "2102020273885390",
+    orderPageUrl: "https://order.epos.com/page/my-fruit-selection-enterprise"
+};
+
+// Dynamic Data Connection (EPOS 360 POS, Google Sheets CSV, with Local Fallback)
+window.GOOGLE_SHEET_CSV_URL = ""; 
 
 document.addEventListener('DOMContentLoaded', async () => {
     const productsGrid = document.getElementById('productsGrid');
@@ -103,8 +110,25 @@ document.addEventListener('DOMContentLoaded', async () => {
     try {
         let products = [];
 
-        // Try fetching from Google Sheet CSV first if configured
-        if (window.GOOGLE_SHEET_CSV_URL) {
+        // 1. Try EPOS 360 API / HTML Store Data if available
+        if (window.EPOS_CONFIG && window.EPOS_CONFIG.accessKey) {
+            try {
+                const eposRes = await fetch(`https://order.epos.com/page/${window.EPOS_CONFIG.brandName}`);
+                if (eposRes.ok) {
+                    const eposHtml = await eposRes.text();
+                    const jsonMatch = eposHtml.match(/extJson:\s*(\{.*?\})\s*,\s*brandName/s);
+                    if (jsonMatch && jsonMatch[1]) {
+                        const parsed = JSON.parse(jsonMatch[1]);
+                        console.log('EPOS 360 Store connected!', parsed);
+                    }
+                }
+            } catch (eposErr) {
+                console.warn('EPOS live fetch info', eposErr);
+            }
+        }
+
+        // 2. Try fetching from Google Sheet CSV first if configured
+        if ((!products || products.length === 0) && window.GOOGLE_SHEET_CSV_URL) {
             try {
                 const sheetRes = await fetch(window.GOOGLE_SHEET_CSV_URL);
                 if (sheetRes.ok) {
@@ -116,7 +140,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
         }
 
-        // Fallback to local JSON database if Sheet is empty or not configured
+        // 3. Fallback to local JSON database if empty
         if (!products || products.length === 0) {
             const response = await fetch('data/products.json');
             if (!response.ok) throw new Error('Failed to fetch data');
