@@ -6,145 +6,17 @@
     <title>FRÜIT (U Fruit) | Premium Fresh Fruit</title>
     <meta name="description" content="U Fruit offers the finest selection of whole fruits, fresh-cut platters, and freshly squeezed juices. Premium quality, delivered fresh.">
     <!-- Favicon (Tab Logo) -->
-    <link rel="icon" type="image/png" href="assets/ufruit logo.png">
+    <link rel="icon" type="image/jpeg" href="assets/fruit-logo-english-master-v1.jpg">
     <link rel="stylesheet" href="style.css">
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@0"></script>
 </head>
 <body>
-
-    <!-- ================================================
-         MAINTENANCE OVERLAY — Remove this block when done
-         ================================================ -->
-    <div id="maintenance-overlay" style="
-        position: fixed;
-        inset: 0;
-        z-index: 99999;
-        background: #FDFBF0;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        padding: 2rem;
-        font-family: 'Inter', sans-serif;
-    ">
-        <!-- Logo (Click 3 times to unlock preview) -->
-        <img id="maintenance-logo" src="assets/ufruit logo.png" alt="FRÜIT Logo" style="height: 70px; width: auto; margin-bottom: 2.5rem; cursor: pointer; user-select: none;" title="Admin: Click 3 times to preview site">
-
-        <!-- Animated fruit icon -->
-        <div style="
-            font-size: 3.5rem;
-            animation: fruit-bounce 2s ease-in-out infinite;
-            margin-bottom: 2rem;
-        ">🍊</div>
-
-        <!-- Headline -->
-        <h1 style="
-            font-family: 'Armstrong', 'Outfit', sans-serif;
-            font-size: clamp(2rem, 6vw, 3.5rem);
-            color: #2D3436;
-            line-height: 1.2;
-            margin-bottom: 1rem;
-        ">We'll Be Back Shortly</h1>
-
-        <!-- Sub-text -->
-        <p style="
-            font-size: 1.1rem;
-            color: #636E72;
-            max-width: 420px;
-            line-height: 1.7;
-            margin-bottom: 2.5rem;
-        ">We're currently giving <strong style="color: #2D3436;">FRÜIT</strong> a fresh upgrade. 
-        Something delicious is coming your way — check back soon!</p>
-
-        <!-- Divider dot -->
-        <div style="display:flex; gap: 0.5rem; margin-bottom: 2.5rem;">
-            <span style="width:8px;height:8px;border-radius:9999px;background:#FB8C00;animation:dot-pulse 1.4s ease-in-out infinite 0s;display:inline-block;"></span>
-            <span style="width:8px;height:8px;border-radius:9999px;background:#FB8C00;animation:dot-pulse 1.4s ease-in-out infinite 0.2s;display:inline-block;"></span>
-            <span style="width:8px;height:8px;border-radius:9999px;background:#FB8C00;animation:dot-pulse 1.4s ease-in-out infinite 0.4s;display:inline-block;"></span>
-        </div>
-
-        <!-- Contact line -->
-        <p style="font-size: 0.9rem; color: #636E72;">
-            Need something urgent? 
-            <a href="mailto:hello@ufruit.com.my" style="color: #FB8C00; font-weight: 600; text-decoration: none;">hello@ufruit.com.my</a>
-        </p>
-
-        <style>
-            @keyframes fruit-bounce {
-                0%, 100% { transform: translateY(0px); }
-                50% { transform: translateY(-14px); }
-            }
-            @keyframes dot-pulse {
-                0%, 80%, 100% { opacity: 0.2; transform: scale(0.8); }
-                40% { opacity: 1; transform: scale(1); }
-            }
-        </style>
-    </div>
-
-    <!-- Admin Preview Badge & Logic -->
-    <div id="admin-preview-bar" style="display: none; position: fixed; bottom: 15px; right: 15px; z-index: 100000; background: #2D3436; color: #fff; padding: 10px 16px; border-radius: 9999px; font-family: sans-serif; font-size: 13px; box-shadow: 0 4px 15px rgba(0,0,0,0.3); align-items: center; gap: 10px;">
-        <span>🔓 Admin Preview Mode Active</span>
-        <button id="lock-maint-btn" style="background: #FB8C00; border: none; color: #fff; padding: 4px 10px; border-radius: 9999px; cursor: pointer; font-weight: bold; font-size: 12px;">Lock Maintenance</button>
-    </div>
-
-    <script>
-        (function() {
-            const overlay = document.getElementById('maintenance-overlay');
-            const adminBar = document.getElementById('admin-preview-bar');
-            const lockBtn = document.getElementById('lock-maint-btn');
-            const logo = document.getElementById('maintenance-logo');
-
-            const params = new URLSearchParams(window.location.search);
-            const isPreviewParam = params.get('preview') === 'admin' || params.get('preview') === 'true';
-
-            function enablePreview() {
-                localStorage.setItem('fruit_admin_preview', 'true');
-                if (overlay) overlay.style.display = 'none';
-                if (adminBar) adminBar.style.display = 'flex';
-            }
-
-            function disablePreview() {
-                localStorage.removeItem('fruit_admin_preview');
-                if (overlay) overlay.style.display = 'flex';
-                if (adminBar) adminBar.style.display = 'none';
-            }
-
-            if (isPreviewParam || localStorage.getItem('fruit_admin_preview') === 'true') {
-                enablePreview();
-            }
-
-            if (lockBtn) {
-                lockBtn.addEventListener('click', disablePreview);
-            }
-
-            // Click logo 3 times to unlock
-            let logoClicks = 0;
-            let clickTimer;
-            if (logo) {
-                logo.addEventListener('click', function() {
-                    logoClicks++;
-                    clearTimeout(clickTimer);
-                    if (logoClicks >= 3) {
-                        enablePreview();
-                        logoClicks = 0;
-                    } else {
-                        clickTimer = setTimeout(() => { logoClicks = 0; }, 1000);
-                    }
-                });
-            }
-        })();
-    </script>
-    <!-- ================================================
-         END MAINTENANCE OVERLAY
-         ================================================ -->
-
-    <!-- Header -->
-    <header>
+    <!-- Header (Awwwards Glass Navigation) -->
+    <header class="glass-header">
         <div class="container nav-content">
             <a href="#" class="logo">
-                <img src="assets/ufruit logo.png" alt="U Fruit Logo" style="height: 40px; width: auto;">
+                <img src="assets/fruit-logo-english-master-v1.jpg" alt="U FRÜIT Master Logo" style="height: 44px; width: auto; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.08); transition: transform 0.3s ease;">
             </a>
             <nav class="nav-links">
                 <a href="#home">Home</a>
@@ -154,10 +26,10 @@
                 <a href="#about">Our Story</a>
             </nav>
             <div class="header-right">
-                <button class="cart-toggle" id="openCart" aria-label="Open Cart" style="background: none; border: none; cursor: pointer; color: var(--text-dark); display: flex; align-items: center; gap: 0.5rem; font-weight: 500;">
-                    <i data-lucide="shopping-bag"></i> <span class="cart-count" style="background: var(--primary-orange); color: white; width: 20px; height: 20px; border-radius: 50%; font-size: 0.7rem; display: flex; align-items: center; justify-content: center;">0</span>
+                <button class="cart-toggle" id="openCart" aria-label="Open Cart" style="background: none; border: none; cursor: pointer; color: var(--text-dark); display: flex; align-items: center; gap: 0.5rem; font-weight: 600;">
+                    <i data-lucide="shopping-bag"></i> <span class="cart-count" style="background: var(--primary-orange); color: white; width: 22px; height: 22px; border-radius: 50%; font-size: 0.75rem; display: flex; align-items: center; justify-content: center; font-weight: 700;">0</span>
                 </button>
-                <a href="https://order.epos.com/page/my-fruit-selection-enterprise" target="_blank" class="cta-button" style="background: #11720C; color: white;">🛒 EPOS Pick-Up</a>
+                <a href="https://order.epos.com/page/my-fruit-selection-enterprise" target="_blank" class="cta-button epos-btn" style="background: #11720C; color: white; border-radius: 9999px; font-weight: 700; box-shadow: 0 4px 14px rgba(17, 114, 12, 0.25);">🛒 EPOS Pick-Up</a>
                 <button class="menu-toggle" aria-label="Toggle Menu">
                     <i data-lucide="menu"></i>
                 </button>
@@ -165,20 +37,31 @@
         </div>
     </header>
 
-    <!-- Hero Section -->
+    <!-- Hero Section (Kinetic Staggered Typography & Glowing Badges) -->
     <section class="hero" id="home">
         <div class="container hero-content">
             <div class="hero-text reveal">
-                <h1>Taste the <span>Purest</span> Energy of Nature</h1>
-                <p>Curated premium fruits, artistically cut platters, and raw cold-pressed juices. Experience the zesty side of luxury.</p>
-                <div class="hero-btns" style="display: flex; gap: 1rem; flex-wrap: wrap;">
-                    <a href="#collections" class="cta-button">Explore Collections</a>
-                    <a href="https://order.epos.com/page/my-fruit-selection-enterprise" target="_blank" class="cta-button" style="background: #11720C; color: white;">🛒 Order Pick-Up (EPOS)</a>
+                <div class="hero-badge-pill border-gradient" style="display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.4rem 1rem; border-radius: 9999px; background: rgba(255,255,255,0.85); margin-bottom: 1.5rem; font-size: 0.85rem; font-weight: 700; color: var(--text-dark); box-shadow: var(--shadow-card);">
+                    <span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:#11720C; box-shadow: 0 0 8px #11720C;"></span>
+                    <span>100% ORGANIC SOURCED • PREMIUM CHOICE</span>
+                </div>
+                <h1 class="stagger-heading" aria-label="Taste the Purest Energy of Nature">
+                    <span class="word-wrap"><span class="word">Taste</span></span>
+                    <span class="word-wrap"><span class="word">the</span></span>
+                    <span class="word-wrap"><span class="word highlight">Purest</span></span>
+                    <span class="word-wrap"><span class="word">Energy</span></span>
+                    <span class="word-wrap"><span class="word">of</span></span>
+                    <span class="word-wrap"><span class="word">Nature</span></span>
+                </h1>
+                <p class="hero-subtext">Curated premium fruits, artistically cut platters, and raw cold-pressed juices. Experience the zesty side of luxury with U FRÜIT.</p>
+                <div class="hero-btns" style="display: flex; gap: 1.2rem; flex-wrap: wrap; margin-top: 1.5rem;">
+                    <a href="#collections" class="cta-button primary-cta">Explore Collections</a>
+                    <a href="https://order.epos.com/page/my-fruit-selection-enterprise" target="_blank" class="cta-button epos-hero-btn" style="background: #11720C; color: white;">🛒 Order Pick-Up (EPOS)</a>
                 </div>
             </div>
             <div class="hero-image reveal">
-                <img src="assets/hero.png" alt="Luxurious Fruit Platter">
-                <div class="floating-badge">
+                <img src="assets/hero.png" alt="Luxurious Fruit Platter" class="hero-main-img">
+                <div class="floating-badge border-gradient">
                     <div class="badge-icon">
                         <i data-lucide="sparkles"></i>
                     </div>
@@ -191,6 +74,46 @@
         </div>
     </section>
 
+    <!-- ================================================
+         AWWWARDS-QUALITY MARQUEE LOOP (Meng To Skill)
+         ================================================ -->
+    <div class="marquee-section">
+        <div class="marquee-track">
+            <div class="marquee-content">
+                <span>🍊 FRÜIT SELECTION</span>
+                <span class="dot">•</span>
+                <span>100% ORGANIC SOURCED</span>
+                <span class="dot">•</span>
+                <span>ARTISAN CUT PLATTERS</span>
+                <span class="dot">•</span>
+                <span>COLD-PRESSED JUICES</span>
+                <span class="dot">•</span>
+                <span>KUALA LUMPUR</span>
+                <span class="dot">•</span>
+                <span>DELIVERED FRESH</span>
+                <span class="dot">•</span>
+                <span>U FRÜIT LUXURY PRODUCE</span>
+                <span class="dot">•</span>
+            </div>
+            <div class="marquee-content" aria-hidden="true">
+                <span>🍊 FRÜIT SELECTION</span>
+                <span class="dot">•</span>
+                <span>100% ORGANIC SOURCED</span>
+                <span class="dot">•</span>
+                <span>ARTISAN CUT PLATTERS</span>
+                <span class="dot">•</span>
+                <span>COLD-PRESSED JUICES</span>
+                <span class="dot">•</span>
+                <span>KUALA LUMPUR</span>
+                <span class="dot">•</span>
+                <span>DELIVERED FRESH</span>
+                <span class="dot">•</span>
+                <span>U FRÜIT LUXURY PRODUCE</span>
+                <span class="dot">•</span>
+            </div>
+        </div>
+    </div>
+
     <!-- FRÜIT Squad Mascot Banner Section -->
     <section class="squad-banner-section" id="squad-banner" style="padding: 5rem 0; background: var(--bg-cream); overflow: hidden;">
         <div class="container" style="text-align: center;">
@@ -198,7 +121,7 @@
                 <span class="card-tag">Meet Our Mascots</span>
                 <div style="display: flex; align-items: center; justify-content: center; gap: 0.8rem; flex-wrap: wrap; margin: 0.5rem 0 1rem 0;">
                     <span style="font-size: clamp(1.8rem, 4vw, 2.8rem); font-family: 'Armstrong', sans-serif; font-weight: 800; color: var(--text-dark);">The</span>
-                    <img src="assets/ufruit logo.png" alt="FRÜIT Logo" style="height: clamp(40px, 6vw, 60px); width: auto; display: inline-block;">
+                    <img src="assets/fruit-logo-english-master-v1.jpg" alt="FRÜIT Master Logo" style="height: clamp(40px, 6vw, 60px); width: auto; display: inline-block; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.08);">
                     <span style="font-size: clamp(1.8rem, 4vw, 2.8rem); font-family: 'Armstrong', sans-serif; font-weight: 800; color: var(--text-dark);">Squad 🍓🍊🍏🍋🥑</span>
                 </div>
                 <p>We're packing your box with love! 🧡</p>
@@ -444,7 +367,7 @@
     <!-- Animated IP Checkout Banner Section -->
     <section class="checkout-banner-section" id="squad-banner">
         <div class="checkout-banner-container reveal">
-            <img src="assets/ufruit logo.png" alt="優 FRÜIT Original Logo" class="checkout-banner-logo">
+            <img src="assets/fruit-logo-english-master-v1.jpg" alt="U FRÜIT Master Logo" class="checkout-banner-logo" style="border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.08);">
             <h2 class="checkout-banner-title">
                 We're packing your box with love! <span class="heart-pulse">🧡</span>
             </h2>
@@ -549,7 +472,7 @@
             <div class="footer-content">
                 <div class="footer-about">
                     <a href="#" class="footer-logo">
-                        <img src="assets/ufruit logo.png" alt="FRÜIT Logo" style="height: 40px; width: auto; margin-bottom: 1rem; display: block;">
+                        <img src="assets/fruit-logo-english-master-v1.jpg" alt="U FRÜIT Master Logo" style="height: 44px; width: auto; margin-bottom: 1rem; display: block; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.08);">
                     </a>
                     <p>Elevating the art of fresh fruit. From nature's best gardens to your sophisticated table.</p>
                     <div class="social-links">

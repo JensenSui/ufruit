@@ -19,8 +19,9 @@ window.addEventListener('scroll', () => {
     lastScroll = currentScroll;
 });
 
-// Reveal Animations on Scroll
+// Awwwards-Quality Reveal & Kinetic Typography on Scroll
 const revealElements = document.querySelectorAll('.reveal');
+const staggerHeadings = document.querySelectorAll('.stagger-heading');
 
 const revealOnScroll = (entries, observer) => {
     entries.forEach(entry => {
@@ -31,15 +32,41 @@ const revealOnScroll = (entries, observer) => {
     });
 };
 
-const options = {
-    threshold: 0.1
+const staggerOnScroll = (entries, observer) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('animated');
+            observer.unobserve(entry.target);
+        }
+    });
 };
 
+const options = { threshold: 0.1 };
 const observer = new IntersectionObserver(revealOnScroll, options);
+const staggerObserver = new IntersectionObserver(staggerOnScroll, { threshold: 0.2 });
 
-revealElements.forEach(element => {
-    observer.observe(element);
+revealElements.forEach(element => observer.observe(element));
+staggerHeadings.forEach(heading => staggerObserver.observe(heading));
+
+// Awwwards-Quality Spotlight Hover Tracking (reveal-hover-effect)
+function attachSpotlightHover(cards) {
+    cards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            card.style.setProperty('--mouse-x', `${x}px`);
+            card.style.setProperty('--mouse-y', `${y}px`);
+        });
+    });
+}
+
+// Attach to existing cards on load and expose globally for dynamic product cards
+document.addEventListener('DOMContentLoaded', () => {
+    attachSpotlightHover(document.querySelectorAll('.card, .product-card'));
+    setTimeout(() => attachSpotlightHover(document.querySelectorAll('.card, .product-card')), 800);
 });
+window.attachSpotlightHover = attachSpotlightHover;
 
 // Smooth Scroll for Nav Links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -163,7 +190,7 @@ document.addEventListener('DOMContentLoaded', async () => {
             if (data.available === 'NO' || data.Available === 'NO') return; // Skip unavailable items
 
             html += `
-            <div class="card reveal active" style="cursor: pointer;" onclick="openModal('${escapeQuotes(data.tag || 'Fresh')}', '${escapeQuotes(data.title || 'Product')}', '${escapeQuotes(data.desc || '')}', '${escapeQuotes(data.price || 'RM 0.00')}', '${escapeQuotes(data.image || 'assets/hero.png')}')">
+            <div class="card border-gradient reveal active" style="cursor: pointer;" onclick="openModal('${escapeQuotes(data.tag || 'Fresh')}', '${escapeQuotes(data.title || 'Product')}', '${escapeQuotes(data.desc || '')}', '${escapeQuotes(data.price || 'RM 0.00')}', '${escapeQuotes(data.image || 'assets/hero.png')}')">
                 <div class="card-image">
                     <img src="${data.image || 'assets/hero.png'}" alt="${data.title || 'Product'}">
                 </div>
@@ -181,6 +208,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         });
         productsGrid.innerHTML = html;
         lucide.createIcons();
+        if (window.attachSpotlightHover) {
+            window.attachSpotlightHover(productsGrid.querySelectorAll('.card'));
+        }
 
     } catch (error) {
         console.error("Error fetching products: ", error);
