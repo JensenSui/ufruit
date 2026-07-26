@@ -191,15 +191,15 @@ document.addEventListener('DOMContentLoaded', async () => {
             if (data.available === 'NO' || data.Available === 'NO') return; // Skip unavailable items
 
             const numTag = String(index + 1).padStart(2, '0');
-            const spanClass = index === 0 ? 'span-12' : 'span-6';
-            const aspectStyle = index === 0 ? 'aspect-ratio: 16/7;' : 'aspect-ratio: 4/3;';
-            const imgStyle = index === 0 ? 'max-height: 400px;' : 'max-height: 300px;';
+            const isLastOdd = (products.length % 2 === 0) && (index === products.length - 1);
+            const spanClass = (index === 0 || isLastOdd) ? 'span-12' : 'span-6';
+            const aspectStyle = (index === 0 || isLastOdd) ? 'aspect-ratio: 16/6;' : 'aspect-ratio: 16/10;';
 
             html += `
             <div class="lookbook-card card ${spanClass} reveal active" style="cursor: pointer;" onclick="openModal('${escapeQuotes(data.tag || 'Fresh')}', '${escapeQuotes(data.title || 'Product')}', '${escapeQuotes(data.desc || '')}', '${escapeQuotes(data.price || 'RM 0.00')}', '${escapeQuotes(data.image || 'assets/hero.png')}')">
                 <span class="lookbook-index-tag">${numTag} / ${escapeQuotes(data.tag || 'LUXURY HARVEST')}</span>
                 <div class="lookbook-card-image" style="${aspectStyle}">
-                    <img src="${data.image || 'assets/hero.png'}" alt="${data.title || 'Product'}" style="${imgStyle}">
+                    <img src="${data.image || 'assets/hero.png'}" alt="${data.title || 'Product'}">
                 </div>
                 <div class="lookbook-card-meta">
                     <div>
