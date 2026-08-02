@@ -178,11 +178,18 @@
                     "></div>
 
                     <!-- 5 Characters -->
-                    <img src="assets/IP1-Berry.png" alt="Berry" class="squad-char squad-berry" title="Berry 🍓" style="height: 250px; z-index: 4; cursor: pointer; transition: all 0.3s ease;">
-                    <img src="assets/IP2-Juice.png" alt="Juice" class="squad-char squad-juice" title="Juice 🍊" style="height: 240px; z-index: 5; cursor: pointer; transition: all 0.3s ease; margin-left: -40px;">
-                    <img src="assets/IP3-Lemon.png" alt="Lemon" class="squad-char squad-lemon" title="Lemon 🍋" style="height: 260px; z-index: 6; cursor: pointer; transition: all 0.3s ease; margin-left: -40px;">
-                    <img src="assets/IP4-Crisp.png" alt="Crisp" class="squad-char squad-crisp" title="Crisp 🍏" style="height: 270px; z-index: 7; cursor: pointer; transition: all 0.3s ease; margin-left: -40px;">
-                    <img src="assets/IP5-Cado.png" alt="Cado" class="squad-char squad-cado" title="Cado 🥑" style="height: 265px; z-index: 3; cursor: pointer; transition: all 0.3s ease; margin-left: -40px;">
+                    <img src="assets/IP1-Berry.png" alt="Berry" class="squad-char squad-berry" title="Berry 🍓" role="button" tabindex="0" aria-label="Meet Berry" style="height: 250px; z-index: 4; cursor: pointer; transition: all 0.3s ease;">
+                    <img src="assets/IP2-Juice.png" alt="Juice" class="squad-char squad-juice" title="Juice 🍊" role="button" tabindex="0" aria-label="Meet Juice" style="height: 240px; z-index: 5; cursor: pointer; transition: all 0.3s ease; margin-left: -40px;">
+                    <img src="assets/IP3-Lemon.png" alt="Lemon" class="squad-char squad-lemon" title="Lemon 🍋" role="button" tabindex="0" aria-label="Meet Lemon" style="height: 260px; z-index: 6; cursor: pointer; transition: all 0.3s ease; margin-left: -40px;">
+                    <img src="assets/IP4-Crisp.png" alt="Crisp" class="squad-char squad-crisp" title="Crisp 🍏" role="button" tabindex="0" aria-label="Meet Crisp" style="height: 270px; z-index: 7; cursor: pointer; transition: all 0.3s ease; margin-left: -40px;">
+                    <img src="assets/IP5-Cado.png" alt="Cado" class="squad-char squad-cado" title="Cado 🥑" role="button" tabindex="0" aria-label="Meet Cado" style="height: 265px; z-index: 3; cursor: pointer; transition: all 0.3s ease; margin-left: -40px;">
+                </div>
+
+                <!-- Interactive Stage Discoverability Pill -->
+                <div style="text-align: center; margin-bottom: 1.2rem; position: relative; z-index: 10;">
+                    <span style="display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(26,26,24,0.06); color: var(--color-deep); padding: 0.45rem 1.1rem; border-radius: 999px; font-size: 0.85rem; font-weight: 600; letter-spacing: 0.04em; border: 1px solid rgba(0,0,0,0.06); box-shadow: 0 2px 8px rgba(0,0,0,0.04);">
+                        ✨ Tap any character to meet the squad!
+                    </span>
                 </div>
 
                 <!-- Colourful Baseline Stripe -->
@@ -348,6 +355,20 @@
                     <a href="https://wa.me/60122135938?text=Hi%20FRÜIT!%20I'm%20looking%20for%20Wholesale%20Fruit%20Supply%20for%20my%20business." target="_blank" class="cta-button" style="display: inline-flex; align-items: center; justify-content: center; width: 100%; font-size: 0.95rem; padding: 0.8rem; background: var(--primary-green);">
                         💬 Wholesale Supply Quote
                     </a>
+                </div>
+
+                <!-- Central Corporate Concierge Banner -->
+                <div class="card reveal span-12" style="grid-column: 1 / -1; padding: 2.5rem 3rem; border-radius: var(--radius-md); background: linear-gradient(135deg, #1A1A18 0%, #2A2A27 100%); color: #ffffff; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 2rem; margin-top: 1.5rem; border: 1px solid rgba(255,255,255,0.1);">
+                    <div style="max-width: 600px;">
+                        <span class="card-tag" style="color: var(--primary-amber); background: rgba(255, 179, 0, 0.15); border-color: rgba(255, 179, 0, 0.3);">EXECUTIVE CONCIERGE</span>
+                        <h3 style="font-size: 1.8rem; margin: 0.8rem 0 0.5rem; color: #fff;">Need a Tailored Corporate Solution?</h3>
+                        <p style="color: rgba(255,255,255,0.75); font-size: 1rem; line-height: 1.6; margin: 0;">Speak directly with our B2B Concierge team for multi-location office deliveries, custom billing, and priority invoicing.</p>
+                    </div>
+                    <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                        <a href="https://wa.me/60122135938?text=Hi%20FRÜIT%20Concierge,%20I'd%20like%20to%20discuss%20a%20tailored%20Corporate%20/%20VIP%20Gifting%20account." target="_blank" class="cta-button" style="background: #25D366; color: #ffffff; padding: 1rem 1.8rem; font-size: 1rem; display: inline-flex; align-items: center; gap: 0.5rem; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);">
+                            <i data-lucide="message-circle" style="width: 20px; height: 20px;"></i> WhatsApp B2B Concierge
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -673,34 +694,29 @@
                     <div style="font-weight: 700; color: var(--primary-green);">${document.getElementById('modalPrice').innerText}</div>
                 </div>
             `;
-            document.querySelector('.cart-total span:last-child').innerText = document.getElementById('modalPrice').innerText;
-            modal.classList.remove('active');
-            toggleCart();
-        }
-    </script>
-
-    <!-- Floating WhatsApp Button -->
-    <a href="https://wa.me/60122135938?text=Hi%20FRÜIT,%20I'd%20like%20to%20inquire%20about%20your%20fresh%20fruits!" target="_blank" aria-label="Chat on WhatsApp" style="
+            document.querySelector('.cart-total span:last    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/60122135938?text=Hi%20FRÜIT%20Concierge,%20I'd%20like%20to%20inquire%20about%20your%20fresh%20fruits!" target="_blank" aria-label="Chat with FRÜIT Concierge on WhatsApp" style="
         position: fixed;
         bottom: 25px;
         left: 25px;
         z-index: 9999;
         background: #25D366;
         color: #ffffff;
-        padding: 12px 20px;
+        padding: 12px 22px;
         border-radius: 9999px;
         display: flex;
         align-items: center;
         gap: 10px;
-        box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
-        font-family: sans-serif;
-        font-weight: 600;
+        box-shadow: 0 8px 25px rgba(37, 211, 102, 0.45);
+        font-family: var(--font-label);
+        font-weight: 700;
         font-size: 14px;
+        letter-spacing: 0.03em;
         text-decoration: none;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
-    " onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-        <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        <span>Chat on WhatsApp</span>
+        transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    " onmouseover="this.style.transform='translateY(-3px) scale(1.04)'; this.style.boxShadow='0 12px 30px rgba(37, 211, 102, 0.6)';" onmouseout="this.style.transform='translateY(0) scale(1)'; this.style.boxShadow='0 8px 25px rgba(37, 211, 102, 0.45)';">
+        <svg width="22" height="22" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.884-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        <span>💬 Chat with FRÜIT Concierge</span>
     </a>
 </body>
 </html>

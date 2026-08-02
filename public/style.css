@@ -129,11 +129,12 @@ header {
 }
 
 header.scrolled {
-    background: var(--glass);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    padding: 0.9rem 0;
-    box-shadow: 0 1px 0 rgba(0,0,0,0.06), var(--shadow-card);
+    background: rgba(245, 240, 232, 0.92);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    padding: 0.8rem 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
 }
 
 .nav-content {
@@ -854,8 +855,14 @@ footer {
     .nav-links.active { right: 0; }
 
     .nav-links a {
-        font-size: 1rem;
-        letter-spacing: 0.3em;
+        font-size: 1.1rem;
+        letter-spacing: 0.25em;
+        min-height: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        padding: 0.5rem 1rem;
     }
 
     .cta-button.header-cta { display: none; }

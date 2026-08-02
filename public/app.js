@@ -206,9 +206,9 @@ document.addEventListener('DOMContentLoaded', async () => {
                         <h3>${data.title || 'Product'}</h3>
                         <p>${data.desc || ''}</p>
                     </div>
-                    <div class="lookbook-price-row">
-                        <span class="lookbook-price">${data.price || 'RM 0.00'}</span>
-                        <span class="card-link" style="margin-top: 0; font-family: 'Space Grotesk', monospace; font-weight: 700;">ACQUIRE <i data-lucide="arrow-right"></i></span>
+                    <div class="lookbook-price-row" style="align-items: center;">
+                        <span class="lookbook-price" style="background: rgba(26,26,24,0.06); padding: 0.35rem 0.75rem; border-radius: 999px; font-weight: 700;">${data.price || 'RM 0.00'}</span>
+                        <span class="card-link" style="margin-top: 0; font-family: var(--font-label); font-weight: 700; font-size: 0.82rem; letter-spacing: 0.08em; display: inline-flex; align-items: center; gap: 0.35rem; background: var(--primary-green); color: #ffffff; padding: 0.45rem 0.95rem; border-radius: 999px; box-shadow: 0 4px 12px rgba(46, 125, 50, 0.2); transition: all 0.3s ease;">QUICK VIEW <i data-lucide="eye" style="width: 14px; height: 14px;"></i></span>
                     </div>
                 </div>
             </div>
