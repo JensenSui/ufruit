@@ -61,28 +61,28 @@ Avoid looking like generic supermarket produce departments — too sterile and p
 
 ## Typography
 
-**Display / Heading Font:** Armstrong Extrabold  
-- Weight: Extrabold  
-- Source: Custom — file at `assets/fonts/Armstrong-Extrabold.otf`  
-- Use for: Hero headlines, brand taglines, large poster type, email hero headers  
-- Character: Bold, expressive, slightly editorial — commands attention
+**Display / Heading Font:** Outfit  
+- Weight: Bold (700) / Extrabold (800)  
+- Source: Google Fonts — `https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap`  
+- Use for: Hero headlines, brand taglines, large poster type, section titles  
+- Character: Sleek, geometric, sophisticated — echoes the sculptural curves of the canonical UFRÜIT V3 logo
 
-**Body / Copy Font:** Armstrong (Regular)  
-- Weight: Regular  
-- Source: Custom — file at `assets/fonts/Armstrong.otf`  
-- Use for: Sub-headlines, lead copy, card descriptions, navigation
+**Body / Copy Font:** Plus Jakarta Sans  
+- Weight: Regular (400) / Medium (500)  
+- Source: Google Fonts — `https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap`  
+- Use for: Sub-headlines, lead copy, card descriptions, paragraph text, navigation  
+- Character: Ultra-clean Swiss modernism, high legibility, whisper-quiet luxury
 
-**Accent / Label Font:** Gabriel Sans Condensed Bold  
-- Source: Custom — file at `assets/fonts/GabrielSansCond-Trial-Bold.ttf`  
-- Use for: Category labels, price tags, spaced-out subheadings ("S E L E C T I O N" style), captions, tags  
-- Character: Condensed, structured, efficient — contrasts beautifully with Armstrong's warmth
+**Accent / Label Font:** Outfit (Semi-Bold 600 / Bold 700)  
+- Source: Google Fonts  
+- Use for: Category labels, price tags, spaced-out subheadings, captions, badges  
+- Character: Structured, clean, modern
 
 **Typography Rules:**
-- Headlines: Armstrong Extrabold, always.
-- Subheadings / taglines: Armstrong Regular or Gabriel Sans Condensed Bold.
-- Body copy: Armstrong Regular (or fall-back system sans for web performance: Inter/system-ui).
+- Headlines: Outfit (700/800), always.
+- Subheadings / taglines: Outfit (600) or Plus Jakarta Sans (500).
+- Body copy: Plus Jakarta Sans (400/500).
 - Never use more than 2 fonts in a single design.
-- "SELECTION" wordmark is always set in Gabriel Sans Condensed Bold, widely spaced (letter-spacing: 0.4em+), in Warm Cream on light backgrounds.
 - The FRÜIT wordmark itself uses multi-colour hand-painted brush lettering — never recreate it as live type; always use the logo asset.
 
 ---
@@ -146,7 +146,7 @@ Outline icons, 1.5–2px stroke, rounded caps and joins. Colour: match surroundi
 - ❌ No stock photo-style food imagery (people smiling at salads, studio-lit fake styling)
 - ❌ Never recreate the FRÜIT brush lettering in another font
 - ❌ Never use all four logo colours simultaneously on UI elements — causes visual noise
-- ❌ No Comic Sans, Papyrus, or display fonts other than Armstrong/Gabriel Sans
+- ❌ No Comic Sans, Papyrus, or display fonts other than Outfit/Plus Jakarta Sans
 - ❌ No overcrowded layouts — this brand breathes and lets the fruit speak
 
 ---
@@ -161,9 +161,9 @@ Outline icons, 1.5–2px stroke, rounded caps and joins. Colour: match surroundi
 | Brand Identity Sheet | `design-engine/assets/colours/brand-identity-sheet.png` | ✅ Generated |
 | Colour Palette Swatch Card | `design-engine/assets/colours/colour-palette-swatch.png` | ✅ Generated |
 | Colour Palette Source | `design-engine/assets/colours/colour-palette.png` | ✅ Copied |
-| Font: Armstrong Extrabold | `design-engine/assets/fonts/Armstrong-Extrabold.otf` | ✅ Ready |
-| Font: Armstrong Regular | `design-engine/assets/fonts/Armstrong.otf` | ✅ Ready |
-| Font: Gabriel Sans Cond Bold | `design-engine/assets/fonts/GabrielSansCond-Trial-Bold.ttf` | ✅ Ready |
+| Font: Outfit (Bold/Extrabold) | Google Fonts (`Outfit`) | ✅ Ready |
+| Font: Plus Jakarta Sans (Regular/Medium) | Google Fonts (`Plus Jakarta Sans`) | ✅ Ready |
+| Font: Outfit (Semi-Bold/Bold) | Google Fonts (`Outfit`) | ✅ Ready |
 | Hero Photography | `assets/hero.png` | ✅ Ready |
 | Juice Photography | `assets/juice.png` | ✅ Ready |
 | Whole Fruit Photography | `assets/whole-fruit.png` | ✅ Ready |
@@ -195,9 +195,9 @@ Primary Brand Red  : #D4272B  Tomato Red
 Background         : #F5F0E8  Warm Cream
 Dark Text          : #1A1A18  Charcoal
 
-Display Font : Armstrong Extrabold
-Body Font    : Armstrong Regular
-Label Font   : Gabriel Sans Condensed Bold
+Display Font : Outfit (700/800)
+Body Font    : Plus Jakarta Sans (400/500)
+Label Font   : Outfit (600/700)
 
 Personality  : Fresh · Bold · Vibrant · Artisanal · Joyful
 ════════════════════════════════════
