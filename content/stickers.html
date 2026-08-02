@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FRÜIT IP — Meme Stickers</title>
+    <style>
+        /* FONTS */
+        @font-face {
+            font-family: 'Armstrong Extrabold';
+            src: url('../assets/fonts/Armstrong-Extrabold.otf') format('opentype');
+            font-weight: 800;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Armstrong Regular';
+            src: url('../assets/fonts/Armstrong.otf') format('opentype');
+            font-weight: 400;
+            font-style: normal;
+        }
+        @font-face {
+            font-family: 'Gabriel Sans Cond Bold';
+            src: url('../assets/fonts/GabrielSansCond-Trial-Bold.ttf') format('truetype');
+            font-weight: 700;
+            font-style: normal;
+        }
+
+        /* BRAND COLORS & DESIGN SYSTEM */
+        :root {
+            --tomato-red: #D4272B;
+            --harvest-orange: #E8722A;
+            --golden-amber: #F0B429;
+            --leaf-green: #6B8C3A;
+            --forest-olive: #4A6B2A;
+            --warm-cream: #F5F0E8;
+            --charcoal: #1A1A18;
+            --snow-white: #FAFAF7;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--charcoal);
+            color: var(--snow-white);
+            font-family: 'Armstrong Regular', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 60px 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        h1 {
+            font-family: 'Armstrong Extrabold', sans-serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            color: var(--snow-white);
+            margin-bottom: 10px;
+            letter-spacing: 0.02em;
+        }
+
+        p.subtitle {
+            font-size: 1.2rem;
+            color: rgba(250, 250, 247, 0.7);
+            margin-bottom: 20px;
+        }
+        
+        p.instruction {
+            font-family: 'Gabriel Sans Cond Bold', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            font-size: 0.9rem;
+            color: var(--golden-amber);
+            background: rgba(240, 180, 41, 0.1);
+            padding: 8px 16px;
+            border-radius: 20px;
+            display: inline-block;
+        }
+
+        /* STICKER GRID */
+        .sticker-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 60px 40px;
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        @media (max-width: 1024px) {
+            .sticker-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 40px;
+            }
+        }
+        @media (max-width: 600px) {
+            .sticker-grid {
+                grid-template-columns: 1fr;
+                gap: 50px;
+            }
+        }
+
+        /* STICKER BASE */
+        .sticker-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            /* Using a container so we can scale the 600x600 sticker down seamlessly */
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            position: relative;
+            container-type: inline-size;
+        }
+
+        .sticker {
+            width: 100%;
+            aspect-ratio: 1 / 1;
+            border-radius: 8cqw; /* ~48px at 600px */
+            border: 1.3cqw solid var(--snow-white); /* ~8px at 600px */
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4), 
+                        0 5px 15px rgba(0,0,0,0.2), 
+                        inset 0 0 0 1cqw rgba(255,255,255,0.5);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
+            cursor: pointer;
+            background-color: var(--snow-white);
+        }
+
+        .sticker:hover {
+            transform: scale(1.05) translateY(-5px);
+            box-shadow: 0 25px 45px rgba(0,0,0,0.5), 
+                        0 10px 20px rgba(0,0,0,0.3),
+                        inset 0 0 0 1cqw rgba(255,255,255,0.6);
+            z-index: 10;
+        }
+
+        /* Inner background for the tint */
+        .sticker-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 0;
+        }
+
+        /* Character Image */
+        .sticker-img {
+            position: absolute;
+            height: 65%;
+            z-index: 2;
+            object-fit: contain;
+            /* White outline effect for character */
+            filter: drop-shadow(0 0 0.5cqw white) drop-shadow(0 0 1cqw white) drop-shadow(0 1cqw 1cqw rgba(0,0,0,0.2));
+            transition: transform 0.3s ease;
+        }
+
+        .sticker:hover .sticker-img {
+            transform: scale(1.08);
+        }
+
+        /* Meme Text */
+        .sticker-text {
+            position: absolute;
+            z-index: 3;
+            font-family: 'Armstrong Extrabold', sans-serif;
+            text-align: center;
+            color: var(--charcoal);
+            line-height: 1.1;
+            text-shadow: 2px 2px 0 var(--snow-white),
+                         -2px -2px 0 var(--snow-white),
+                         2px -2px 0 var(--snow-white),
+                         -2px 2px 0 var(--snow-white),
+                         0 4px 10px rgba(0,0,0,0.3);
+        }
+
+        /* Character Name Label */
+        .sticker-label {
+            position: absolute;
+            bottom: 4cqw;
+            z-index: 4;
+            font-family: 'Gabriel Sans Cond Bold', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            font-size: 2.5cqw;
+            background: var(--snow-white);
+            padding: 0.8cqw 2.5cqw;
+            border-radius: 4cqw;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        /* Decorative Elements */
+        .deco {
+            position: absolute;
+            z-index: 1;
+            font-family: 'Armstrong Extrabold', sans-serif;
+            pointer-events: none;
+        }
+
+
+        /* ==================================
+           STICKER 1: BERRY (YAAAS!) 
+           ================================== */
+        .sticker-berry .sticker-bg {
+            background: radial-gradient(circle at center, rgba(212, 39, 43, 0.15) 0%, rgba(212, 39, 43, 0.3) 100%);
+        }
+        .sticker-berry .sticker-img {
+            bottom: 5%;
+            height: 70%;
+        }
+        .sticker-berry .sticker-text {
+            top: 10%;
+            font-size: 10cqw;
+            transform: rotate(-6deg);
+            color: var(--tomato-red);
+        }
+        .sticker-berry .sticker-label {
+            color: var(--tomato-red);
+        }
+        /* Decor */
+        .sticker-berry .deco-1 { top: 15%; left: 10%; font-size: 6cqw; color: var(--golden-amber); transform: rotate(15deg); }
+        .sticker-berry .deco-2 { top: 30%; right: 12%; font-size: 5cqw; color: var(--leaf-green); transform: rotate(-10deg); }
+        .sticker-berry .deco-3 { bottom: 25%; left: 15%; font-size: 7cqw; color: var(--harvest-orange); transform: rotate(25deg); }
+
+
+        /* ==================================
+           STICKER 2: JUICE (5 more mins~) 
+           ================================== */
+        .sticker-juice .sticker-bg {
+            background: linear-gradient(135deg, rgba(232, 114, 42, 0.1) 0%, rgba(232, 114, 42, 0.25) 100%);
+        }
+        .sticker-juice .sticker-img {
+            bottom: 0%;
+            height: 60%;
+        }
+        .sticker-juice .sticker-text {
+            top: 15%;
+            font-family: 'Armstrong Regular', sans-serif; /* softer */
+            font-size: 7cqw;
+            color: var(--harvest-orange);
+            transform: rotate(-2deg);
+        }
+        .sticker-juice .sticker-label {
+            color: var(--harvest-orange);
+        }
+        /* Decor */
+        .sticker-juice .deco-1 { top: 25%; right: 15%; font-size: 5cqw; color: #888; font-family: 'Armstrong Extrabold'; }
+        .sticker-juice .deco-2 { top: 15%; right: 8%; font-size: 3cqw; color: #aaa; font-family: 'Armstrong Extrabold'; }
+        .sticker-juice .deco-3 { top: 40%; left: 10%; font-size: 8cqw; color: rgba(232,114,42,0.4); } /* moon-like */
+
+
+        /* ==================================
+           STICKER 3: LEMON (Really?) 
+           ================================== */
+        .sticker-lemon .sticker-bg {
+            background: radial-gradient(ellipse at top, rgba(240, 180, 41, 0.1) 0%, rgba(240, 180, 41, 0.35) 100%);
+        }
+        .sticker-lemon .sticker-img {
+            bottom: 5%;
+            height: 62%;
+        }
+        .sticker-lemon .sticker-text {
+            top: 12%;
+            font-size: 9.5cqw;
+            font-style: italic;
+            color: var(--charcoal);
+            text-transform: uppercase;
+        }
+        .sticker-lemon .sticker-label {
+            color: var(--golden-amber);
+        }
+        /* Decor */
+        .sticker-lemon .deco-1 { top: 8%; right: 10%; font-size: 9cqw; color: var(--golden-amber); }
+        .sticker-lemon .deco-2 { bottom: 30%; right: 15%; font-size: 4cqw; color: var(--charcoal); opacity: 0.5; }
+        .sticker-lemon .deco-3 { top: 35%; left: 8%; font-size: 6cqw; color: var(--golden-amber); transform: rotate(-15deg); }
+
+
+        /* ==================================
+           STICKER 4: CRISP (LET'S GOOO) 
+           ================================== */
+        .sticker-crisp .sticker-bg {
+            background: repeating-linear-gradient(
+                45deg,
+                rgba(107, 140, 58, 0.15),
+                rgba(107, 140, 58, 0.15) 10px,
+                rgba(107, 140, 58, 0.25) 10px,
+                rgba(107, 140, 58, 0.25) 20px
+            );
+        }
+        .sticker-crisp .sticker-img {
+            bottom: 5%;
+            height: 65%;
+        }
+        .sticker-crisp .sticker-text {
+            top: 8%;
+            font-size: 11cqw;
+            transform: rotate(-8deg);
+            color: var(--leaf-green);
+        }
+        .sticker-crisp .sticker-label {
+            color: var(--leaf-green);
+        }
+        /* Decor */
+        .sticker-crisp .deco-1 { top: 30%; left: 5%; font-size: 8cqw; color: var(--golden-amber); transform: rotate(-20deg); }
+        .sticker-crisp .deco-2 { top: 20%; right: 5%; font-size: 7cqw; color: var(--tomato-red); transform: rotate(15deg); }
+
+
+        /* ==================================
+           STICKER 5: CADO (I'm proud of you) 
+           ================================== */
+        .sticker-cado .sticker-bg {
+            background: radial-gradient(circle at bottom, rgba(74, 107, 42, 0.3) 0%, rgba(74, 107, 42, 0.1) 80%);
+        }
+        .sticker-cado .sticker-img {
+            bottom: 5%;
+            height: 60%;
+        }
+        .sticker-cado .sticker-text {
+            top: 15%;
+            font-size: 6.5cqw;
+            color: var(--forest-olive);
+            width: 80%;
+        }
+        .sticker-cado .sticker-label {
+            color: var(--forest-olive);
+        }
+        /* Decor */
+        .sticker-cado .deco-1 { top: 12%; left: 10%; font-size: 5cqw; color: var(--tomato-red); }
+        .sticker-cado .deco-2 { top: 30%; right: 12%; font-size: 4cqw; color: var(--tomato-red); transform: rotate(15deg); }
+        .sticker-cado .deco-3 { bottom: 25%; left: 15%; font-size: 6cqw; color: var(--golden-amber); opacity: 0.8; }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>FRÜIT IP — Meme Stickers</h1>
+        <p class="subtitle">Reaction stickers for Instagram Stories, WhatsApp & Telegram</p>
+        <p class="instruction">Right-click &rarr; Save as image to use as stickers</p>
+    </header>
+
+    <div class="sticker-grid">
+
+        <!-- Sticker 1: Berry -->
+        <div class="sticker-wrapper sticker-berry">
+            <div class="sticker">
+                <div class="sticker-bg"></div>
+                <div class="deco deco-1">✦</div>
+                <div class="deco deco-2">★</div>
+                <div class="deco deco-3">✧</div>
+                <div class="sticker-text">YAAAS!</div>
+                <img src="../public/assets/IP1-Berry.png" alt="Berry" class="sticker-img">
+                <div class="sticker-label">Berry</div>
+            </div>
+        </div>
+
+        <!-- Sticker 2: Juice -->
+        <div class="sticker-wrapper sticker-juice">
+            <div class="sticker">
+                <div class="sticker-bg"></div>
+                <div class="deco deco-1">Z</div>
+                <div class="deco deco-2">z</div>
+                <div class="deco deco-3">☾</div>
+                <div class="sticker-text">5 more mins~</div>
+                <img src="../public/assets/IP2-Juice.png" alt="Juice" class="sticker-img">
+                <div class="sticker-label">Juice</div>
+            </div>
+        </div>
+
+        <!-- Sticker 3: Lemon -->
+        <div class="sticker-wrapper sticker-lemon">
+            <div class="sticker">
+                <div class="sticker-bg"></div>
+                <div class="deco deco-1">?</div>
+                <div class="deco deco-2">...</div>
+                <div class="deco deco-3">!</div>
+                <div class="sticker-text">Really?</div>
+                <img src="../public/assets/IP3-Lemon.png" alt="Lemon" class="sticker-img">
+                <div class="sticker-label">Lemon</div>
+            </div>
+        </div>
+
+        <!-- Sticker 4: Crisp -->
+        <div class="sticker-wrapper sticker-crisp">
+            <div class="sticker">
+                <div class="sticker-bg"></div>
+                <div class="deco deco-1">⚡</div>
+                <div class="deco deco-2">💢</div>
+                <div class="sticker-text">LET'S GOOO</div>
+                <img src="../public/assets/IP4-Crisp.png" alt="Crisp" class="sticker-img">
+                <div class="sticker-label">Crisp</div>
+            </div>
+        </div>
+
+        <!-- Sticker 5: Cado -->
+        <div class="sticker-wrapper sticker-cado">
+            <div class="sticker">
+                <div class="sticker-bg"></div>
+                <div class="deco deco-1">♥</div>
+                <div class="deco deco-2">❤</div>
+                <div class="deco deco-3">✨</div>
+                <div class="sticker-text">I'm proud of you</div>
+                <img src="../public/assets/IP5-Cado.png" alt="Cado" class="sticker-img">
+                <div class="sticker-label">Cado</div>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+</html>

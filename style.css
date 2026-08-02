@@ -33,16 +33,16 @@
 
 /* ── Brand Token System ───────────────────────────────────── */
 :root {
-    /* === Colour System (source: brand-kit.md) === */
-    --color-primary:    #D4272B;   /* Tomato Red   — logo F, CTAs */
-    --color-secondary:  #E8722A;   /* Harvest Orange — logo R      */
-    --color-accent:     #F0B429;   /* Golden Amber  — CTAs, hover  */
-    --color-growth:     #6B8C3A;   /* Leaf Green    — logo I       */
-    --color-deep:       #4A6B2A;   /* Forest Olive  — logo T, text */
-    --color-bg:         #F5F0E8;   /* Warm Cream    — all BGs      */
-    --color-text:       #1A1A18;   /* Charcoal      — body text    */
-    --color-text-muted: #6B6560;   /* Warm Muted    — secondary    */
-    --color-white:      #FAFAF7;   /* Snow White    — on dark BG   */
+    /* === Colour System (canonical V3 brand palette) === */
+    --color-primary:    #e92934;   /* Ruby Red       — logo Ü, CTAs */
+    --color-secondary:  #fa8f03;   /* Harvest Orange — logo F      */
+    --color-accent:     #fdb606;   /* Golden Amber   — logo R      */
+    --color-growth:     #829e2f;   /* Fresh Leaf     — logo T      */
+    --color-deep:       #677236;   /* Forest Olive   — logo I      */
+    --color-bg:         #F5F0E8;   /* Warm Cream     — all BGs     */
+    --color-text:       #1A1A18;   /* Charcoal       — body text   */
+    --color-text-muted: #6B6560;   /* Warm Muted     — secondary   */
+    --color-white:      #FAFAF7;   /* Snow White     — on dark BG  */
 
     /* Legacy aliases kept for JS compatibility */
     --primary-red:    var(--color-primary);

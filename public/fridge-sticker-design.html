@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UFRÜIT — Freezer Wrap Sticker Designs (V3 Spec)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --tomato:       #D4272B;
+            --orange:       #E8722A;
+            --amber:        #F0B429;
+            --leaf:         #6B8C3A;
+            --olive:        #4A6B2A;
+            --cream:        #F5F0E8;
+            --charcoal:     #1A1A18;
+            --snow:         #FAFAF7;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--cream);
+            color: var(--charcoal);
+            line-height: 1.5;
+        }
+
+        /* ═══ HEADER ═══ */
+        .page-header {
+            background: var(--charcoal);
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+        .page-header h1 {
+            color: var(--snow);
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+        .page-header h1 span { color: var(--amber); }
+        .page-header p {
+            color: rgba(250,250,247,0.4);
+            font-size: 0.8rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-top: 0.5rem;
+        }
+
+        /* ═══ INTERACTIVE MOCKUP SECTION ═══ */
+        .section-mockup {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .mockup-container {
+            position: relative;
+            width: 100%;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+            background: #fff;
+        }
+
+        .fridge-photo {
+            width: 100%;
+            display: block;
+        }
+
+        /* Absolute sticker overlay mapped to the white panel of fridge1.jpg */
+        .sticker-overlay {
+            position: absolute;
+            left: 17%;
+            top: 54.3%;
+            width: 64.2%;
+            height: 30.2%;
+            z-index: 5;
+            overflow: hidden;
+            box-shadow: inset 0 2px 8px rgba(0,0,0,0.2), 0 1px 3px rgba(0,0,0,0.1);
+            transform: perspective(600px) rotateX(1.2deg) rotateY(-0.3deg) skewY(-0.15deg);
+            transform-origin: center center;
+            transition: all 0.4s ease;
+        }
+
+        /* ═══ STICKER GRAPHICS ═══ */
+        .wrap-design {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+            background: var(--cream);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .wrap-design.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* Design 1: Artisanal Collage */
+        .design-collage {
+            background-color: var(--cream);
+            background-image: 
+                /* Left Fruit Shapes */
+                radial-gradient(circle at 10% 20%, var(--orange) 0%, var(--orange) 30%, transparent 31%),
+                radial-gradient(circle at 5% 75%, var(--leaf) 0%, var(--leaf) 40%, transparent 41%),
+                radial-gradient(circle at 20% 50%, var(--tomato) 0%, var(--tomato) 25%, transparent 26%),
+                /* Right Fruit Shapes */
+                radial-gradient(circle at 90% 25%, var(--amber) 0%, var(--amber) 35%, transparent 36%),
+                radial-gradient(circle at 95% 80%, var(--tomato) 0%, var(--tomato) 20%, transparent 21%),
+                radial-gradient(circle at 80% 60%, var(--leaf) 0%, var(--leaf) 28%, transparent 29%);
+            background-size: 100% 100%;
+        }
+
+        /* Abstract Botanical Overlay via SVG */
+        .collage-botanical {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 2;
+            opacity: 0.15;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M10,20 Q30,5 50,20 T90,20' fill='none' stroke='%234A6B2A' stroke-width='2'/%3E%3Cpath d='M20,80 Q40,95 60,80 T100,80' fill='none' stroke='%234A6B2A' stroke-width='2'/%3E%3C/svg%3E");
+            background-size: 15% auto;
+        }
+
+        .design-collage .logo-center {
+            z-index: 3;
+            width: 32%;
+            filter: drop-shadow(0 4px 15px rgba(0,0,0,0.08));
+        }
+
+        /* Design 2: Asymmetric Block */
+        .design-block {
+            background-color: var(--cream);
+            display: flex;
+            justify-content: flex-start;
+            position: relative;
+        }
+
+        .block-left {
+            width: 25%;
+            height: 100%;
+            background: var(--olive);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--cream);
+            font-size: 0.5rem;
+            font-weight: 700;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            writing-mode: vertical-rl;
+            text-orientation: mixed;
+            transform: rotate(180deg);
+            padding: 10px 0;
+            border-left: 2px solid var(--tomato);
+        }
+
+        .block-center {
+            width: 60%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .block-center::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 0; bottom: 0;
+            width: 3px;
+            background: var(--tomato);
+        }
+
+        .block-right {
+            width: 15%;
+            height: 100%;
+            background: var(--orange);
+            border-left: 3px solid var(--amber);
+        }
+
+        .design-block .logo-center {
+            width: 50%;
+        }
+
+        /* Design 3: Tonal Waves */
+        .design-waves {
+            background: var(--cream);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .waves-logo-container {
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding-top: 5px;
+        }
+
+        .waves-logo-container .logo-center {
+            width: 28%;
+        }
+
+        .waves-wrapper {
+            width: 100%;
+            height: 38%;
+            position: relative;
+        }
+
+        .wave-svg {
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Design 4: 5 IP Mascots */
+        .design-mascots {
+            background-color: var(--cream);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 12px 6px;
+            position: relative;
+        }
+
+        .mascots-header {
+            text-align: center;
+            z-index: 2;
+        }
+
+        .mascots-header h4 {
+            font-size: 0.65rem;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            color: var(--olive);
+            text-transform: uppercase;
+        }
+
+        .mascots-header span {
+            font-size: 0.42rem;
+            color: var(--orange);
+            display: block;
+            font-weight: 600;
+            letter-spacing: 0.1em;
+        }
+
+        .mascots-row {
+            display: flex;
+            justify-content: space-around;
+            align-items: flex-end;
+            width: 90%;
+            height: 52%;
+            z-index: 2;
+        }
+
+        .mascot-img {
+            height: 100%;
+            max-width: 18%;
+            object-fit: contain;
+            filter: drop-shadow(0 3px 6px rgba(0,0,0,0.15));
+            transition: transform 0.3s ease;
+        }
+
+        .mascot-img:hover {
+            transform: translateY(-4px) scale(1.08);
+        }
+
+        .mascots-footer {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2;
+        }
+
+        /* ═══ CONTROLS PANEL ═══ */
+        .controls-panel {
+            background: white;
+            border-radius: 16px;
+            padding: 2rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+
+        .controls-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--charcoal);
+        }
+
+        .concept-btn {
+            width: 100%;
+            background: var(--cream);
+            border: 2px solid transparent;
+            border-radius: 12px;
+            padding: 1.2rem;
+            text-align: left;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .concept-btn:hover {
+            background: #e8e3d9;
+            transform: translateY(-2px);
+        }
+
+        .concept-btn.active {
+            border-color: var(--olive);
+            background: white;
+            box-shadow: 0 6px 20px rgba(74,107,42,0.12);
+        }
+
+        .concept-num {
+            font-size: 0.65rem;
+            font-weight: 700;
+            color: var(--orange);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            display: block;
+            margin-bottom: 0.2rem;
+        }
+
+        .concept-name {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: var(--charcoal);
+            margin-bottom: 0.4rem;
+        }
+
+        .concept-desc {
+            font-size: 0.8rem;
+            color: rgba(26,26,24,0.55);
+            line-height: 1.4;
+        }
+
+        /* ═══ FLAT LAYOUTS SECTION ═══ */
+        .section-flats {
+            max-width: 1200px;
+            margin: 4rem auto;
+            padding: 0 2rem;
+        }
+
+        .flats-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .flats-header h2 {
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .flats-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3.5rem;
+        }
+
+        .flat-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.06);
+        }
+
+        .flat-canvas-wrapper {
+            background: var(--charcoal);
+            padding: 2rem;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Flat aspect ratio is standard 2.2:1 wrap sticker size */
+        .flat-canvas {
+            width: 100%;
+            max-width: 900px;
+            aspect-ratio: 2.2 / 1;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+        }
+
+        .flat-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+        }
+
+        .flat-spec-list {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .flat-spec-tag {
+            font-size: 0.7rem;
+            font-weight: 500;
+            padding: 0.35rem 0.8rem;
+            background: var(--cream);
+            border-radius: 100px;
+            color: rgba(26,26,24,0.6);
+        }
+
+        .divider {
+            max-width: 1200px;
+            margin: 4rem auto;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(74,107,42,0.15), transparent);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header class="page-header">
+        <h1>Commercial Freezer <span>Wrap Designs</span></h1>
+        <p>UFRÜIT store branding collection 2026</p>
+    </header>
+
+    <!-- INTERACTIVE MOCKUP SECTION -->
+    <section class="section-mockup">
+        <!-- Mockup Display Panel -->
+        <div class="mockup-container">
+            <img src="fridge1.jpg" alt="Shop Freezer" class="fridge-photo">
+            
+            <!-- Dynamic Sticker Overlay -->
+            <div class="sticker-overlay">
+                
+                <!-- Wrap 1: Collage -->
+                <div class="wrap-design design-collage active" id="mock-wrap-1">
+                    <div class="collage-botanical"></div>
+                    <div class="logo-center logo-svg-inject"></div>
+                </div>
+
+                <!-- Wrap 2: Block -->
+                <div class="wrap-design design-block" id="mock-wrap-2">
+                    <div class="block-left">Freshly Curated · Daily Arrivals</div>
+                    <div class="block-center">
+                        <div class="logo-center logo-svg-inject"></div>
+                    </div>
+                    <div class="block-right"></div>
+                </div>
+
+                <!-- Wrap 3: Waves -->
+                <div class="wrap-design design-waves" id="mock-wrap-3">
+                    <div class="waves-logo-container">
+                        <div class="logo-center logo-svg-inject"></div>
+                    </div>
+                    <div class="waves-wrapper">
+                        <!-- Wave SVGs stacked -->
+                        <svg class="wave-svg" viewBox="0 0 100 20" preserveAspectRatio="none">
+                            <!-- Tomato Red Wave -->
+                            <path d="M0,15 C30,10 70,20 100,15 L100,20 L0,20 Z" fill="#D4272B"/>
+                        </svg>
+                        <svg class="wave-svg" viewBox="0 0 100 20" preserveAspectRatio="none" style="height: 80%;">
+                            <!-- Orange Wave -->
+                            <path d="M0,13 C35,18 65,8 100,13 L100,20 L0,20 Z" fill="#E8722A"/>
+                        </svg>
+                        <svg class="wave-svg" viewBox="0 0 100 20" preserveAspectRatio="none" style="height: 60%;">
+                            <!-- Amber Wave -->
+                            <path d="M0,11 C40,7 60,15 100,11 L100,20 L0,20 Z" fill="#F0B429"/>
+                        </svg>
+                        <svg class="wave-svg" viewBox="0 0 100 20" preserveAspectRatio="none" style="height: 40%;">
+                            <!-- Olive Wave -->
+                    </div>
+                </div>
+
+                <!-- Wrap 4: 5 IP Mascots -->
+                <div class="wrap-design design-mascots" id="mock-wrap-4">
+                    <div class="mascots-header">
+                        <h4>FRESH CUT FRUITS</h4>
+                        <span>新鮮切果</span>
+                    </div>
+                    <div class="mascots-row">
+                        <img src="public/assets/IP1-Berry.png" alt="Berry" class="mascot-img">
+                        <img src="public/assets/IP2-Juice.png" alt="Juice" class="mascot-img">
+                        <img src="public/assets/IP3-Lemon.png" alt="Lemon" class="mascot-img">
+                        <img src="public/assets/IP4-Crisp.png" alt="Crisp" class="mascot-img">
+                        <img src="public/assets/IP5-Cado.png" alt="Cado" class="mascot-img">
+                    </div>
+                    <div class="mascots-footer">
+                        <div class="logo-center logo-svg-inject" style="width: 25%;"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Controls Side Panel -->
+        <div class="controls-panel">
+            <h3 class="controls-title">Choose Design Concept</h3>
+            
+            <button class="concept-btn active" onclick="switchMockup(1)">
+                <span class="concept-num">Concept 01</span>
+                <div class="concept-name">The Fruit Market Collage</div>
+                <p class="concept-desc">Layered abstract fruit shapes clustered at the edges, leaving a clean Warm Cream space in the center for the Primary Logo. Playful and artisanal.</p>
+            </button>
+
+            <button class="concept-btn" onclick="switchMockup(2)">
+                <span class="concept-num">Concept 02</span>
+                <div class="concept-name">The Asymmetric Block</div>
+                <p class="concept-desc">Modern color-blocked vertical layout. Features a Forest Olive side-banner with styled text, a bold Tomato Red divider, and orange accents.</p>
+            </button>
+
+            <button class="concept-btn" onclick="switchMockup(3)">
+                <span class="concept-num">Concept 03</span>
+                <div class="concept-name">The Tonal Wave Flow</div>
+                <p class="concept-desc">Stacked painterly waves in brand colors sweep across the bottom hem, evoking motion and fresh harvest abundance. The logo floats centered above.</p>
+            </button>
+
+            <button class="concept-btn" onclick="switchMockup(4)">
+                <span class="concept-num">Concept 04 ★ NEW</span>
+                <div class="concept-name">5 IP Mascots ("FRESH CUT FRUITS")</div>
+                <p class="concept-desc">Features all 5 audited IP characters (Berry with star glasses, Juice with headphones, Lemon with Vogue book, Crisp with aviator goggles, Cado with gold wire glasses) pointing up to 'FRESH CUT FRUITS' with master logo at base.</p>
+            </button>
+        </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- FLAT LAYOUTS SECTION -->
+    <section class="section-flats">
+        <div class="flats-header">
+            <h2>Flat Print Layouts</h2>
+            <p style="color: rgba(26,26,24,0.55); font-size: 0.9rem; margin-top: 0.5rem;">Proportional vector wraps ready for vinyl printing</p>
+        </div>
+
+        <div class="flats-grid">
+            <!-- Flat 1 -->
+            <div class="flat-card">
+                <div class="flat-canvas-wrapper">
+                    <div class="flat-canvas design-collage">
+                        <div class="collage-botanical"></div>
+                        <div class="logo-center logo-svg-inject" style="width: 25%;"></div>
+                    </div>
+                </div>
+                <div class="flat-info">
+                    <div>
+                        <h4 style="font-weight: 700; margin-bottom: 0.3rem;">Concept 01: The Fruit Market Collage</h4>
+                        <p style="font-size: 0.8rem; color: rgba(26,26,24,0.55);">Warm Cream base with graphic fruits cluster. Recommended for a welcoming, boutique-market feel.</p>
+                    </div>
+                    <div class="flat-spec-list">
+                        <span class="flat-spec-tag">Vector Print</span>
+                        <span class="flat-spec-tag">Matte Finish Vinyl</span>
+                        <span class="flat-spec-tag">Cream Base</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Flat 2 -->
+            <div class="flat-card">
+                <div class="flat-canvas-wrapper">
+                    <div class="flat-canvas design-block">
+                        <div class="block-left" style="font-size: 0.8rem; letter-spacing: 0.3em; padding: 20px 0;">Freshly Curated · Daily Arrivals</div>
+                        <div class="block-center" style="width: 60%;">
+                            <div class="logo-center logo-svg-inject" style="width: 40%;"></div>
+                        </div>
+                        <div class="block-right" style="width: 15%;"></div>
+                    </div>
+                </div>
+                <div class="flat-info">
+                    <div>
+                        <h4 style="font-weight: 700; margin-bottom: 0.3rem;">Concept 02: The Asymmetric Block</h4>
+                        <p style="font-size: 0.8rem; color: rgba(26,26,24,0.55);">Three-panel clean vertical layout. Looks architectural, modern, and highly structured.</p>
+                    </div>
+                    <div class="flat-spec-list">
+                        <span class="flat-spec-tag">High-Contrast Print</span>
+                        <span class="flat-spec-tag">Satin Finish</span>
+                        <span class="flat-spec-tag">Typography Feature</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Flat 3 -->
+            <div class="flat-card">
+                <div class="flat-canvas-wrapper">
+                    <div class="flat-canvas design-waves">
+                        <div class="waves-logo-container" style="padding-top: 15px;">
+                            <div class="logo-center logo-svg-inject" style="width: 22%;"></div>
+                        </div>
+                        <div class="waves-wrapper" style="height: 38%;">
+                            <svg class="wave-svg" viewBox="0 0 100 20" preserveAspectRatio="none">
+                                <path d="M0,15 C30,10 70,20 100,15 L100,20 L0,20 Z" fill="#D4272B"/>
+                            </svg>
+                            <svg class="wave-svg" viewBox="0 0 100 20" preserveAspectRatio="none" style="height: 80%;">
+                                <path d="M0,13 C35,18 65,8 100,13 L100,20 L0,20 Z" fill="#E8722A"/>
+                            </svg>
+                            <svg class="wave-svg" viewBox="0 0 100 20" preserveAspectRatio="none" style="height: 60%;">
+                                <path d="M0,11 C40,7 60,15 100,11 L100,20 L0,20 Z" fill="#F0B429"/>
+                            </svg>
+                            <svg class="wave-svg" viewBox="0 0 100 20" preserveAspectRatio="none" style="height: 40%;">
+                                <path d="M0,10 C30,15 70,5 100,10 L100,20 L0,20 Z" fill="#4A6B2A"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="flat-info">
+                    <div>
+                        <h4 style="font-weight: 700; margin-bottom: 0.3rem;">Concept 03: The Tonal Wave Flow</h4>
+                        <p style="font-size: 0.8rem; color: rgba(26,26,24,0.55);">Bottom wave borders sweeping across the width. Evokes fresh growth, harvest, and liquid energy.</p>
+                    </div>
+                    <div class="flat-spec-list">
+                        <span class="flat-spec-tag">Gradient Wave Overlay</span>
+                        <span class="flat-spec-tag">Matte Finish</span>
+                        <span class="flat-spec-tag">Abundance Theme</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Flat 4 -->
+            <div class="flat-card">
+                <div class="flat-canvas-wrapper">
+                    <div class="flat-canvas design-mascots" style="padding: 15px 25px;">
+                        <div class="mascots-header">
+                            <h4 style="font-size: 1.1rem; letter-spacing: 0.15em;">FRESH CUT FRUITS</h4>
+                            <span style="font-size: 0.75rem;">新鮮切果</span>
+                        </div>
+                        <div class="mascots-row" style="height: 58%; width: 85%;">
+                            <img src="public/assets/IP1-Berry.png" alt="Berry" class="mascot-img">
+                            <img src="public/assets/IP2-Juice.png" alt="Juice" class="mascot-img">
+                            <img src="public/assets/IP3-Lemon.png" alt="Lemon" class="mascot-img">
+                            <img src="public/assets/IP4-Crisp.png" alt="Crisp" class="mascot-img">
+                            <img src="public/assets/IP5-Cado.png" alt="Cado" class="mascot-img">
+                        </div>
+                        <div class="mascots-footer">
+                            <div class="logo-center logo-svg-inject" style="width: 18%;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flat-info">
+                    <div>
+                        <h4 style="font-weight: 700; margin-bottom: 0.3rem;">Concept 04: 5 IP Mascots ("FRESH CUT FRUITS")</h4>
+                        <p style="font-size: 0.8rem; color: rgba(26,26,24,0.55);">Features all 5 canonical brand IP characters (Berry, Juice, Lemon, Crisp, Cado) pointing up to headline with logo anchored at base.</p>
+                    </div>
+                    <div class="flat-spec-list">
+                        <span class="flat-spec-tag">5 Audited IP Assets</span>
+                        <span class="flat-spec-tag">High-Res Print</span>
+                        <span class="flat-spec-tag">Brand Mascot Feature</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SVG LOGO CODE -->
+    <script>
+        const primaryLogo = '<img src="assets/UFRÜIT LOGO V3.svg" alt="UFRÜIT Canonical Master V3" style="width: 100%; height: auto; display: block;">';
+
+        // Inject SVGs
+        document.querySelectorAll('.logo-svg-inject').forEach(el => {
+            el.innerHTML = primaryLogo;
+        });
+
+        // Switch active mockup design
+        function switchMockup(id) {
+            // Remove active classes
+            document.querySelectorAll('.wrap-design').forEach(el => el.classList.remove('active'));
+            document.querySelectorAll('.concept-btn').forEach(el => el.classList.remove('active'));
+            
+            // Add active class to selected elements
+            document.getElementById('mock-wrap-' + id).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+    </script>
+</body>
+</html>

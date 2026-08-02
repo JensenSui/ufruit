@@ -67,3 +67,10 @@ node_modules/
 
 # dataconnect generated files
 .dataconnect
+
+# Agent / AI local files
+.agents/
+.claude/
+agent/
+data/skills/
+skills-lock.json

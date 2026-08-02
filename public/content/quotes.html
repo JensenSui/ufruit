@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FRÜIT IP — Quote Cards</title>
+    <style>
+        @font-face {
+            font-family: 'Armstrong Extrabold';
+            src: url('../assets/fonts/Armstrong-Extrabold.otf') format('opentype');
+            font-weight: 800;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Armstrong Regular';
+            src: url('../assets/fonts/Armstrong.otf') format('opentype');
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        @font-face {
+            font-family: 'Gabriel Sans Condensed Bold';
+            src: url('../assets/fonts/GabrielSansCond-Trial-Bold.ttf') format('truetype');
+            font-weight: 700;
+            font-style: normal;
+        }
+
+        /* Brand Colors Variables */
+        :root {
+            --color-tomato-red: #D4272B;
+            --color-harvest-orange: #E8722A;
+            --color-golden-amber: #F0B429;
+            --color-leaf-green: #6B8C3A;
+            --color-forest-olive: #4A6B2A;
+            --color-warm-cream: #F5F0E8;
+            --color-charcoal: #1A1A18;
+            --color-snow-white: #FAFAF7;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--color-charcoal);
+            font-family: 'Armstrong Regular', sans-serif;
+            color: var(--color-snow-white);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 80px 20px;
+            gap: 80px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-family: 'Armstrong Extrabold', sans-serif;
+            font-size: 48px;
+            margin-bottom: 16px;
+            color: var(--color-snow-white);
+            letter-spacing: 0.02em;
+        }
+
+        .instructions {
+            font-family: 'Gabriel Sans Condensed Bold', sans-serif;
+            font-size: 18px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: rgba(250, 250, 247, 0.7);
+        }
+
+        .cards-container {
+            display: flex;
+            flex-direction: column;
+            gap: 120px;
+        }
+
+        /* Card Base Styles */
+        .card {
+            width: 1080px;
+            height: 1350px;
+            background-color: var(--color-warm-cream);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+            flex-shrink: 0;
+        }
+
+        /* Noise Texture */
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noiseFilter)"/></svg>');
+            opacity: 0.04;
+            mix-blend-mode: multiply;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        /* Logo Watermark */
+        .logo-watermark {
+            position: absolute;
+            top: 60px;
+            height: 64px;
+            width: auto;
+            opacity: 1;
+            z-index: 5;
+        }
+
+        /* Text Content Area */
+        .content-area {
+            position: absolute;
+            top: 240px;
+            width: 820px;
+            text-align: center;
+            z-index: 6;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 32px;
+        }
+
+        .quote-mark {
+            font-family: 'Armstrong Extrabold', sans-serif;
+            font-size: 120px;
+            line-height: 0;
+            opacity: 0.1;
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: -1;
+        }
+
+        .quote {
+            font-family: 'Armstrong Extrabold', sans-serif;
+            font-size: 58px;
+            color: var(--color-charcoal);
+            line-height: 1.25;
+            letter-spacing: -0.01em;
+            text-wrap: balance;
+        }
+
+        .attribution {
+            font-family: 'Gabriel Sans Condensed Bold', sans-serif;
+            font-size: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+        }
+
+        /* Character Image Area */
+        .character-img {
+            position: absolute;
+            bottom: 6px; /* Just above accent strip */
+            height: 52%;
+            width: 100%;
+            object-fit: contain;
+            object-position: bottom center;
+            z-index: 4;
+            filter: drop-shadow(0 20px 60px rgba(0,0,0,0.15));
+        }
+
+        /* Accent Strip */
+        .accent-strip {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            z-index: 10;
+        }
+
+        /* Subtle Gradient Tint */
+        .gradient-tint {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+            opacity: 0.08;
+        }
+
+        /* Decorative Elements */
+        .deco-circle {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(100px);
+            z-index: 2;
+            opacity: 0.5;
+        }
+
+        .deco-dots {
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background-image: radial-gradient(circle, currentColor 2px, transparent 2px);
+            background-size: 20px 20px;
+            opacity: 0.05;
+            z-index: 2;
+        }
+
+
+        /* --- CARD 1: BERRY --- */
+        .card-berry .gradient-tint { background: linear-gradient(135deg, transparent 0%, var(--color-tomato-red) 100%); }
+        .card-berry .accent-strip { background-color: var(--color-tomato-red); }
+        .card-berry .attribution { color: var(--color-tomato-red); }
+        .card-berry .quote-mark { color: var(--color-tomato-red); }
+        .card-berry .deco-circle {
+            width: 400px; height: 400px;
+            background-color: var(--color-tomato-red);
+            bottom: -100px; right: -100px;
+        }
+        .card-berry .deco-dots { color: var(--color-tomato-red); top: 150px; left: 100px; }
+
+        /* --- CARD 2: CADO --- */
+        .card-cado .gradient-tint { background: linear-gradient(135deg, transparent 0%, var(--color-forest-olive) 100%); }
+        .card-cado .accent-strip { background-color: var(--color-forest-olive); }
+        .card-cado .attribution { color: var(--color-forest-olive); }
+        .card-cado .quote-mark { color: var(--color-forest-olive); }
+        .card-cado .deco-circle {
+            width: 500px; height: 500px;
+            background-color: var(--color-forest-olive);
+            bottom: 20%; left: -200px;
+        }
+        .card-cado .deco-dots { color: var(--color-forest-olive); top: 200px; right: 100px; }
+
+        /* --- CARD 3: JUICE --- */
+        .card-juice .gradient-tint { background: linear-gradient(135deg, transparent 0%, var(--color-harvest-orange) 100%); }
+        .card-juice .accent-strip { background-color: var(--color-harvest-orange); }
+        .card-juice .attribution { color: var(--color-harvest-orange); }
+        .card-juice .quote-mark { color: var(--color-harvest-orange); }
+        .card-juice .quote {
+            font-size: 64px; /* Slightly larger for short quote */
+            text-transform: lowercase; /* Enforce lowercase vibe */
+        }
+        .card-juice .deco-circle {
+            width: 600px; height: 600px;
+            background-color: var(--color-harvest-orange);
+            top: -200px; right: -200px;
+            opacity: 0.3;
+        }
+        .card-juice .deco-dots { color: var(--color-harvest-orange); bottom: 40%; left: 80px; }
+
+        /* --- CARD 4: CRISP --- */
+        .card-crisp .gradient-tint { background: linear-gradient(135deg, transparent 0%, var(--color-leaf-green) 100%); }
+        .card-crisp .accent-strip { background-color: var(--color-leaf-green); }
+        .card-crisp .attribution { color: var(--color-leaf-green); }
+        .card-crisp .quote-mark { color: var(--color-leaf-green); }
+        .card-crisp .deco-circle {
+            width: 350px; height: 350px;
+            background-color: var(--color-leaf-green);
+            top: 30%; left: -100px;
+        }
+        .card-crisp .deco-dots { color: var(--color-leaf-green); top: 120px; right: 80px; }
+
+        /* --- CARD 5: LEMON --- */
+        .card-lemon .gradient-tint { background: linear-gradient(135deg, transparent 0%, var(--color-golden-amber) 100%); }
+        .card-lemon .accent-strip { background-color: var(--color-golden-amber); }
+        .card-lemon .attribution { color: var(--color-golden-amber); }
+        .card-lemon .quote-mark { color: var(--color-golden-amber); }
+        .card-lemon .quote {
+            font-size: 52px; /* Slightly smaller for longer quote */
+        }
+        .card-lemon .deco-circle {
+            width: 450px; height: 450px;
+            background-color: var(--color-golden-amber);
+            bottom: -50px; left: 50%; transform: translateX(-50%);
+            opacity: 0.4;
+        }
+        .card-lemon .deco-dots { color: var(--color-golden-amber); top: 350px; left: 80px; }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>FRÜIT IP — Quote Cards</h1>
+        <p class="instructions">Right-click &rarr; Save as image, or screenshot at 1080&times;1350</p>
+    </header>
+
+    <div class="cards-container">
+        
+        <!-- CARD 1: BERRY -->
+        <div class="card card-berry" id="card-berry">
+            <div class="gradient-tint"></div>
+            <div class="deco-circle"></div>
+            <div class="deco-dots"></div>
+            <img src="../assets/UFRÜIT LOGO V3.svg" alt="UFRÜIT V3 Logo" class="logo-watermark">
+            
+            <div class="content-area">
+                <div class="quote-mark">"</div>
+                <div class="quote">"Stay juicy, stay iconic. 💫"</div>
+                <div class="attribution">— Berry</div>
+            </div>
+            
+            <img src="../public/assets/IP1-Berry.png" alt="Berry Character" class="character-img">
+            <div class="accent-strip"></div>
+        </div>
+
+        <!-- CARD 2: CADO -->
+        <div class="card card-cado" id="card-cado">
+            <div class="gradient-tint"></div>
+            <div class="deco-circle"></div>
+            <div class="deco-dots"></div>
+            <img src="../assets/UFRÜIT LOGO V3.svg" alt="UFRÜIT V3 Logo" class="logo-watermark">
+            
+            <div class="content-area">
+                <div class="quote-mark">"</div>
+                <div class="quote">"Good things take time to ripen."</div>
+                <div class="attribution">— Cado</div>
+            </div>
+            
+            <img src="../public/assets/IP5-Cado.png" alt="Cado Character" class="character-img">
+            <div class="accent-strip"></div>
+        </div>
+
+        <!-- CARD 3: JUICE -->
+        <div class="card card-juice" id="card-juice">
+            <div class="gradient-tint"></div>
+            <div class="deco-circle"></div>
+            <div class="deco-dots"></div>
+            <img src="../assets/UFRÜIT LOGO V3.svg" alt="UFRÜIT V3 Logo" class="logo-watermark">
+            
+            <div class="content-area">
+                <div class="quote-mark">"</div>
+                <div class="quote">"just vibes, no stress ~"</div>
+                <div class="attribution">— Juice</div>
+            </div>
+            
+            <img src="../public/assets/IP2-Juice.png" alt="Juice Character" class="character-img">
+            <div class="accent-strip"></div>
+        </div>
+
+        <!-- CARD 4: CRISP -->
+        <div class="card card-crisp" id="card-crisp">
+            <div class="gradient-tint"></div>
+            <div class="deco-circle"></div>
+            <div class="deco-dots"></div>
+            <img src="../assets/UFRÜIT LOGO V3.svg" alt="UFRÜIT V3 Logo" class="logo-watermark">
+            
+            <div class="content-area">
+                <div class="quote-mark">"</div>
+                <div class="quote">"You didn't wake up today to be mediocre. Now go eat your greens. ⚡"</div>
+                <div class="attribution">— Crisp</div>
+            </div>
+            
+            <img src="../public/assets/IP4-Crisp.png" alt="Crisp Character" class="character-img">
+            <div class="accent-strip"></div>
+        </div>
+
+        <!-- CARD 5: LEMON -->
+        <div class="card card-lemon" id="card-lemon">
+            <div class="gradient-tint"></div>
+            <div class="deco-circle"></div>
+            <div class="deco-dots"></div>
+            <img src="../assets/UFRÜIT LOGO V3.svg" alt="UFRÜIT V3 Logo" class="logo-watermark">
+            
+            <div class="content-area">
+                <div class="quote-mark">"</div>
+                <div class="quote">"'I'll start eating healthy on Monday' — me, every Sunday since 2019."</div>
+                <div class="attribution">— Lemon</div>
+            </div>
+            
+            <img src="../public/assets/IP3-Lemon.png" alt="Lemon Character" class="character-img">
+            <div class="accent-strip"></div>
+        </div>
+
+    </div>
+
+</body>
+</html>

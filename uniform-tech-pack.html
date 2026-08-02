@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UFRÜIT — Uniform Design Concepts (V3 Spec)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --tomato:    #D4272B;
+            --orange:    #E8722A;
+            --amber:     #F0B429;
+            --leaf:      #6B8C3A;
+            --olive:     #4A6B2A;
+            --cream:     #F5F0E8;
+            --charcoal:  #1A1A18;
+            --snow:      #FAFAF7;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background: var(--cream);
+            color: var(--charcoal);
+        }
+
+        /* ═══ HEADER ═══ */
+        .page-header {
+            background: var(--charcoal);
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+        .page-header h1 {
+            color: var(--snow);
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+        .page-header h1 span { color: var(--amber); }
+        .page-header p {
+            color: rgba(250,250,247,0.4);
+            font-size: 0.8rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-top: 0.5rem;
+        }
+
+        /* ═══ DESIGN SECTION ═══ */
+        .design-section {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .design-header {
+            display: flex;
+            align-items: baseline;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        .design-number {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--orange);
+            background: rgba(232,114,42,0.1);
+            padding: 0.3rem 0.8rem;
+            border-radius: 100px;
+        }
+        .design-name {
+            font-size: 1.6rem;
+            font-weight: 700;
+        }
+        .design-desc {
+            color: rgba(26,26,24,0.5);
+            font-size: 0.9rem;
+            line-height: 1.6;
+            max-width: 700px;
+            margin-bottom: 2rem;
+        }
+
+        .views-row {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .view-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 6px 30px rgba(0,0,0,0.06);
+            width: 320px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .view-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 16px 50px rgba(0,0,0,0.1);
+        }
+
+        .view-canvas {
+            height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .view-info {
+            padding: 1.2rem 1.5rem;
+        }
+        .view-title {
+            font-size: 0.95rem;
+            font-weight: 700;
+            margin-bottom: 0.2rem;
+        }
+        .view-sub {
+            font-size: 0.7rem;
+            color: rgba(26,26,24,0.4);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        /* ═══ SHIRT MASK ═══ */
+        .shirt {
+            width: 260px;
+            height: 290px;
+            position: relative;
+            overflow: hidden;
+            filter: drop-shadow(0 10px 20px rgba(0,0,0,0.12));
+            -webkit-mask-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 657.07 650.74" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M145,317c-1.09,5.64-2.14,11.29-3.27,16.91-1.71,8.5-3.37,17-7.09,24.93-4.54,9.64-9,11.41-19.51,10.62-23.38-1.77-44.22-12.06-66.06-19-12.09-3.81-23.87-8.53-34.06-16.39a66.08,66.08,0,0,1-7-6.33c-6.74-7-9.7-14.42-6.8-24.82a768.78,768.78,0,0,1,37-102.39c12.13-27.61,25.47-54.66,38.68-81.76,6.84-14,18.25-24,31.17-32.35C124,76,142.12,69.06,158.22,58.68,179.54,44.92,203.33,36.55,226.11,26,239.17,19.89,251.79,13.13,261.4,2c2.62-3,5.12-2.12,8-.92,13.92,5.72,28.26,10,43.28,11.61a199.49,199.49,0,0,0,61.62-2.91c3.75-.77,7.72-1.14,11.16-2.65,7.1-3.12,12.56-.85,18.29,3.43C415,19,425.36,28.49,437.94,34.89c3.41,1.73,6.86,3.41,10.42,4.81,28,11.07,56.33,21.42,84.56,32a138.86,138.86,0,0,1,36.64,20.2A20.07,20.07,0,0,1,575,98.24c19.22,34.82,34.39,71.42,47.54,108.88,8.05,22.95,16,46,23.31,69.15,5.63,17.8,7.25,36.53,11.1,54.75.69,3.24-1.34,4.52-3.6,5.75a61,61,0,0,1-23.41,6.72c-25.54,2.53-50.71,7.57-76.13,10.85-10.73,1.38-21.49,2.7-32.11,4.68-5,.93-6.37-.94-7.26-5.25a162.74,162.74,0,0,0-9-28.56c-.54-1.31-.66-2.92-3-4.25,1.5,9.93.19,19.45,1.64,28.69,2,12.88,2.16,25.86,3.39,38.77,2.4,25.36,5.72,50.6,8.64,75.9,3.43,29.73,8.51,59.26,8.89,89.37.36,28.45,3.45,56.8,7.36,85,.6,4.36-.58,6-5.11,6.12-21.47.54-42.94,1.15-64.4,2.08-36.27,1.57-72.56,2.27-108.85,3.18-25,.62-50,.9-74.95.39-35-.72-69.88-2.24-104.8-3.9-15.36-.73-30.46-3.33-44.23-11-7.43-4.15-8-5.42-7.37-13.85,2.52-32.19,6-64.29,9.81-96.35,3.21-26.77,6.63-53.51,9.55-80.32,2.32-21.33,4.33-42.7,5.6-64.15.86-14.49.94-29,.69-43.45C148.17,330.59,147.66,323.69,145,317Z" fill="black"/></svg>');
+            mask-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 657.07 650.74" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg"><path d="M145,317c-1.09,5.64-2.14,11.29-3.27,16.91-1.71,8.5-3.37,17-7.09,24.93-4.54,9.64-9,11.41-19.51,10.62-23.38-1.77-44.22-12.06-66.06-19-12.09-3.81-23.87-8.53-34.06-16.39a66.08,66.08,0,0,1-7-6.33c-6.74-7-9.7-14.42-6.8-24.82a768.78,768.78,0,0,1,37-102.39c12.13-27.61,25.47-54.66,38.68-81.76,6.84-14,18.25-24,31.17-32.35C124,76,142.12,69.06,158.22,58.68,179.54,44.92,203.33,36.55,226.11,26,239.17,19.89,251.79,13.13,261.4,2c2.62-3,5.12-2.12,8-.92,13.92,5.72,28.26,10,43.28,11.61a199.49,199.49,0,0,0,61.62-2.91c3.75-.77,7.72-1.14,11.16-2.65,7.1-3.12,12.56-.85,18.29,3.43C415,19,425.36,28.49,437.94,34.89c3.41,1.73,6.86,3.41,10.42,4.81,28,11.07,56.33,21.42,84.56,32a138.86,138.86,0,0,1,36.64,20.2A20.07,20.07,0,0,1,575,98.24c19.22,34.82,34.39,71.42,47.54,108.88,8.05,22.95,16,46,23.31,69.15,5.63,17.8,7.25,36.53,11.1,54.75.69,3.24-1.34,4.52-3.6,5.75a61,61,0,0,1-23.41,6.72c-25.54,2.53-50.71,7.57-76.13,10.85-10.73,1.38-21.49,2.7-32.11,4.68-5,.93-6.37-.94-7.26-5.25a162.74,162.74,0,0,0-9-28.56c-.54-1.31-.66-2.92-3-4.25,1.5,9.93.19,19.45,1.64,28.69,2,12.88,2.16,25.86,3.39,38.77,2.4,25.36,5.72,50.6,8.64,75.9,3.43,29.73,8.51,59.26,8.89,89.37.36,28.45,3.45,56.8,7.36,85,.6,4.36-.58,6-5.11,6.12-21.47.54-42.94,1.15-64.4,2.08-36.27,1.57-72.56,2.27-108.85,3.18-25,.62-50,.9-74.95.39-35-.72-69.88-2.24-104.8-3.9-15.36-.73-30.46-3.33-44.23-11-7.43-4.15-8-5.42-7.37-13.85,2.52-32.19,6-64.29,9.81-96.35,3.21-26.77,6.63-53.51,9.55-80.32,2.32-21.33,4.33-42.7,5.6-64.15.86-14.49.94-29,.69-43.45C148.17,330.59,147.66,323.69,145,317Z" fill="black"/></svg>');
+            -webkit-mask-size: 100% 100%;
+            mask-size: 100% 100%;
+        }
+
+        /* FABRIC LAYERS — these create the actual design */
+        .fabric-base {
+            position: absolute;
+            inset: 0;
+        }
+
+        .fabric-panel {
+            position: absolute;
+            z-index: 1;
+        }
+
+        .logo-place {
+            position: absolute;
+            z-index: 10;
+        }
+
+        /* ═══ DESIGN 1: SHOULDER YOKE COLOR BLOCK ═══ */
+        .d1-base { background: var(--cream); }
+        .d1-yoke {
+            top: 0; left: 0; right: 0; height: 38%;
+            background: var(--olive);
+            clip-path: polygon(0 0, 100% 0, 100% 70%, 50% 100%, 0 70%);
+        }
+        .d1-stripe {
+            top: 36%; left: 0; right: 0; height: 3px;
+            background: var(--amber);
+            clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 300%, 0 100%);
+        }
+        .d1-logo { top: 14%; left: 50%; transform: translateX(-50%); width: 55px; }
+        .d1-back-logo { top: 42%; left: 50%; transform: translate(-50%, -50%); width: 140px; }
+
+        /* ═══ DESIGN 2: RAGLAN CONTRAST SLEEVES ═══ */
+        .d2-base { background: var(--cream); }
+        .d2-sleeve-l {
+            top: 0; left: 0; width: 30%; height: 50%;
+            background: var(--orange);
+            clip-path: polygon(0 0, 100% 15%, 55% 100%, 0 60%);
+        }
+        .d2-sleeve-r {
+            top: 0; right: 0; width: 30%; height: 50%;
+            background: var(--orange);
+            clip-path: polygon(0 15%, 100% 0, 100% 60%, 45% 100%);
+        }
+        .d2-seam-l {
+            top: 0; left: 22%; width: 3px; height: 50%;
+            background: var(--charcoal);
+            opacity: 0.15;
+            transform: rotate(8deg);
+            transform-origin: top center;
+        }
+        .d2-seam-r {
+            top: 0; right: 22%; width: 3px; height: 50%;
+            background: var(--charcoal);
+            opacity: 0.15;
+            transform: rotate(-8deg);
+            transform-origin: top center;
+        }
+        .d2-collar {
+            top: 0; left: 50%; transform: translateX(-50%);
+            width: 100px; height: 16px;
+            background: var(--orange);
+            border-radius: 0 0 50px 50px;
+        }
+        .d2-logo { top: 18%; right: 22%; width: 42px; }
+
+        /* ═══ DESIGN 3: CHEST BAND ═══ */
+        .d3-base { background: var(--charcoal); }
+        .d3-band {
+            top: 28%; left: 0; right: 0; height: 22%;
+            background: linear-gradient(180deg, var(--olive) 0%, var(--leaf) 100%);
+        }
+        .d3-band-top {
+            top: 27%; left: 0; right: 0; height: 4px;
+            background: var(--amber);
+        }
+        .d3-band-bot {
+            top: 50%; left: 0; right: 0; height: 4px;
+            background: var(--amber);
+        }
+        .d3-collar {
+            top: 0; left: 50%; transform: translateX(-50%);
+            width: 100px; height: 16px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 0 0 50px 50px;
+        }
+        .d3-logo { top: 32%; left: 50%; transform: translateX(-50%); width: 100px; }
+        .d3-back-logo { top: 35%; left: 50%; transform: translate(-50%, -50%); width: 150px; }
+
+        /* ═══ DESIGN 4: SIDE PANEL SPORT ═══ */
+        .d4-base { background: var(--olive); }
+        .d4-panel-l {
+            top: 20%; left: 0; width: 15%; bottom: 0;
+            background: var(--amber);
+            clip-path: polygon(0 0, 100% 8%, 100% 100%, 0 100%);
+        }
+        .d4-panel-r {
+            top: 20%; right: 0; width: 15%; bottom: 0;
+            background: var(--amber);
+            clip-path: polygon(0 8%, 100% 0, 100% 100%, 0 100%);
+        }
+        .d4-panel-line-l {
+            top: 20%; left: 13%; width: 3px; bottom: 0;
+            background: var(--cream);
+            opacity: 0.6;
+            clip-path: polygon(0 4%, 100% 4%, 100% 100%, 0 100%);
+        }
+        .d4-panel-line-r {
+            top: 20%; right: 13%; width: 3px; bottom: 0;
+            background: var(--cream);
+            opacity: 0.6;
+            clip-path: polygon(0 4%, 100% 4%, 100% 100%, 0 100%);
+        }
+        .d4-collar {
+            top: 0; left: 50%; transform: translateX(-50%);
+            width: 100px; height: 16px;
+            background: var(--amber);
+            border-radius: 0 0 50px 50px;
+        }
+        .d4-logo { top: 16%; left: 22%; width: 42px; }
+
+        /* ═══ DESIGN 5: RINGER CLASSIC ═══ */
+        .d5-base { background: var(--cream); }
+        .d5-collar {
+            top: 0; left: 50%; transform: translateX(-50%);
+            width: 110px; height: 18px;
+            background: var(--olive);
+            border-radius: 0 0 55px 55px;
+        }
+        .d5-cuff-l {
+            top: 6%; left: 0; width: 18%; height: 6%;
+            background: var(--olive);
+            clip-path: polygon(0 0, 100% 30%, 100% 100%, 0 70%);
+        }
+        .d5-cuff-r {
+            top: 6%; right: 0; width: 18%; height: 6%;
+            background: var(--olive);
+            clip-path: polygon(0 30%, 100% 0, 100% 70%, 0 100%);
+        }
+        .d5-hem {
+            bottom: 0; left: 20%; right: 20%; height: 5%;
+            background: var(--olive);
+            border-radius: 4px 4px 0 0;
+        }
+        .d5-pocket {
+            top: 24%; left: 18%;
+            width: 50px; height: 45px;
+            border: 2px solid var(--olive);
+            border-top: none;
+            border-radius: 0 0 6px 6px;
+        }
+        .d5-pocket-logo { top: 26%; left: 20%; width: 40px; }
+
+        /* ═══ DESIGN 6: GRADIENT OMBRÉ ═══ */
+        .d6-base {
+            background: linear-gradient(180deg, var(--charcoal) 0%, var(--olive) 45%, var(--leaf) 100%);
+        }
+        .d6-collar {
+            top: 0; left: 50%; transform: translateX(-50%);
+            width: 100px; height: 16px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 0 0 50px 50px;
+        }
+        .d6-thin-stripe {
+            top: 55%; left: 15%; right: 15%; height: 2px;
+            background: var(--amber);
+            opacity: 0.6;
+        }
+        .d6-logo { top: 16%; right: 22%; width: 44px; }
+        .d6-back-logo { top: 40%; left: 50%; transform: translate(-50%, -50%); width: 130px; }
+
+        /* ═══ DESIGN 7: HALF-AND-HALF SPLIT ═══ */
+        .d7-base { background: var(--cream); }
+        .d7-left-half {
+            top: 0; left: 0; width: 50%; bottom: 0;
+            background: var(--olive);
+        }
+        .d7-center-seam {
+            top: 0; left: 50%; width: 4px; bottom: 0;
+            background: var(--amber);
+            transform: translateX(-50%);
+        }
+        .d7-collar {
+            top: 0; left: 50%; transform: translateX(-50%);
+            width: 100px; height: 16px;
+            background: rgba(0,0,0,0.06);
+            border-radius: 0 0 50px 50px;
+        }
+        .d7-logo { top: 18%; left: 50%; transform: translateX(-50%); width: 70px; }
+
+        /* ═══ DESIGN 8: HORIZONTAL STRIPE TRIO ═══ */
+        .d8-base { background: var(--cream); }
+        .d8-stripe1 {
+            top: 30%; left: 0; right: 0; height: 6%;
+            background: var(--olive);
+        }
+        .d8-stripe2 {
+            top: 38%; left: 0; right: 0; height: 3%;
+            background: var(--orange);
+        }
+        .d8-stripe3 {
+            top: 43%; left: 0; right: 0; height: 6%;
+            background: var(--olive);
+        }
+        .d8-collar {
+            top: 0; left: 50%; transform: translateX(-50%);
+            width: 100px; height: 16px;
+            background: var(--olive);
+            border-radius: 0 0 50px 50px;
+        }
+        .d8-logo { top: 16%; left: 22%; width: 42px; }
+
+        /* Logo color overrides */
+        .dark-bg .logo-inject svg .cls-1 { fill: rgba(255,255,255,0.12) !important; }
+        .dark-bg .sec-logo-inject svg .cls-1 { fill: #FFFFFF !important; }
+        .light-bg .sec-logo-inject svg .cls-1 { fill: var(--olive) !important; }
+
+        /* ═══ DIVIDER ═══ */
+        .divider {
+            max-width: 1200px;
+            margin: 0 auto;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(74,107,42,0.15), transparent);
+        }
+
+        /* ═══ CANVAS BACKGROUNDS ═══ */
+        .bg-warm { background: linear-gradient(145deg, #EDEAD4 0%, #E5E0D4 100%); }
+        .bg-cool { background: linear-gradient(145deg, #2A2A28 0%, #1A1A18 100%); }
+        .bg-green { background: linear-gradient(145deg, #5A7830 0%, #4A6828 100%); }
+        .bg-paper { background: linear-gradient(145deg, #F0EDE5 0%, #E8E4DC 100%); }
+
+        /* ═══ BADGE ═══ */
+        .concept-badge {
+            position: absolute;
+            top: 12px; left: 12px;
+            background: var(--amber);
+            color: var(--charcoal);
+            font-size: 0.55rem;
+            font-weight: 700;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            padding: 0.25rem 0.6rem;
+            border-radius: 100px;
+            z-index: 20;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header class="page-header">
+        <h1>Uniform <span>Design Concepts</span></h1>
+        <p>8 original designs · actual garment design, not just logo placement</p>
+    </header>
+
+    <!-- ═══ CONCEPT 1: SHOULDER YOKE ═══ -->
+    <section class="design-section">
+        <div class="design-header">
+            <span class="design-number">Concept 01</span>
+            <h2 class="design-name">The Shoulder Yoke</h2>
+        </div>
+        <p class="design-desc">A V-shaped yoke panel in Forest Olive covers the shoulders and upper chest, with a Golden Amber pinstripe at the seam line. The body is Warm Cream. The secondary logo sits centered in the olive yoke; the master logo fills the back.</p>
+        <div class="views-row">
+            <div class="view-card">
+                <div class="view-canvas bg-paper">
+                    <div class="shirt">
+                        <div class="fabric-base d1-base"></div>
+                        <div class="fabric-panel d1-yoke"></div>
+                        <div class="fabric-panel d1-stripe"></div>
+                        <div class="logo-place d1-logo sec-logo-inject dark-bg"></div>
+                    </div>
+                </div>
+                <div class="view-info">
+                    <div class="view-title">Front — Olive Yoke + Cream Body</div>
+                    <div class="view-sub">V-shaped yoke with amber seam detail</div>
+                </div>
+            </div>
+            <div class="view-card">
+                <div class="view-canvas bg-paper">
+                    <div class="shirt">
+                        <div class="fabric-base d1-base"></div>
+                        <div class="fabric-panel d1-yoke"></div>
+                        <div class="fabric-panel d1-stripe"></div>
+                        <div class="logo-place d1-back-logo logo-inject"></div>
+                    </div>
+                </div>
+                <div class="view-info">
+                    <div class="view-title">Back — Master Logo on Cream</div>
+                    <div class="view-sub">Full UFRÜIT V3 logo below yoke panel</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="divider"></div>
+
+    <!-- ═══ CONCEPT 2: RAGLAN SLEEVES ═══ -->
+    <section class="design-section">
+        <div class="design-header">
+            <span class="design-number">Concept 02</span>
+            <h2 class="design-name">The Raglan</h2>
+        </div>
+        <p class="design-desc">Baseball-style raglan sleeves in Harvest Orange against a Warm Cream body. The contrast collar matches the sleeves. Diagonal seam lines create a sporty, energetic silhouette that says "fresh market, not office." Logo on the front right chest.</p>
+        <div class="views-row">
+            <div class="view-card">
+                <div class="view-canvas bg-warm">
+                    <div class="shirt">
+                        <div class="fabric-base d2-base"></div>
+                        <div class="fabric-panel d2-sleeve-l"></div>
+                        <div class="fabric-panel d2-sleeve-r"></div>
+                        <div class="fabric-panel d2-seam-l"></div>
+                        <div class="fabric-panel d2-seam-r"></div>
+                        <div class="fabric-panel d2-collar"></div>
+                        <div class="logo-place d2-logo sec-logo-inject light-bg"></div>
+                    </div>
+                </div>
+                <div class="view-info">
+                    <div class="view-title">Front — Orange Raglan Sleeves</div>
+                    <div class="view-sub">Contrast seam detail · matching collar</div>
+                </div>
+            </div>
+            <div class="view-card">
+                <div class="view-canvas bg-warm">
+                    <div class="shirt">
+                        <div class="fabric-base d2-base"></div>
+                        <div class="fabric-panel d2-sleeve-l"></div>
+                        <div class="fabric-panel d2-sleeve-r"></div>
+                        <div class="fabric-panel d2-seam-l"></div>
+                        <div class="fabric-panel d2-seam-r"></div>
+                        <div class="fabric-panel d2-collar"></div>
+                        <div class="logo-place d1-back-logo logo-inject"></div>
+                    </div>
+                </div>
+                <div class="view-info">
+                    <div class="view-title">Back — Raglan Seams Frame Logo</div>
+                    <div class="view-sub">Master UFRÜIT V3 logo centered on cream body</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="divider"></div>
+
+    <!-- ═══ CONCEPT 3: CHEST BAND ═══ -->
+    <section class="design-section">
+        <div class="design-header">
+            <span class="design-number">Concept 03</span>
+            <h2 class="design-name">The Chest Band</h2>
+        </div>
+        <p class="design-desc">A wide horizontal band in a Forest-to-Leaf gradient wraps across the chest, framed top and bottom by thin amber pinstripes. The body is deep Charcoal. The logo sits inside the green band like a badge. Bold, editorial, and very premium.</p>
+        <div class="views-row">
+            <div class="view-card">
+                <div class="view-canvas bg-cool">
+                    <div class="shirt dark-bg">
+                        <div class="fabric-base d3-base"></div>
+                        <div class="fabric-panel d3-band"></div>
+                        <div class="fabric-panel d3-band-top"></div>
+                        <div class="fabric-panel d3-band-bot"></div>
+                        <div class="fabric-panel d3-collar"></div>
+                        <div class="logo-place d3-logo sec-logo-inject"></div>
+                    </div>
+                </div>
+                <div class="view-info">
+                    <div class="view-title">Front — Green Band on Charcoal</div>
+                    <div class="view-sub">Gradient band · amber pinstripe borders</div>
+                </div>
+            </div>
+            <div class="view-card">
+                <div class="view-canvas bg-cool">
+                    <div class="shirt dark-bg">
+                        <div class="fabric-base d3-base"></div>
+                        <div class="fabric-panel d3-band"></div>
+                        <div class="fabric-panel d3-band-top"></div>
+                        <div class="fabric-panel d3-band-bot"></div>
+                        <div class="fabric-panel d3-collar"></div>
+                        <div class="logo-place d3-back-logo logo-inject"></div>
+                    </div>
+                </div>
+                <div class="view-info">
+                    <div class="view-title">Back — Logo Centered in Band</div>
+                    <div class="view-sub">Master UFRÜIT V3 logo sits within the green zone</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="divider"></div>
+
+    <!-- ═══ CONCEPT 4: SIDE PANEL ═══ -->
+    <section class="design-section">
+        <div class="design-header">
+            <span class="design-number">Concept 04</span>
+            <h2 class="design-name">The Side Panel Sport</h2>
+        </div>
+        <p class="design-desc">Full olive body with amber racing stripes running down both sides from underarm to hem, separated by a thin cream pinstripe. An amber contrast collar crowns the look. Energetic and athletic — perfect for staff constantly on the move in a busy market.</p>
+        <div class="views-row">
+            <div class="view-card">
+                <div class="view-canvas bg-green">
+                    <div class="shirt dark-bg">
+                        <div class="fabric-base d4-base"></div>
+                        <div class="fabric-panel d4-panel-l"></div>
+                        <div class="fabric-panel d4-panel-r"></div>
+                        <div class="fabric-panel d4-panel-line-l"></div>
+                        <div class="fabric-panel d4-panel-line-r"></div>
+                        <div class="fabric-panel d4-collar"></div>
+                        <div class="logo-place d4-logo sec-logo-inject"></div>
+                    </div>
+                </div>
+                <div class="view-info">
+                    <div class="view-title">Front — Amber Side Panels</div>
+                    <div class="view-sub">Racing stripe with cream piping detail</div>
+                </div>
+            </div>
+            <div class="view-card">
+                <div class="view-canvas bg-green">
+                    <div class="shirt dark-bg">
+                        <div class="fabric-base d4-base"></div>
+                        <div class="fabric-panel d4-panel-l"></div>
+                        <div class="fabric-panel d4-panel-r"></div>
+                        <div class="fabric-panel d4-panel-line-l"></div>
+                        <div class="fabric-panel d4-panel-line-r"></div>
+                        <div class="fabric-panel d4-collar"></div>
+                        <div class="logo-place d1-back-logo logo-inject"></div>
+                    </div>
+                </div>
+                <div class="view-info">
+                    <div class="view-title">Back — Side Stripes Frame Logo</div>
+                    <div class="view-sub">Master logo flanked by amber panels</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="divider"></div>
+
+    <!-- ═══ CONCEPT 5: RINGER TEE ═══ -->
+    <section class="design-section">
+        <div class="design-header">
+            <span class="design-number">Concept 05</span>
+            <h2 class="design-name">The Ringer Classic</h2>
+        </div>
+        <p class="design-desc">A retro-modern ringer tee: Warm Cream body with Forest Olive contrast on the collar band, sleeve cuffs, and hem band. A chest pocket with an olive border houses the secondary logo. Clean, timeless, and effortlessly cool — like an artisan café uniform.</p>
+        <div class="views-row">
+            <div class="view-card">
+                <div class="view-canvas bg-paper">
+                    <div class="shirt">
+                        <div class="fabric-base d5-base"></div>
+                        <div class="fabric-panel d5-collar"></div>
+                        <div class="fabric-panel d5-cuff-l"></div>
+                        <div class="fabric-panel d5-cuff-r"></div>
+                        <div class="fabric-panel d5-hem"></div>
+                        <div class="fabric-panel d5-pocket"></div>
+                        <div class="logo-place d5-pocket-logo sec-logo-inject light-bg"></div>
+                    </div>
+                </div>
+                <div class="view-info">
+                    <div class="view-title">Front — Ringer with Chest Pocket</div>
+                    <div class="view-sub">Olive collar · cuffs · hem · pocket border</div>
+                </div>
+            </div>
+            <div class="view-card">
+                <div class="view-canvas bg-paper">
+                    <div class="shirt">
+                        <div class="fabric-base d5-base"></div>
+                        <div class="fabric-panel d5-collar"></div>
+                        <div class="fabric-panel d5-cuff-l"></div>
+                        <div class="fabric-panel d5-cuff-r"></div>
+                        <div class="fabric-panel d5-hem"></div>
+                        <div class="logo-place d1-back-logo logo-inject"></div>
+                    </div>
+                </div>
+                <div class="view-info">
+                    <div class="view-title">Back — Clean Cream Canvas</div>
+                    <div class="view-sub">Master logo with ringer trim details</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="divider"></div>
+
+    <!-- ═══ CONCEPT 6: GRADIENT OMBRÉ ═══ -->
+    <section class="design-section">
+        <div class="design-header">
+            <span class="design-number">Concept 06</span>
+            <h2 class="design-name">The Ombré Fade</h2>
+        </div>
+        <p class="design-desc">A dramatic vertical gradient that fades from deep Charcoal at the shoulders through Forest Olive to Leaf Green at the hem. A subtle amber thread runs horizontally across the waist. The effect is like a forest at dusk — mysterious, natural, premium.</p>
+        <div class="views-row">
+            <div class="view-card">
+                <div class="view-canvas bg-cool">
+                    <div class="shirt dark-bg">
+                        <div class="fabric-base d6-base"></div>
+                        <div class="fabric-panel d6-collar"></div>
+                        <div class="fabric-panel d6-thin-stripe"></div>
+                        <div class="logo-place d6-logo sec-logo-inject"></div>
+                    </div>
+                </div>
+                <div class="view-info">
+                    <div class="view-title">Front — Charcoal-to-Green Ombré</div>
+                    <div class="view-sub">Vertical gradient · amber waist detail</div>
+                </div>
+            </div>
+            <div class="view-card">
+                <div class="view-canvas bg-cool">
+                    <div class="shirt dark-bg">
+                        <div class="fabric-base d6-base"></div>
+                        <div class="fabric-panel d6-collar"></div>
+                        <div class="fabric-panel d6-thin-stripe"></div>
+                        <div class="logo-place d6-back-logo logo-inject"></div>
+                    </div>
+                </div>
+                <div class="view-info">
+                    <div class="view-title">Back — Logo Floats in the Fade</div>
+                    <div class="view-sub">Master logo on the gradient transition</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="divider"></div>
+
+    <!-- ═══ CONCEPT 7: HALF-AND-HALF ═══ -->
+    <section class="design-section">
+        <div class="design-header">
+            <span class="design-number">Concept 07</span>
+            <h2 class="design-name">The Split</h2>
+        </div>
+        <p class="design-desc">A bold 50/50 vertical split — left half in Forest Olive, right half in Warm Cream — joined by a central amber seam. The secondary logo straddles the split line, bridging both worlds. Fashion-forward and unmistakably UFRÜIT.</p>
+        <div class="views-row">
+            <div class="view-card">
+                <div class="view-canvas bg-paper">
+                    <div class="shirt">
+                        <div class="fabric-base d7-base"></div>
+                        <div class="fabric-panel d7-left-half"></div>
+                        <div class="fabric-panel d7-center-seam"></div>
+                        <div class="fabric-panel d7-collar"></div>
+                        <div class="logo-place d7-logo sec-logo-inject light-bg"></div>
+                    </div>
+                </div>
+                <div class="view-info">
+                    <div class="view-title">Front — Olive/Cream Split</div>
+                    <div class="view-sub">Center amber seam · logo bridging both halves</div>
+                </div>
+            </div>
+            <div class="view-card">
+                <div class="view-canvas bg-paper">
+                    <div class="shirt">
+                        <div class="fabric-base d7-base"></div>
+                        <div class="fabric-panel d7-left-half"></div>
+                        <div class="fabric-panel d7-center-seam"></div>
+                        <div class="fabric-panel d7-collar"></div>
+                        <div class="logo-place d1-back-logo logo-inject"></div>
+                    </div>
+                </div>
+                <div class="view-info">
+                    <div class="view-title">Back — Split Canvas with Logo</div>
+                    <div class="view-sub">Master logo across the two-tone design</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <div class="divider"></div>
+
+    <!-- ═══ CONCEPT 8: HORIZONTAL STRIPES ═══ -->
+    <section class="design-section">
+        <div class="design-header">
+            <span class="design-number">Concept 08</span>
+            <h2 class="design-name">The Varsity Stripe</h2>
+        </div>
+        <p class="design-desc">Two thick olive stripes sandwich a thinner orange stripe across the chest, on a Warm Cream body. The olive collar ties it together. Inspired by varsity and rugby traditions — strong, team-spirited, and instantly recognizable from across a market floor.</p>
+        <div class="views-row">
+            <div class="view-card">
+                <div class="view-canvas bg-warm">
+                    <div class="shirt">
+                        <div class="fabric-base d8-base"></div>
+                        <div class="fabric-panel d8-stripe1"></div>
+                        <div class="fabric-panel d8-stripe2"></div>
+                        <div class="fabric-panel d8-stripe3"></div>
+                        <div class="fabric-panel d8-collar"></div>
+                        <div class="logo-place d8-logo sec-logo-inject light-bg"></div>
+                    </div>
+                </div>
+                <div class="view-info">
+                    <div class="view-title">Front — Varsity Chest Stripes</div>
+                    <div class="view-sub">Olive + orange triple band · olive collar</div>
+                </div>
+            </div>
+            <div class="view-card">
+                <div class="view-canvas bg-warm">
+                    <div class="shirt">
+                        <div class="fabric-base d8-base"></div>
+                        <div class="fabric-panel d8-stripe1"></div>
+                        <div class="fabric-panel d8-stripe2"></div>
+                        <div class="fabric-panel d8-stripe3"></div>
+                        <div class="fabric-panel d8-collar"></div>
+                        <div class="logo-place d1-back-logo logo-inject"></div>
+                    </div>
+                </div>
+                <div class="view-info">
+                    <div class="view-title">Back — Stripes Beneath Logo</div>
+                    <div class="view-sub">Master logo above the stripe zone</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SVG INJECTION -->
+    <script>
+        const lightLogoImg = '<img src="assets/UFRÜIT LOGO V3.svg" alt="UFRÜIT Canonical Master V3" style="width: 100%; height: auto; display: block;">';
+        const darkLogoImg = '<img src="assets/UFRÜIT LOGO V3-dark.svg" alt="UFRÜIT Canonical Master V3 Dark" style="width: 100%; height: auto; display: block;">';
+
+        document.querySelectorAll('.logo-inject, .sec-logo-inject').forEach(el => {
+            const isDark = el.classList.contains('dark-bg') ||
+                           el.closest('.dark-bg') ||
+                           el.classList.contains('d1-logo') ||
+                           el.classList.contains('d3-logo') ||
+                           el.classList.contains('d3-back-logo') ||
+                           el.classList.contains('d6-back-logo');
+            el.innerHTML = isDark ? darkLogoImg : lightLogoImg;
+        });
+    </script>
+</body>
+</html>

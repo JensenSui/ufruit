@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FRÜIT IP — Payment Checkout Banner (1920x1080 Animated GIF Loop)</title>
+    <style>
+        @font-face {
+            font-family: 'Armstrong Extrabold';
+            src: url('../assets/fonts/Armstrong-Extrabold.otf') format('opentype');
+            font-weight: 800;
+        }
+
+        @font-face {
+            font-family: 'Armstrong Regular';
+            src: url('../assets/fonts/Armstrong.otf') format('opentype');
+            font-weight: 400;
+        }
+
+        @font-face {
+            font-family: 'Gabriel Sans Cond Bold';
+            src: url('../assets/fonts/GabrielSansCond-Trial-Bold.ttf') format('truetype');
+            font-weight: 700;
+        }
+
+        :root {
+            --tomato-red: #D4272B;
+            --harvest-orange: #E8722A;
+            --golden-amber: #F0B429;
+            --leaf-green: #6B8C3A;
+            --forest-olive: #4A6B2A;
+            --warm-cream: #F5F0E8;
+            --charcoal: #1A1A18;
+            --snow-white: #FAFAF7;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--charcoal);
+            font-family: 'Armstrong Regular', sans-serif;
+            color: var(--snow-white);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+            gap: 20px;
+            min-height: 100vh;
+        }
+
+        header {
+            text-align: center;
+        }
+
+        h1 {
+            font-family: 'Armstrong Extrabold', sans-serif;
+            font-size: 32px;
+            color: var(--snow-white);
+            margin-bottom: 4px;
+        }
+
+        .subtitle {
+            font-family: 'Gabriel Sans Cond Bold', sans-serif;
+            font-size: 13px;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            color: var(--golden-amber);
+        }
+
+        .controls {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .btn {
+            background: rgba(250, 250, 247, 0.1);
+            border: 1px solid rgba(250, 250, 247, 0.2);
+            color: var(--snow-white);
+            font-family: 'Gabriel Sans Cond Bold', sans-serif;
+            font-size: 13px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            padding: 8px 18px;
+            border-radius: 100px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn:hover, .btn.active {
+            background: var(--golden-amber);
+            color: var(--charcoal);
+            border-color: var(--golden-amber);
+        }
+
+        /* 1920x1080 CANVAS */
+        .banner-container {
+            width: 1920px;
+            height: 1080px;
+            background-color: var(--warm-cream);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.6);
+            flex-shrink: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            padding: 65px 100px 0 100px;
+            color: var(--charcoal);
+        }
+
+        /* Subtle Grain Noise Overlay */
+        .banner-container::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: url('data:image/svg+xml;utf8,<svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><filter id="noiseFilter"><feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="3" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23noiseFilter)"/></svg>');
+            opacity: 0.045;
+            mix-blend-mode: multiply;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        /* Ambient Glow */
+        .bg-glow-orange {
+            position: absolute;
+            top: -150px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 1300px;
+            height: 650px;
+            background: radial-gradient(ellipse at center, rgba(232, 114, 42, 0.12) 0%, rgba(245, 240, 232, 0) 70%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        /* Original Brand Logo */
+        .banner-logo {
+            height: 96px;
+            width: auto;
+            object-fit: contain;
+            filter: drop-shadow(0 4px 12px rgba(0,0,0,0.06));
+            z-index: 5;
+        }
+
+        /* Main Headline Section */
+        .headline-wrapper {
+            position: relative;
+            z-index: 5;
+            text-align: center;
+            max-width: 1400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .main-line {
+            font-family: 'Armstrong Extrabold', sans-serif;
+            font-size: 72px;
+            line-height: 1.1;
+            color: var(--charcoal);
+            letter-spacing: -0.01em;
+            margin-top: 8px;
+        }
+
+        .main-line .accent-heart {
+            color: var(--tomato-red);
+            display: inline-block;
+            transform: scale(1.1);
+            animation: pulseHeart 1.8s infinite ease-in-out;
+        }
+
+        @keyframes pulseHeart {
+            0%, 100% { transform: scale(1.1); }
+            50% { transform: scale(1.25); }
+        }
+
+        /* Character Group Stage */
+        .character-stage {
+            position: relative;
+            z-index: 5;
+            width: 1240px;
+            height: 620px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            margin-bottom: 24px;
+        }
+
+        /* Floor Shadow Podium */
+        .stage-shadow {
+            position: absolute;
+            bottom: 25px;
+            width: 90%;
+            height: 85px;
+            background: radial-gradient(ellipse at center, rgba(26, 26, 24, 0.16) 0%, rgba(245, 240, 232, 0) 75%);
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        /* Character Images Base */
+        .char-img {
+            position: absolute;
+            bottom: 35px;
+            object-fit: contain;
+            filter: drop-shadow(0 20px 30px rgba(0,0,0,0.16));
+            cursor: pointer;
+            transition: filter 0.3s ease;
+        }
+
+        .char-img:hover {
+            filter: drop-shadow(0 30px 45px rgba(0,0,0,0.28)) brightness(1.05);
+        }
+
+        /* Base Positions & Rotations */
+        .char-berry {
+            left: 30px;
+            height: 440px;
+            z-index: 4;
+            transform-origin: bottom center;
+        }
+
+        .char-juice {
+            left: 240px;
+            height: 430px;
+            z-index: 5;
+            transform-origin: bottom center;
+        }
+
+        .char-crisp {
+            left: 470px;
+            height: 480px;
+            z-index: 7;
+            transform-origin: bottom center;
+        }
+
+        .char-lemon {
+            left: 710px;
+            height: 460px;
+            z-index: 6;
+            transform-origin: bottom center;
+        }
+
+        .char-cado {
+            left: 930px;
+            height: 470px;
+            z-index: 3;
+            transform-origin: bottom center;
+        }
+
+        /* 🔄 LOOPING ANIMATION SEQUENCES (7.5s Total Loop) */
+        .auto-anim .char-berry {
+            animation: popBerry 7.5s infinite ease-in-out;
+        }
+
+        .auto-anim .char-juice {
+            animation: popJuice 7.5s infinite ease-in-out;
+        }
+
+        .auto-anim .char-crisp {
+            animation: popCrisp 7.5s infinite ease-in-out;
+        }
+
+        .auto-anim .char-lemon {
+            animation: popLemon 7.5s infinite ease-in-out;
+        }
+
+        .auto-anim .char-cado {
+            animation: popCado 7.5s infinite ease-in-out;
+        }
+
+        /* Keyframes for Berry (0s -> 1.5s) */
+        @keyframes popBerry {
+            0% { transform: translateY(0) rotate(-5deg) scale(1); z-index: 4; }
+            4% { transform: translateY(-36px) rotate(-2deg) scale(1.15); z-index: 25; filter: drop-shadow(0 35px 50px rgba(212, 39, 43, 0.35)); }
+            16% { transform: translateY(-36px) rotate(-2deg) scale(1.15); z-index: 25; filter: drop-shadow(0 35px 50px rgba(212, 39, 43, 0.35)); }
+            20% { transform: translateY(0) rotate(-5deg) scale(1); z-index: 4; }
+            100% { transform: translateY(0) rotate(-5deg) scale(1); z-index: 4; }
+        }
+
+        /* Keyframes for Juice (1.5s -> 3.0s) */
+        @keyframes popJuice {
+            0%, 18% { transform: translateY(0) rotate(-1deg) scale(1); z-index: 5; }
+            24% { transform: translateY(-36px) rotate(1deg) scale(1.15); z-index: 25; filter: drop-shadow(0 35px 50px rgba(232, 114, 42, 0.35)); }
+            36% { transform: translateY(-36px) rotate(1deg) scale(1.15); z-index: 25; filter: drop-shadow(0 35px 50px rgba(232, 114, 42, 0.35)); }
+            40% { transform: translateY(0) rotate(-1deg) scale(1); z-index: 5; }
+            100% { transform: translateY(0) rotate(-1deg) scale(1); z-index: 5; }
+        }
+
+        /* Keyframes for Crisp (3.0s -> 4.5s) */
+        @keyframes popCrisp {
+            0%, 38% { transform: translateY(0) rotate(0deg) scale(1); z-index: 7; }
+            44% { transform: translateY(-36px) rotate(-1deg) scale(1.15); z-index: 25; filter: drop-shadow(0 35px 50px rgba(107, 140, 58, 0.35)); }
+            56% { transform: translateY(-36px) rotate(-1deg) scale(1.15); z-index: 25; filter: drop-shadow(0 35px 50px rgba(107, 140, 58, 0.35)); }
+            60% { transform: translateY(0) rotate(0deg) scale(1); z-index: 7; }
+            100% { transform: translateY(0) rotate(0deg) scale(1); z-index: 7; }
+        }
+
+        /* Keyframes for Lemon (4.5s -> 6.0s) */
+        @keyframes popLemon {
+            0%, 58% { transform: translateY(0) rotate(2deg) scale(1); z-index: 6; }
+            64% { transform: translateY(-36px) rotate(0deg) scale(1.15); z-index: 25; filter: drop-shadow(0 35px 50px rgba(240, 180, 41, 0.45)); }
+            76% { transform: translateY(-36px) rotate(0deg) scale(1.15); z-index: 25; filter: drop-shadow(0 35px 50px rgba(240, 180, 41, 0.45)); }
+            80% { transform: translateY(0) rotate(2deg) scale(1); z-index: 6; }
+            100% { transform: translateY(0) rotate(2deg) scale(1); z-index: 6; }
+        }
+
+        /* Keyframes for Cado (6.0s -> 7.5s) */
+        @keyframes popCado {
+            0%, 78% { transform: translateY(0) rotate(5deg) scale(1); z-index: 3; }
+            84% { transform: translateY(-36px) rotate(2deg) scale(1.15); z-index: 25; filter: drop-shadow(0 35px 50px rgba(74, 107, 42, 0.35)); }
+            96% { transform: translateY(-36px) rotate(2deg) scale(1.15); z-index: 25; filter: drop-shadow(0 35px 50px rgba(74, 107, 42, 0.35)); }
+            100% { transform: translateY(0) rotate(5deg) scale(1); z-index: 3; }
+        }
+
+        /* Baseline Color Stripe */
+        .colourful-baseline {
+            width: 100%;
+            height: 24px;
+            display: flex;
+            position: relative;
+            z-index: 10;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.06);
+        }
+
+        .colourful-baseline div {
+            flex: 1;
+            height: 100%;
+            transition: opacity 0.3s ease;
+        }
+
+        .stripe-red { background-color: var(--tomato-red); }
+        .stripe-orange { background-color: var(--harvest-orange); }
+        .stripe-amber { background-color: var(--golden-amber); }
+        .stripe-green { background-color: var(--leaf-green); }
+        .stripe-olive { background-color: var(--forest-olive); }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>FRÜIT IP — Payment Checkout Banner</h1>
+        <p class="subtitle">1920 × 1080 PX · Looping GIF Video Mode</p>
+    </header>
+
+    <div class="controls">
+        <button class="btn active" id="toggleAnimBtn">▶ Auto Loop Animation (Active)</button>
+        <button class="btn" id="clickHintBtn">💡 Click any character to pop forward manually</button>
+    </div>
+
+    <!-- 1920x1080 BANNER CANVAS -->
+    <div class="banner-container auto-anim" id="bannerCanvas">
+        <div class="bg-glow-orange"></div>
+
+        <!-- Headline & Original Logo Section -->
+        <div class="headline-wrapper">
+            <img src="../assets/UFRÜIT LOGO V3.svg" alt="UFRÜIT Canonical Master V3" class="banner-logo">
+            <h2 class="main-line">
+                We're packing your box with love! <span class="accent-heart">🧡</span>
+            </h2>
+        </div>
+
+        <!-- 5 Characters Stage (Looping Pop-up Animation Sequence) -->
+        <div class="character-stage">
+            <div class="stage-shadow"></div>
+
+            <img src="../public/assets/IP1-Berry.png" alt="Berry" class="char-img char-berry" id="char-berry" title="Berry 🍓 (Pops 1st)">
+            <img src="../public/assets/IP2-Juice.png" alt="Juice" class="char-img char-juice" id="char-juice" title="Juice 🍊 (Pops 2nd)">
+            <img src="../public/assets/IP4-Crisp.png" alt="Crisp" class="char-img char-crisp" id="char-crisp" title="Crisp 🍏 (Pops 3rd)">
+            <img src="../public/assets/IP3-Lemon.png" alt="Lemon" class="char-img char-lemon" id="char-lemon" title="Lemon 🍋 (Pops 4th)">
+            <img src="../public/assets/IP5-Cado.png" alt="Cado" class="char-img char-cado" id="char-cado" title="Cado 🥑 (Pops 5th)">
+        </div>
+
+        <!-- Colourful Baseline Stripe -->
+        <div class="colourful-baseline">
+            <div class="stripe-red"></div>
+            <div class="stripe-orange"></div>
+            <div class="stripe-amber"></div>
+            <div class="stripe-green"></div>
+            <div class="stripe-olive"></div>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('bannerCanvas');
+        const toggleBtn = document.getElementById('toggleAnimBtn');
+        let isAnimating = true;
+
+        toggleBtn.addEventListener('click', () => {
+            isAnimating = !isAnimating;
+            if (isAnimating) {
+                canvas.classList.add('auto-anim');
+                toggleBtn.textContent = '▶ Auto Loop Animation (Active)';
+                toggleBtn.classList.add('active');
+            } else {
+                canvas.classList.remove('auto-anim');
+                toggleBtn.textContent = '⏸ Auto Loop Paused';
+                toggleBtn.classList.remove('active');
+            }
+        });
+
+        // Click on individual character to bring forward
+        document.querySelectorAll('.char-img').forEach(img => {
+            img.addEventListener('click', (e) => {
+                // reset z-indices
+                document.querySelectorAll('.char-img').forEach(i => i.style.zIndex = '');
+                e.target.style.zIndex = '30';
+                e.target.style.transform = 'translateY(-36px) scale(1.18)';
+                setTimeout(() => {
+                    e.target.style.transform = '';
+                    e.target.style.zIndex = '';
+                }, 1800);
+            });
+        });
+    </script>
+</body>
+</html>
