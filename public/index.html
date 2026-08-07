@@ -842,7 +842,12 @@
                     <div style="font-weight: 700; color: var(--primary-green);">${document.getElementById('modalPrice').innerText}</div>
                 </div>
             `;
-            document.querySelector('.cart-total span:last    <!-- Floating WhatsApp Button -->
+            document.querySelector('.cart-total span:last-child').innerText = document.getElementById('modalPrice').innerText;
+            toggleCart();
+        }
+    </script>
+
+    <!-- Floating WhatsApp Button -->
     <a href="https://wa.me/60122135938?text=Hi%20FRÜIT%20Concierge,%20I'd%20like%20to%20inquire%20about%20your%20fresh%20fruits!" target="_blank" aria-label="Chat with FRÜIT Concierge on WhatsApp" style="
         position: fixed;
         bottom: 25px;
