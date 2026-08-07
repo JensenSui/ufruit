@@ -420,5 +420,5 @@ const GameEngine = (() => {
     };
 })();
 
-// Auto-init when DOM is ready
-document.addEventListener('DOMContentLoaded', GameEngine.init);
+// Auto-init since script is at the bottom of body
+GameEngine.init();
