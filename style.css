@@ -1458,3 +1458,128 @@ footer {
 .squad-podium-card:hover .podium-svg-badge {
     transform: scale(1.22) rotate(15deg) !important;
 }
+
+/* ========================================================
+   UFRÜIT SLICER GAME UI
+   ======================================================== */
+.game-modal {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(26, 26, 24, 0.85);
+    backdrop-filter: blur(12px);
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+}
+.game-modal.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+.game-modal-content {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    height: 90vh;
+    max-height: 800px;
+    background: #F5F0E8;
+    border-radius: var(--radius-lg);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+    overflow: hidden;
+}
+.close-game {
+    position: absolute;
+    top: 15px; right: 15px;
+    background: rgba(0,0,0,0.1);
+    border: none;
+    color: var(--color-deep);
+    font-size: 1.5rem;
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 100;
+    transition: background 0.3s ease;
+}
+.close-game:hover {
+    background: rgba(0,0,0,0.2);
+}
+.game-container {
+    position: relative;
+    width: 100%; height: 100%;
+}
+canvas#fruitGame {
+    width: 100%; height: 100%;
+    display: block;
+    cursor: crosshair;
+}
+.game-hud {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    pointer-events: none;
+}
+.hud-top {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+.score-box {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    color: var(--primary-green);
+    font-weight: 700;
+    background: rgba(245, 240, 232, 0.9);
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+.lives-box {
+    background: rgba(245, 240, 232, 0.9);
+    padding: 0.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    display: flex;
+    gap: 5px;
+}
+.game-screen {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(245, 240, 232, 0.95);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    z-index: 10;
+}
+.game-btn {
+    margin-top: 2rem;
+    background: var(--primary-green);
+    color: #fff;
+    border: none;
+    padding: 1rem 3rem;
+    font-family: var(--font-label);
+    font-size: 1.2rem;
+    font-weight: 700;
+    border-radius: 9999px;
+    cursor: pointer;
+    box-shadow: 0 8px 20px rgba(107, 140, 58, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.game-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 25px rgba(107, 140, 58, 0.4);
+}
+.flash-red {
+    animation: flashRed 0.2s ease-out;
+}
+@keyframes flashRed {
+    0%, 100% { box-shadow: inset 0 0 0 rgba(212, 39, 43, 0); }
+    50% { box-shadow: inset 0 0 50px rgba(212, 39, 43, 0.8); }
+}
